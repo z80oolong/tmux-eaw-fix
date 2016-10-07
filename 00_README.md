@@ -1,1 +1,1 @@
-# README
+# tmux 2.3 において East Asian Ambiguous Width Character を全角文字の幅で表示する
