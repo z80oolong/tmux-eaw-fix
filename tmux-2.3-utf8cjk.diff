@@ -152,7 +152,7 @@ index 430e110..591261c 100644
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-clock.Po@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-copy.Po@am__quote@
 diff --git a/configure b/configure
-index 0e3f14f..d98314a 100755
+index 0e3f14f..17b8d1b 100755
 --- a/configure
 +++ b/configure
 @@ -687,6 +687,8 @@ NO_IMSG_TRUE
@@ -176,11 +176,11 @@ index 0e3f14f..d98314a 100755
    --enable-static         create a static build
    --enable-utempter       use utempter if it is installed
    --enable-utf8proc       use utf8proc if it is installed
-+  --enable-utf8cjk        enable east asian ambiguous width character to wide
++  --disable-utf8cjk       disable east asian ambiguous width character to wide
  
  Some influential environment variables:
    CC          C compiler command
-@@ -5444,6 +5448,26 @@ else
+@@ -5444,6 +5448,28 @@ else
  fi
  
  
@@ -188,14 +188,16 @@ index 0e3f14f..d98314a 100755
 +# Check whether --enable-utf8cjk was given.
 +if test "${enable_utf8cjk+set}" = set; then :
 +  enableval=$enable_utf8cjk; found_utf8cjk=$enable_utf8cjk
++else
++  found_utf8cjk=no
 +
 +fi
 +
-+if test "x$found_utf8cjk" = xyes; then
++if test "x$found_utf8cjk" != xno; then
 +	$as_echo "#define ENABLE_UTF8CJK 1" >>confdefs.h
 +
 +fi
-+ if test "x$found_utf8cjk" = xyes; then
++ if test "x$found_utf8cjk" != xno; then
 +  ENABLE_UTF8CJK_TRUE=
 +  ENABLE_UTF8CJK_FALSE='#'
 +else
@@ -207,7 +209,7 @@ index 0e3f14f..d98314a 100755
  # Check for b64_ntop.
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for b64_ntop" >&5
  $as_echo_n "checking for b64_ntop... " >&6; }
-@@ -6846,6 +6870,10 @@ if test -z "${HAVE_UTF8PROC_TRUE}" && test -z "${HAVE_UTF8PROC_FALSE}"; then
+@@ -6846,6 +6872,10 @@ if test -z "${HAVE_UTF8PROC_TRUE}" && test -z "${HAVE_UTF8PROC_FALSE}"; then
    as_fn_error $? "conditional \"HAVE_UTF8PROC\" was never defined.
  Usually this means the macro was only invoked conditionally." "$LINENO" 5
  fi
@@ -219,23 +221,24 @@ index 0e3f14f..d98314a 100755
    as_fn_error $? "conditional \"NO_B64_NTOP\" was never defined.
  Usually this means the macro was only invoked conditionally." "$LINENO" 5
 diff --git a/configure.ac b/configure.ac
-index 9e0d09e..d750ffe 100644
+index 9e0d09e..c16f885 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -247,6 +247,17 @@ if test "x$found_utf8proc" = xyes; then
+@@ -247,6 +247,18 @@ if test "x$found_utf8proc" = xyes; then
  fi
  AM_CONDITIONAL(HAVE_UTF8PROC, [test "x$found_utf8proc" = xyes])
  
 +# East Asian Ambiguous Width character to wide.
 +AC_ARG_ENABLE(
 +	utf8cjk,
-+	AC_HELP_STRING(--enable-utf8cjk, enable east asian ambiguous width character to wide),
-+	found_utf8cjk=$enable_utf8cjk
++	AC_HELP_STRING(--disable-utf8cjk, disable east asian ambiguous width character to wide),
++	found_utf8cjk=$enable_utf8cjk,
++	found_utf8cjk=no
 +)
-+if test "x$found_utf8cjk" = xyes; then
++if test "x$found_utf8cjk" != xno; then
 +	AC_DEFINE(ENABLE_UTF8CJK)
 +fi
-+AM_CONDITIONAL(ENABLE_UTF8CJK, [test "x$found_utf8cjk" = xyes])
++AM_CONDITIONAL(ENABLE_UTF8CJK, [test "x$found_utf8cjk" != xno])
 +
  # Check for b64_ntop.
  AC_MSG_CHECKING(for b64_ntop)
@@ -260,7 +263,7 @@ index 4898e55..29bcce4 100644
  	  .type = OPTIONS_TABLE_NUMBER,
  	  .scope = OPTIONS_TABLE_SESSION,
 diff --git a/tmux.c b/tmux.c
-index 1b3332a..79371cc 100644
+index 1b3332a..80895c9 100644
 --- a/tmux.c
 +++ b/tmux.c
 @@ -187,14 +187,17 @@ main(int argc, char **argv)
@@ -268,7 +271,7 @@ index 1b3332a..79371cc 100644
  	const char	*s;
  	int		 opt, flags, keys;
 -
-+#ifdef ENABLE_UTF8CJK
++#ifndef ENABLE_UTF8CJK
  	if (setlocale(LC_CTYPE, "en_US.UTF-8") == NULL) {
 +#endif
  		if (setlocale(LC_CTYPE, "") == NULL)
@@ -276,7 +279,7 @@ index 1b3332a..79371cc 100644
  		s = nl_langinfo(CODESET);
  		if (strcasecmp(s, "UTF-8") != 0 && strcasecmp(s, "UTF8") != 0)
  			errx(1, "need UTF-8 locale (LC_CTYPE) but have %s", s);
-+#ifdef ENABLE_UTF8CJK
++#ifndef ENABLE_UTF8CJK
  	}
 +#endif
  
