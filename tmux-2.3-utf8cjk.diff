@@ -1,149 +1,42 @@
 diff --git a/Makefile.am b/Makefile.am
-index 81dc4c7..4af8c76 100644
+index 81dc4c7..bd9c560 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -190,6 +190,11 @@ if HAVE_UTF8PROC
- nodist_tmux_SOURCES += compat/utf8proc.c
- endif
- 
-+# Add wcwidth.c for utf8cjk
-+if ENABLE_UTF8CJK
-+nodist_tmux_SOURCES += wcwidth.c
-+endif
-+
- # Add compat for missing or broken functions.
- if NO_FORKPTY
- nodist_tmux_SOURCES += compat/forkpty-@PLATFORM@.c
+@@ -177,6 +177,7 @@ dist_tmux_SOURCES = \
+ 	tty-term.c \
+ 	tty.c \
+ 	utf8.c \
++	wcwidth.c \
+ 	window-choose.c \
+ 	window-clock.c \
+ 	window-copy.c \
 diff --git a/Makefile.in b/Makefile.in
-index 430e110..591261c 100644
+index 430e110..bd1acc6 100644
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -128,28 +128,31 @@ bin_PROGRAMS = tmux$(EXEEXT)
- # Add compat file for utf8proc.
- @HAVE_UTF8PROC_TRUE@am__append_14 = compat/utf8proc.c
- 
-+# Add wcwidth.c for utf8cjk
-+@ENABLE_UTF8CJK_TRUE@am__append_15 = wcwidth.c
-+
- # Add compat for missing or broken functions.
--@NO_FORKPTY_TRUE@am__append_15 = compat/forkpty-@PLATFORM@.c
--@NO_IMSG_TRUE@am__append_16 = compat/imsg.c compat/imsg-buffer.c
--@NO_CLOSEFROM_TRUE@am__append_17 = compat/closefrom.c
--@NO_DAEMON_TRUE@am__append_18 = compat/daemon.c
--@NO_GETPROGNAME_TRUE@am__append_19 = compat/getprogname.c
--@NO_SETPROCTITLE_TRUE@am__append_20 = compat/setproctitle.c
--@NO_SETENV_TRUE@am__append_21 = compat/setenv.c
--@NO_STRLCAT_TRUE@am__append_22 = compat/strlcat.c
--@NO_STRLCPY_TRUE@am__append_23 = compat/strlcpy.c
--@NO_ASPRINTF_TRUE@am__append_24 = compat/asprintf.c
--@NO_FGETLN_TRUE@am__append_25 = compat/fgetln.c
--@NO_FPARSELN_TRUE@am__append_26 = compat/fparseln.c
--@NO_GETOPT_TRUE@am__append_27 = compat/getopt.c
--@NO_STRCASESTR_TRUE@am__append_28 = compat/strcasestr.c
--@NO_STRSEP_TRUE@am__append_29 = compat/strsep.c
--@NO_VIS_TRUE@am__append_30 = compat/vis.c compat/unvis.c
--@NO_STRTONUM_TRUE@am__append_31 = compat/strtonum.c
--@NO_B64_NTOP_TRUE@am__append_32 = compat/b64_ntop.c
--@NO_CFMAKERAW_TRUE@am__append_33 = compat/cfmakeraw.c
--@NO_OPENAT_TRUE@am__append_34 = compat/openat.c
--@NO_REALLOCARRAY_TRUE@am__append_35 = compat/reallocarray.c
-+@NO_FORKPTY_TRUE@am__append_16 = compat/forkpty-@PLATFORM@.c
-+@NO_IMSG_TRUE@am__append_17 = compat/imsg.c compat/imsg-buffer.c
-+@NO_CLOSEFROM_TRUE@am__append_18 = compat/closefrom.c
-+@NO_DAEMON_TRUE@am__append_19 = compat/daemon.c
-+@NO_GETPROGNAME_TRUE@am__append_20 = compat/getprogname.c
-+@NO_SETPROCTITLE_TRUE@am__append_21 = compat/setproctitle.c
-+@NO_SETENV_TRUE@am__append_22 = compat/setenv.c
-+@NO_STRLCAT_TRUE@am__append_23 = compat/strlcat.c
-+@NO_STRLCPY_TRUE@am__append_24 = compat/strlcpy.c
-+@NO_ASPRINTF_TRUE@am__append_25 = compat/asprintf.c
-+@NO_FGETLN_TRUE@am__append_26 = compat/fgetln.c
-+@NO_FPARSELN_TRUE@am__append_27 = compat/fparseln.c
-+@NO_GETOPT_TRUE@am__append_28 = compat/getopt.c
-+@NO_STRCASESTR_TRUE@am__append_29 = compat/strcasestr.c
-+@NO_STRSEP_TRUE@am__append_30 = compat/strsep.c
-+@NO_VIS_TRUE@am__append_31 = compat/vis.c compat/unvis.c
-+@NO_STRTONUM_TRUE@am__append_32 = compat/strtonum.c
-+@NO_B64_NTOP_TRUE@am__append_33 = compat/b64_ntop.c
-+@NO_CFMAKERAW_TRUE@am__append_34 = compat/cfmakeraw.c
-+@NO_OPENAT_TRUE@am__append_35 = compat/openat.c
-+@NO_REALLOCARRAY_TRUE@am__append_36 = compat/reallocarray.c
- subdir = .
- ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
- am__aclocal_m4_deps = $(top_srcdir)/configure.ac
-@@ -217,29 +220,30 @@ dist_tmux_OBJECTS = alerts.$(OBJEXT) arguments.$(OBJEXT) \
- 	xmalloc.$(OBJEXT) xterm-keys.$(OBJEXT)
+@@ -212,9 +212,10 @@ dist_tmux_OBJECTS = alerts.$(OBJEXT) arguments.$(OBJEXT) \
+ 	server.$(OBJEXT) session.$(OBJEXT) signal.$(OBJEXT) \
+ 	status.$(OBJEXT) style.$(OBJEXT) tmux.$(OBJEXT) \
+ 	tty-acs.$(OBJEXT) tty-keys.$(OBJEXT) tty-term.$(OBJEXT) \
+-	tty.$(OBJEXT) utf8.$(OBJEXT) window-choose.$(OBJEXT) \
+-	window-clock.$(OBJEXT) window-copy.$(OBJEXT) window.$(OBJEXT) \
+-	xmalloc.$(OBJEXT) xterm-keys.$(OBJEXT)
++	tty.$(OBJEXT) utf8.$(OBJEXT) wcwidth.$(OBJEXT) \
++	window-choose.$(OBJEXT) window-clock.$(OBJEXT) \
++	window-copy.$(OBJEXT) window.$(OBJEXT) xmalloc.$(OBJEXT) \
++	xterm-keys.$(OBJEXT)
  am__dirstamp = $(am__leading_dot)dirstamp
  @HAVE_UTF8PROC_TRUE@am__objects_1 = compat/utf8proc.$(OBJEXT)
--@NO_FORKPTY_TRUE@am__objects_2 = compat/forkpty-@PLATFORM@.$(OBJEXT)
--@NO_IMSG_TRUE@am__objects_3 = compat/imsg.$(OBJEXT) \
-+@ENABLE_UTF8CJK_TRUE@am__objects_2 = wcwidth.$(OBJEXT)
-+@NO_FORKPTY_TRUE@am__objects_3 = compat/forkpty-@PLATFORM@.$(OBJEXT)
-+@NO_IMSG_TRUE@am__objects_4 = compat/imsg.$(OBJEXT) \
- @NO_IMSG_TRUE@	compat/imsg-buffer.$(OBJEXT)
--@NO_CLOSEFROM_TRUE@am__objects_4 = compat/closefrom.$(OBJEXT)
--@NO_DAEMON_TRUE@am__objects_5 = compat/daemon.$(OBJEXT)
--@NO_GETPROGNAME_TRUE@am__objects_6 = compat/getprogname.$(OBJEXT)
--@NO_SETPROCTITLE_TRUE@am__objects_7 = compat/setproctitle.$(OBJEXT)
--@NO_SETENV_TRUE@am__objects_8 = compat/setenv.$(OBJEXT)
--@NO_STRLCAT_TRUE@am__objects_9 = compat/strlcat.$(OBJEXT)
--@NO_STRLCPY_TRUE@am__objects_10 = compat/strlcpy.$(OBJEXT)
--@NO_ASPRINTF_TRUE@am__objects_11 = compat/asprintf.$(OBJEXT)
--@NO_FGETLN_TRUE@am__objects_12 = compat/fgetln.$(OBJEXT)
--@NO_FPARSELN_TRUE@am__objects_13 = compat/fparseln.$(OBJEXT)
--@NO_GETOPT_TRUE@am__objects_14 = compat/getopt.$(OBJEXT)
--@NO_STRCASESTR_TRUE@am__objects_15 = compat/strcasestr.$(OBJEXT)
--@NO_STRSEP_TRUE@am__objects_16 = compat/strsep.$(OBJEXT)
--@NO_VIS_TRUE@am__objects_17 = compat/vis.$(OBJEXT) \
-+@NO_CLOSEFROM_TRUE@am__objects_5 = compat/closefrom.$(OBJEXT)
-+@NO_DAEMON_TRUE@am__objects_6 = compat/daemon.$(OBJEXT)
-+@NO_GETPROGNAME_TRUE@am__objects_7 = compat/getprogname.$(OBJEXT)
-+@NO_SETPROCTITLE_TRUE@am__objects_8 = compat/setproctitle.$(OBJEXT)
-+@NO_SETENV_TRUE@am__objects_9 = compat/setenv.$(OBJEXT)
-+@NO_STRLCAT_TRUE@am__objects_10 = compat/strlcat.$(OBJEXT)
-+@NO_STRLCPY_TRUE@am__objects_11 = compat/strlcpy.$(OBJEXT)
-+@NO_ASPRINTF_TRUE@am__objects_12 = compat/asprintf.$(OBJEXT)
-+@NO_FGETLN_TRUE@am__objects_13 = compat/fgetln.$(OBJEXT)
-+@NO_FPARSELN_TRUE@am__objects_14 = compat/fparseln.$(OBJEXT)
-+@NO_GETOPT_TRUE@am__objects_15 = compat/getopt.$(OBJEXT)
-+@NO_STRCASESTR_TRUE@am__objects_16 = compat/strcasestr.$(OBJEXT)
-+@NO_STRSEP_TRUE@am__objects_17 = compat/strsep.$(OBJEXT)
-+@NO_VIS_TRUE@am__objects_18 = compat/vis.$(OBJEXT) \
- @NO_VIS_TRUE@	compat/unvis.$(OBJEXT)
--@NO_STRTONUM_TRUE@am__objects_18 = compat/strtonum.$(OBJEXT)
--@NO_B64_NTOP_TRUE@am__objects_19 = compat/b64_ntop.$(OBJEXT)
--@NO_CFMAKERAW_TRUE@am__objects_20 = compat/cfmakeraw.$(OBJEXT)
--@NO_OPENAT_TRUE@am__objects_21 = compat/openat.$(OBJEXT)
--@NO_REALLOCARRAY_TRUE@am__objects_22 = compat/reallocarray.$(OBJEXT)
-+@NO_STRTONUM_TRUE@am__objects_19 = compat/strtonum.$(OBJEXT)
-+@NO_B64_NTOP_TRUE@am__objects_20 = compat/b64_ntop.$(OBJEXT)
-+@NO_CFMAKERAW_TRUE@am__objects_21 = compat/cfmakeraw.$(OBJEXT)
-+@NO_OPENAT_TRUE@am__objects_22 = compat/openat.$(OBJEXT)
-+@NO_REALLOCARRAY_TRUE@am__objects_23 = compat/reallocarray.$(OBJEXT)
- nodist_tmux_OBJECTS = osdep-@PLATFORM@.$(OBJEXT) $(am__objects_1) \
- 	$(am__objects_2) $(am__objects_3) $(am__objects_4) \
- 	$(am__objects_5) $(am__objects_6) $(am__objects_7) \
-@@ -247,7 +251,8 @@ nodist_tmux_OBJECTS = osdep-@PLATFORM@.$(OBJEXT) $(am__objects_1) \
- 	$(am__objects_11) $(am__objects_12) $(am__objects_13) \
- 	$(am__objects_14) $(am__objects_15) $(am__objects_16) \
- 	$(am__objects_17) $(am__objects_18) $(am__objects_19) \
--	$(am__objects_20) $(am__objects_21) $(am__objects_22)
-+	$(am__objects_20) $(am__objects_21) $(am__objects_22) \
-+	$(am__objects_23)
- tmux_OBJECTS = $(dist_tmux_OBJECTS) $(nodist_tmux_OBJECTS)
- tmux_LDADD = $(LDADD)
- AM_V_P = $(am__v_P_@AM_V@)
-@@ -575,7 +580,8 @@ nodist_tmux_SOURCES = osdep-@PLATFORM@.c $(am__append_14) \
- 	$(am__append_24) $(am__append_25) $(am__append_26) \
- 	$(am__append_27) $(am__append_28) $(am__append_29) \
- 	$(am__append_30) $(am__append_31) $(am__append_32) \
--	$(am__append_33) $(am__append_34) $(am__append_35)
-+	$(am__append_33) $(am__append_34) $(am__append_35) \
-+	$(am__append_36)
- all: all-am
- 
- .SUFFIXES:
-@@ -834,6 +840,7 @@ distclean-compile:
+ @NO_FORKPTY_TRUE@am__objects_2 = compat/forkpty-@PLATFORM@.$(OBJEXT)
+@@ -561,6 +562,7 @@ dist_tmux_SOURCES = \
+ 	tty-term.c \
+ 	tty.c \
+ 	utf8.c \
++	wcwidth.c \
+ 	window-choose.c \
+ 	window-clock.c \
+ 	window-copy.c \
+@@ -834,6 +836,7 @@ distclean-compile:
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tty-term.Po@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tty.Po@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utf8.Po@am__quote@
@@ -151,107 +44,15 @@ index 430e110..591261c 100644
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-choose.Po@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-clock.Po@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-copy.Po@am__quote@
-diff --git a/configure b/configure
-index 0e3f14f..17b8d1b 100755
---- a/configure
-+++ b/configure
-@@ -687,6 +687,8 @@ NO_IMSG_TRUE
- XOPEN_DEFINES
- NO_B64_NTOP_FALSE
- NO_B64_NTOP_TRUE
-+ENABLE_UTF8CJK_FALSE
-+ENABLE_UTF8CJK_TRUE
- HAVE_UTF8PROC_FALSE
- HAVE_UTF8PROC_TRUE
- LIBNCURSES_LIBS
-@@ -812,6 +814,7 @@ enable_profile
- enable_static
- enable_utempter
- enable_utf8proc
-+enable_utf8cjk
- '
-       ac_precious_vars='build_alias
- host_alias
-@@ -1459,6 +1462,7 @@ Optional Features:
-   --enable-static         create a static build
-   --enable-utempter       use utempter if it is installed
-   --enable-utf8proc       use utf8proc if it is installed
-+  --disable-utf8cjk       disable east asian ambiguous width character to wide
- 
- Some influential environment variables:
-   CC          C compiler command
-@@ -5444,6 +5448,28 @@ else
- fi
- 
- 
-+# East Asian Ambiguous Width character to wide.
-+# Check whether --enable-utf8cjk was given.
-+if test "${enable_utf8cjk+set}" = set; then :
-+  enableval=$enable_utf8cjk; found_utf8cjk=$enable_utf8cjk
-+else
-+  found_utf8cjk=no
-+
-+fi
-+
-+if test "x$found_utf8cjk" != xno; then
-+	$as_echo "#define ENABLE_UTF8CJK 1" >>confdefs.h
-+
-+fi
-+ if test "x$found_utf8cjk" != xno; then
-+  ENABLE_UTF8CJK_TRUE=
-+  ENABLE_UTF8CJK_FALSE='#'
-+else
-+  ENABLE_UTF8CJK_TRUE='#'
-+  ENABLE_UTF8CJK_FALSE=
-+fi
-+
-+
- # Check for b64_ntop.
- { $as_echo "$as_me:${as_lineno-$LINENO}: checking for b64_ntop" >&5
- $as_echo_n "checking for b64_ntop... " >&6; }
-@@ -6846,6 +6872,10 @@ if test -z "${HAVE_UTF8PROC_TRUE}" && test -z "${HAVE_UTF8PROC_FALSE}"; then
-   as_fn_error $? "conditional \"HAVE_UTF8PROC\" was never defined.
- Usually this means the macro was only invoked conditionally." "$LINENO" 5
- fi
-+if test -z "${ENABLE_UTF8CJK_TRUE}" && test -z "${ENABLE_UTF8CJK_FALSE}"; then
-+  as_fn_error $? "conditional \"ENABLE_UTF8CJK\" was never defined.
-+Usually this means the macro was only invoked conditionally." "$LINENO" 5
-+fi
- if test -z "${NO_B64_NTOP_TRUE}" && test -z "${NO_B64_NTOP_FALSE}"; then
-   as_fn_error $? "conditional \"NO_B64_NTOP\" was never defined.
- Usually this means the macro was only invoked conditionally." "$LINENO" 5
-diff --git a/configure.ac b/configure.ac
-index 9e0d09e..c16f885 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -247,6 +247,18 @@ if test "x$found_utf8proc" = xyes; then
- fi
- AM_CONDITIONAL(HAVE_UTF8PROC, [test "x$found_utf8proc" = xyes])
- 
-+# East Asian Ambiguous Width character to wide.
-+AC_ARG_ENABLE(
-+	utf8cjk,
-+	AC_HELP_STRING(--disable-utf8cjk, disable east asian ambiguous width character to wide),
-+	found_utf8cjk=$enable_utf8cjk,
-+	found_utf8cjk=no
-+)
-+if test "x$found_utf8cjk" != xno; then
-+	AC_DEFINE(ENABLE_UTF8CJK)
-+fi
-+AM_CONDITIONAL(ENABLE_UTF8CJK, [test "x$found_utf8cjk" != xno])
-+
- # Check for b64_ntop.
- AC_MSG_CHECKING(for b64_ntop)
- AC_TRY_LINK(
 diff --git a/options-table.c b/options-table.c
-index 4898e55..29bcce4 100644
+index 4898e55..8772e75 100644
 --- a/options-table.c
 +++ b/options-table.c
 @@ -124,6 +124,14 @@ const struct options_table_entry options_table[] = {
  			 ":Ss=\\E[%p1%d q:Se=\\E[2 q,screen*:XT"
  	},
  
-+#if ENABLE_UTF8CJK
++#ifndef NO_USE_UTF8CJK
 +	{ .name = "utf8-cjk",
 +	  .type = OPTIONS_TABLE_FLAG,
 +	  .scope = OPTIONS_TABLE_SERVER,
@@ -263,7 +64,7 @@ index 4898e55..29bcce4 100644
  	  .type = OPTIONS_TABLE_NUMBER,
  	  .scope = OPTIONS_TABLE_SESSION,
 diff --git a/tmux.c b/tmux.c
-index 1b3332a..80895c9 100644
+index 1b3332a..44896f2 100644
 --- a/tmux.c
 +++ b/tmux.c
 @@ -187,14 +187,17 @@ main(int argc, char **argv)
@@ -271,7 +72,7 @@ index 1b3332a..80895c9 100644
  	const char	*s;
  	int		 opt, flags, keys;
 -
-+#ifndef ENABLE_UTF8CJK
++#ifdef NO_USE_UTF8CJK
  	if (setlocale(LC_CTYPE, "en_US.UTF-8") == NULL) {
 +#endif
  		if (setlocale(LC_CTYPE, "") == NULL)
@@ -279,21 +80,21 @@ index 1b3332a..80895c9 100644
  		s = nl_langinfo(CODESET);
  		if (strcasecmp(s, "UTF-8") != 0 && strcasecmp(s, "UTF8") != 0)
  			errx(1, "need UTF-8 locale (LC_CTYPE) but have %s", s);
-+#ifndef ENABLE_UTF8CJK
++#ifdef NO_USE_UTF8CJK
  	}
 +#endif
  
  	setlocale(LC_TIME, "");
  	tzset();
 diff --git a/utf8.c b/utf8.c
-index eb9b47a..e173318 100644
+index eb9b47a..31bcec0 100644
 --- a/utf8.c
 +++ b/utf8.c
 @@ -25,6 +25,10 @@
  
  #include "tmux.h"
  
-+#if ENABLE_UTF8CJK
++#ifndef NO_USE_UTF8CJK
 +int mk_wcwidth_cjk(wchar_t);
 +#endif
 +
@@ -304,7 +105,7 @@ index eb9b47a..e173318 100644
  {
  	int	width;
  
-+#ifdef ENABLE_UTF8CJK
++#ifndef NO_USE_UTF8CJK
 +	if (options_get_number(global_options, "utf8-cjk")) {
 +		width = mk_wcwidth_cjk(wc);
 +	} else {
@@ -326,10 +127,10 @@ index eb9b47a..e173318 100644
  
 diff --git a/wcwidth.c b/wcwidth.c
 new file mode 100644
-index 0000000..61e822a
+index 0000000..81344ec
 --- /dev/null
 +++ b/wcwidth.c
-@@ -0,0 +1,309 @@
+@@ -0,0 +1,311 @@
 +/*
 + * This is an implementation of wcwidth() and wcswidth() (defined in
 + * IEEE Std 1002.1-2001) for Unicode.
@@ -390,6 +191,7 @@ index 0000000..61e822a
 + *
 + * Latest version: http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 + */
++#ifndef NO_USE_UTF8CJK
 +
 +#include <wchar.h>
 +
@@ -639,3 +441,4 @@ index 0000000..61e822a
 +
 +  return width;
 +}
++#endif
