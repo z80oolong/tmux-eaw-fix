@@ -1,4 +1,4 @@
-# tmux 2.3 において Unicode 規格の East_Asian_Width 特性が Ambiguous である文字を全角文字の幅で表示する
+# tmux 2.3 において East_Asian_Width 特性が A である文字を全角文字の幅で表示する
 
 tmux 2.3 において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び  
 罫線文字等、 East_Asian_Width 特性の値が A (Ambiguous) となる文字 (以下、 East_Asian_Width 特性が A の文字) が、  
