@@ -22,7 +22,7 @@ A の文字が全角文字の幅と同じ幅で表示されるようになりま
 設定を追記します。
 
 ```
-set -g utf8-cjk off
+set-option -g utf8-cjk off
 ```
 
 なお、この差分ファイルを作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した East_Asian_Width 特性が A の  
