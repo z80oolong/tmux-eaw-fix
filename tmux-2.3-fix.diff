@@ -1,49 +1,3 @@
-diff --git a/Makefile.am b/Makefile.am
-index 81dc4c7..bd9c560 100644
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -177,6 +177,7 @@ dist_tmux_SOURCES = \
- 	tty-term.c \
- 	tty.c \
- 	utf8.c \
-+	wcwidth.c \
- 	window-choose.c \
- 	window-clock.c \
- 	window-copy.c \
-diff --git a/Makefile.in b/Makefile.in
-index 430e110..bd1acc6 100644
---- a/Makefile.in
-+++ b/Makefile.in
-@@ -212,9 +212,10 @@ dist_tmux_OBJECTS = alerts.$(OBJEXT) arguments.$(OBJEXT) \
- 	server.$(OBJEXT) session.$(OBJEXT) signal.$(OBJEXT) \
- 	status.$(OBJEXT) style.$(OBJEXT) tmux.$(OBJEXT) \
- 	tty-acs.$(OBJEXT) tty-keys.$(OBJEXT) tty-term.$(OBJEXT) \
--	tty.$(OBJEXT) utf8.$(OBJEXT) window-choose.$(OBJEXT) \
--	window-clock.$(OBJEXT) window-copy.$(OBJEXT) window.$(OBJEXT) \
--	xmalloc.$(OBJEXT) xterm-keys.$(OBJEXT)
-+	tty.$(OBJEXT) utf8.$(OBJEXT) wcwidth.$(OBJEXT) \
-+	window-choose.$(OBJEXT) window-clock.$(OBJEXT) \
-+	window-copy.$(OBJEXT) window.$(OBJEXT) xmalloc.$(OBJEXT) \
-+	xterm-keys.$(OBJEXT)
- am__dirstamp = $(am__leading_dot)dirstamp
- @HAVE_UTF8PROC_TRUE@am__objects_1 = compat/utf8proc.$(OBJEXT)
- @NO_FORKPTY_TRUE@am__objects_2 = compat/forkpty-@PLATFORM@.$(OBJEXT)
-@@ -561,6 +562,7 @@ dist_tmux_SOURCES = \
- 	tty-term.c \
- 	tty.c \
- 	utf8.c \
-+	wcwidth.c \
- 	window-choose.c \
- 	window-clock.c \
- 	window-copy.c \
-@@ -834,6 +836,7 @@ distclean-compile:
- @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tty-term.Po@am__quote@
- @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tty.Po@am__quote@
- @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utf8.Po@am__quote@
-+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wcwidth.Po@am__quote@
- @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-choose.Po@am__quote@
- @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-clock.Po@am__quote@
- @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-copy.Po@am__quote@
 diff --git a/options-table.c b/options-table.c
 index 4898e55..8772e75 100644
 --- a/options-table.c
@@ -86,51 +40,29 @@ index 1b3332a..44896f2 100644
  
  	setlocale(LC_TIME, "");
  	tzset();
+diff --git a/tmux.h b/tmux.h
+index 995e310..3285038 100644
+--- a/tmux.h
++++ b/tmux.h
+@@ -50,7 +50,9 @@ struct tmuxpeer;
+ struct tmuxproc;
+ 
+ /* Default global configuration file. */
++#ifndef TMUX_CONF
+ #define TMUX_CONF "/etc/tmux.conf"
++#endif
+ 
+ /*
+  * Minimum layout cell size, NOT including separator line. The scroll region
 diff --git a/utf8.c b/utf8.c
-index eb9b47a..31bcec0 100644
+index eb9b47a..a87eb3e 100644
 --- a/utf8.c
 +++ b/utf8.c
-@@ -25,6 +25,10 @@
+@@ -25,6 +25,319 @@
  
  #include "tmux.h"
  
 +#ifndef NO_USE_UTF8CJK
-+int mk_wcwidth_cjk(wchar_t);
-+#endif
-+
- static int	utf8_width(wchar_t);
- 
- /* Set a single character. */
-@@ -109,11 +113,23 @@ utf8_width(wchar_t wc)
- {
- 	int	width;
- 
-+#ifndef NO_USE_UTF8CJK
-+	if (options_get_number(global_options, "utf8-cjk")) {
-+		width = mk_wcwidth_cjk(wc);
-+	} else {
-+#ifdef HAVE_UTF8PROC
-+		width = utf8proc_wcwidth(wc);
-+#else
-+		width = wcwidth(wc);
-+#endif
-+	}
-+#else
- #ifdef HAVE_UTF8PROC
- 	width = utf8proc_wcwidth(wc);
- #else
- 	width = wcwidth(wc);
- #endif
-+#endif
- 	if (width < 0 || width > 0xff) {
- 		log_debug("Unicode %04x, wcwidth() %d", wc, width);
- 
-diff --git a/wcwidth.c b/wcwidth.c
-new file mode 100644
-index 0000000..81344ec
---- /dev/null
-+++ b/wcwidth.c
-@@ -0,0 +1,311 @@
 +/*
 + * This is an implementation of wcwidth() and wcswidth() (defined in
 + * IEEE Std 1002.1-2001) for Unicode.
@@ -191,9 +123,9 @@ index 0000000..81344ec
 + *
 + * Latest version: http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 + */
-+#ifndef NO_USE_UTF8CJK
 +
-+#include <wchar.h>
++// Delete duplicated '#include <wchar.h>' by Z.OOL. <zool@zool.jpn.org>
++//#include <wchar.h>
 +
 +struct interval {
 +  int first;
@@ -442,3 +374,31 @@ index 0000000..81344ec
 +  return width;
 +}
 +#endif
++
+ static int	utf8_width(wchar_t);
+ 
+ /* Set a single character. */
+@@ -109,11 +422,23 @@ utf8_width(wchar_t wc)
+ {
+ 	int	width;
+ 
++#ifndef NO_USE_UTF8CJK
++	if (options_get_number(global_options, "utf8-cjk")) {
++		width = mk_wcwidth_cjk(wc);
++	} else {
++#ifdef HAVE_UTF8PROC
++		width = utf8proc_wcwidth(wc);
++#else
++		width = wcwidth(wc);
++#endif
++	}
++#else
+ #ifdef HAVE_UTF8PROC
+ 	width = utf8proc_wcwidth(wc);
+ #else
+ 	width = wcwidth(wc);
+ #endif
++#endif
+ 	if (width < 0 || width > 0xff) {
+ 		log_debug("Unicode %04x, wcwidth() %d", wc, width);
+ 

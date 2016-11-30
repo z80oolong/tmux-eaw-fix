@@ -7,7 +7,7 @@ tmux 2.3 において、 Unicode の規格における東アジア圏の各種�
 このファイルは、 tmux 2.3 において East_Asian_Width 特性が A の文字の幅を漢字や全角カナ文字等と同じ幅 2 で  
 表示するように修正するための差分ファイルです。
 
-tmux 2.3 のソースコードが置かれているディレクトリに移動した後、以下のようにして差分ファイル tmux-2.3-utf8cjk.diff を  
+tmux 2.3 のソースコードが置かれているディレクトリに移動した後、以下のようにして差分ファイル tmux-2.3-fix.diff を  
 適用します。
 
 ```
@@ -15,17 +15,17 @@ tmux 2.3 のソースコードが置かれているディレクトリに移動�
 (ここに、/path/to/diff は、 tmux-utf8cjk.diff が置かれたディレクトリのパス名)
 ```
 
-差分ファイルを適用後、 tmux 2.3 を通常通りに build してインストールすると、 tmux 2.3 において、 East_Asian_Width 特性が  
-A の文字が全角文字の幅と同じ幅で表示されるようになります。
+差分ファイルを適用後、 tmux 2.3 を通常通りに build してインストールすると、 tmux 2.3 において、 East_Asian_Width  
+特性が A の文字が全角文字の幅と同じ幅で表示されるようになります。
 
-また、 East_Asian_Width 特性が A の文字の文字幅を 2 ではなく 1 として扱う場合は、tmux の設定ファイル .tmux.conf に以下の  
-設定を追記します。
+また、 East_Asian_Width 特性が A の文字の文字幅を 2 ではなく 1 として扱う場合は、tmux の設定ファイル .tmux.conf  
+に以下の設定を追記します。
 
 ```
 set-option -g utf8-cjk off
 ```
 
-なお、この差分ファイルを作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した East_Asian_Width 特性が A の  
-文字の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 Markus Kuhn 氏には心より感謝いたします。
+なお、この差分ファイルを作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した East_Asian_Width  
+特性が A の文字の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 Markus Kuhn 氏には心より感謝いたします。
 
 [http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c](http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c)
