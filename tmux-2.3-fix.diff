@@ -1,5 +1,5 @@
 diff --git a/options-table.c b/options-table.c
-index 4898e55..8772e75 100644
+index 4c78953..7fdbc79 100644
 --- a/options-table.c
 +++ b/options-table.c
 @@ -124,6 +124,14 @@ const struct options_table_entry options_table[] = {
@@ -17,19 +17,40 @@ index 4898e55..8772e75 100644
  	{ .name = "assume-paste-time",
  	  .type = OPTIONS_TABLE_NUMBER,
  	  .scope = OPTIONS_TABLE_SESSION,
+@@ -293,11 +301,13 @@ const struct options_table_entry options_table[] = {
+ 	  .default_num = 0
+ 	},
+ 
++#ifndef NO_USE_PANE_BORDER_ASCII
+ 	{ .name = "pane-border-ascii",
+ 	  .type = OPTIONS_TABLE_FLAG,
+ 	  .scope = OPTIONS_TABLE_SESSION,
+ 	  .default_num = 0
+ 	},
++#endif
+ 
+ 	{ .name = "prefix",
+ 	  .type = OPTIONS_TABLE_KEY,
 diff --git a/tmux.c b/tmux.c
-index 1b3332a..44896f2 100644
+index 1b3332a..cbdead5 100644
 --- a/tmux.c
 +++ b/tmux.c
-@@ -187,14 +187,17 @@ main(int argc, char **argv)
+@@ -185,16 +185,25 @@ int
+ main(int argc, char **argv)
+ {
  	char		*path, *label, **var, tmp[PATH_MAX], *shellcmd = NULL;
++#ifndef NO_USE_UTF8CJK
++	char		*ctype;
++#endif
  	const char	*s;
  	int		 opt, flags, keys;
--
+ 
 +#ifdef NO_USE_UTF8CJK
  	if (setlocale(LC_CTYPE, "en_US.UTF-8") == NULL) {
-+#endif
  		if (setlocale(LC_CTYPE, "") == NULL)
++#else
++		if ((ctype = setlocale(LC_CTYPE, "")) == NULL)
++#endif
  			errx(1, "invalid LC_ALL, LC_CTYPE or LANG");
  		s = nl_langinfo(CODESET);
  		if (strcasecmp(s, "UTF-8") != 0 && strcasecmp(s, "UTF8") != 0)
@@ -40,20 +61,79 @@ index 1b3332a..44896f2 100644
  
  	setlocale(LC_TIME, "");
  	tzset();
+@@ -313,6 +322,15 @@ main(int argc, char **argv)
+ 		options_set_number(global_w_options, "mode-keys", keys);
+ 	}
+ 
++#ifndef NO_USE_UTF8CJK
++	if (!strncmp(ctype, "ja", 2) || !strncmp(ctype, "ko", 2) || !strncmp(ctype, "zh", 2)) {
++		options_set_number(global_options, "utf8-cjk", 1);
++		options_set_number(global_s_options, "pane-border-ascii", 1);
++	} else {
++		options_set_number(global_options, "utf8-cjk", 0);
++		options_set_number(global_s_options, "pane-border-ascii", 0);
++	}
++#endif
+ 	/*
+ 	 * If socket is specified on the command-line with -S or -L, it is
+ 	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index 995e310..3285038 100644
+index 995e310..6d1391a 100644
 --- a/tmux.h
 +++ b/tmux.h
-@@ -50,7 +50,9 @@ struct tmuxpeer;
+@@ -50,7 +50,16 @@ struct tmuxpeer;
  struct tmuxproc;
  
  /* Default global configuration file. */
 +#ifndef TMUX_CONF
  #define TMUX_CONF "/etc/tmux.conf"
 +#endif
++
++/* If "pane-border-ascii" is not used, "utf8-cjk" is not used too. */
++#ifdef NO_USE_PANE_BORDER_ASCII
++#ifndef NO_USE_UTF8CJK
++#define NO_USE_UTF8CJK
++#endif
++#endif
  
  /*
   * Minimum layout cell size, NOT including separator line. The scroll region
+diff --git a/tty-acs.c b/tty-acs.c
+index 967901d..50038ed 100644
+--- a/tty-acs.c
++++ b/tty-acs.c
+@@ -64,6 +64,7 @@ const struct tty_acs_entry tty_acs_table[] = {
+ 	{ '~', "\302\267" }		/* bullet */
+ };
+ 
++#ifndef NO_USE_PANE_BORDER_ASCII
+ const struct tty_acs_entry tty_acs_table_putty[] = {
+ 	{ '+', "\342\206\222" },
+ 	{ ',', "\342\206\220" },
+@@ -98,6 +99,7 @@ const struct tty_acs_entry tty_acs_table_putty[] = {
+ 	{ '}', "\302\243" },
+ 	{ '~', "*" }
+ };
++#endif
+ 
+ int
+ tty_acs_cmp(const void *key, const void *value)
+@@ -124,7 +126,15 @@ tty_acs_get(struct tty *tty, u_char ch)
+ 
+ 	/* Otherwise look up the UTF-8 translation. */
+ 	entry = bsearch(&ch,
++#ifdef NO_USE_PANE_BORDER_ASCII
++	    tty_acs_table,
++#else
++#ifdef NO_USE_UTF8_CJK
+ 	    options_get_number(global_s_options, "pane-border-ascii") ? tty_acs_table_putty : tty_acs_table,
++#else
++	    (options_get_number(global_options, "utf8-cjk") || options_get_number(global_s_options, "pane-border-ascii")) ? tty_acs_table_putty : tty_acs_table,
++#endif
++#endif
+ 	    nitems(tty_acs_table), sizeof tty_acs_table[0],
+ 	    tty_acs_cmp);
+ 	if (entry == NULL)
 diff --git a/utf8.c b/utf8.c
 index eb9b47a..a87eb3e 100644
 --- a/utf8.c
@@ -401,4 +481,3 @@ index eb9b47a..a87eb3e 100644
 +#endif
  	if (width < 0 || width > 0xff) {
  		log_debug("Unicode %04x, wcwidth() %d", wc, width);
- 
