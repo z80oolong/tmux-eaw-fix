@@ -10,11 +10,11 @@ tmux 2.3 において、 Unicode の規格における東アジア圏の各種�
 
 なお、 2017/03/10 現在、 [github 上の tmux](https://github.com/tmux/tmux.git) においては、後述する ```pane-border-ascii.patch``` 及び tmux 2.3 に適用する差分ファイル ```tmux-2.3.diff``` が正常に適用されません。
 
-代わりに、差分ファイル ```tmux-HEAD-92434b0a-fix.diff``` を適用して下さい。これにより、ボーダーラインを罫線文字ではなく ascii 文字を使用するための差分と East Asian Ambiguous Character を全角文字の幅と同じ幅で表示するための差分が同時に適用されるようになります。
+代わりに、 tmux に差分ファイル ```tmux-HEAD-92434b0a-fix.diff``` を適用して下さい。これにより、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分と East Asian Ambiguous Character を全角文字の幅と同じ幅で表示するための差分が同時に適用されるようになります。
 
 ## 差分ファイルの適用と tmux 2.3 のインストール
 
-差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め tmux の画面分割において、ボーダーラインを罫線文字ではなく ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
+差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め tmux の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
 
 [https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch](https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch)
 
@@ -33,7 +33,7 @@ tmux 2.3 において、 Unicode の規格における東アジア圏の各種�
 (ここに、/path/to/diff は、 tmux-2.3-fix.diff が置かれたディレクトリのパス名)
 ```
 
-差分ファイルを適用後、 tmux 2.3 を通常通りに build してインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
+差分ファイルを適用後、 tmux 2.3 を通常通りにビルドしてインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
 
 ## オプションの設定について
 
