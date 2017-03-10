@@ -10,7 +10,7 @@ tmux 2.3 において、 Unicode の規格における東アジア圏の各種�
 
 なお、 2017/03/10 現在、 [github 上の tmux](https://github.com/tmux/tmux.git) においては、後述する ```pane-border-ascii.patch``` 及び tmux 2.3 に適用する差分ファイル ```tmux-2.3.diff``` が正常に適用されません。
 
-代わりに、 tmux に差分ファイル ```tmux-HEAD-92434b0a-fix.diff``` を適用して下さい。これにより、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分と East Asian Ambiguous Character を全角文字の幅と同じ幅で表示するための差分が同時に適用されるようになります。
+代わりに、 tmux に差分ファイル ```tmux-HEAD-392253f0-fix.diff``` を適用して下さい。これにより、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分と East Asian Ambiguous Character を全角文字の幅と同じ幅で表示するための差分が同時に適用されるようになります。
 
 ## 差分ファイルの適用と tmux 2.3 のインストール
 

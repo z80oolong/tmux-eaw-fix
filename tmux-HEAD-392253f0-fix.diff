@@ -33,10 +33,10 @@ index 403509ba..8c35c837 100644
  	  .type = OPTIONS_TABLE_KEY,
  	  .scope = OPTIONS_TABLE_SESSION,
 diff --git a/tmux.c b/tmux.c
-index c9ae92ef..31aebff6 100644
+index b9809568..54ebe381 100644
 --- a/tmux.c
 +++ b/tmux.c
-@@ -189,18 +189,27 @@ int
+@@ -188,18 +188,27 @@ int
  main(int argc, char **argv)
  {
  	char					*path, *label, tmp[PATH_MAX];
@@ -64,7 +64,7 @@ index c9ae92ef..31aebff6 100644
  
  	setlocale(LC_TIME, "");
  	tzset();
-@@ -328,6 +337,15 @@ main(int argc, char **argv)
+@@ -327,6 +336,15 @@ main(int argc, char **argv)
  		options_set_number(global_w_options, "mode-keys", keys);
  	}
  
@@ -81,26 +81,23 @@ index c9ae92ef..31aebff6 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index b772032c..8490fbe9 100644
+index 9479cded..510a04ed 100644
 --- a/tmux.h
 +++ b/tmux.h
-@@ -55,7 +55,16 @@ struct tmuxpeer;
- struct tmuxproc;
- 
- /* Default global configuration file. */
-+#ifndef TMUX_CONF
+@@ -59,6 +59,13 @@ struct tmuxproc;
  #define TMUX_CONF "/etc/tmux.conf"
-+#endif
-+
+ #endif
+ 
 +/* If "pane-border-ascii" is not used, "utf8-cjk" is not used too. */
 +#ifdef NO_USE_PANE_BORDER_ASCII
 +#ifndef NO_USE_UTF8CJK
 +#define NO_USE_UTF8CJK
 +#endif
 +#endif
- 
++
  /*
   * Minimum layout cell size, NOT including separator line. The scroll region
+  * cannot be one line in height so this must be at least two.
 diff --git a/tty-acs.c b/tty-acs.c
 index 6e3103d9..cbac1a86 100644
 --- a/tty-acs.c
