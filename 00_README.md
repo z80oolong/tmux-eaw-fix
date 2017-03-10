@@ -2,7 +2,7 @@
 
 ## 概要
 
-tmux 2.3 において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 East_Asian_Width 特性の値が A (Ambiguous) となる文字 (以下、 East Asian Ambiguous Character) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
+[tmux](http://tmux.github.io/) 2.3 において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 East_Asian_Width 特性の値が A (Ambiguous) となる文字 (以下、 East Asian Ambiguous Character) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
 
 ファイル ```tmux-2.3-fix.diff``` は、 tmux 2.3 において East Asian Ambiguous Character の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
 
@@ -14,7 +14,7 @@ tmux 2.3 において、 Unicode の規格における東アジア圏の各種�
 
 ## 差分ファイルの適用と tmux 2.3 のインストール
 
-差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め tmux の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
+差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め、 [waltarix 氏](https://github.com/waltarix)によって作成された tmux の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
 
 [https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch](https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch)
 
@@ -47,6 +47,10 @@ set-option -g utf8-cjk off
 
 ## 最後に
 
-差分ファイル ```tmux-2.3-fix.diff``` を作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した East_Asian_Width 特性が A の文字の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 Markus Kuhn 氏には心より感謝いたします。
+先ず最初に、tmux の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を作成された [waltarix 氏](https://github.com/waltarix)に心より感謝致します。
+
+また、差分ファイル ```tmux-2.3-fix.diff``` を作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した East_Asian_Width 特性が A の文字の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 Markus Kuhn 氏には心より感謝いたします。
 
 [http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c](http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c)
+
+最後に、 tmux の作者である [Nicholas Marriott 氏](https://github.com/nicm)を初め、 tmux に関わる全ての人々に心より感謝致します。
