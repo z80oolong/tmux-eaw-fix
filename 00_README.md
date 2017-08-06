@@ -16,6 +16,10 @@
 
 2017/07/06 現在、 tmux の[安定版のバージョンは 2.5 になっています](https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz)。以降は tmux 2.5 には差分ファイル ```tmux-2.5-fix.diff``` を、 [github 上の tmux](https://github.com/tmux/tmux.git) には、 ```tmux-HEAD-6b1ceca8-fix.diff``` をそれぞれ適用して下さい。
 
+### 追記 (2017/08/06)
+
+2017/08/06 現在の [github 上の tmux の HEAD の commit は e7b1e05b になっています](https://github.com/tmux/tmux.git)ので、以降は差分ファイル ```tmux-HEAD-e7b1e05b-fix.diff``` を適用して下さい。
+
 ## 差分ファイルの適用と tmux 2.3 のインストール
 
 差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め、 [waltarix 氏](https://github.com/waltarix)によって作成された tmux の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
