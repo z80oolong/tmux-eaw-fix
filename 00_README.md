@@ -26,7 +26,7 @@
 
 2017/08/24 現在の [github 上の tmux の HEAD の commit は 3b40f8e4 になっています][2]ので、以降は差分ファイル ```tmux-HEAD-3b40f8e4-fix.diff``` を適用して下さい。
 
-なお、[github 上の tmux の HEAD][2]に適用する差分ファイルのうち、 obsolute となった ```tmux-HEAD-392253f0-fix.diff```, ```tmux-HEAD-6b1ceca8-fix.diff```, ```tmux-HEAD-e7b1e05b-fix.diff``` を削除しましたので、どうか御了承下さい。
+なお、[github 上の tmux の HEAD][2]に適用する差分ファイルのうち、既に obsolute となった ```tmux-HEAD-392253f0-fix.diff```, ```tmux-HEAD-6b1ceca8-fix.diff```, ```tmux-HEAD-e7b1e05b-fix.diff``` を削除しましたので、どうか御了承下さい。
 
 
 ## 差分ファイルの適用と tmux 2.3 のインストール
@@ -51,6 +51,14 @@
 ```
 
 差分ファイルを適用後、 tmux 2.3 を通常通りにビルドしてインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
+
+## tmux 2.5 及び github 上の tmux の HEAD における差分ファイルの適用とインストール
+
+[tmux][1] 2.5 に適用する差分ファイル ```tmux-2.5-fix.diff``` には、既に [waltarix 氏][4]によって作成された ```pane-border-ascii.patch``` が含まれています。
+
+従って、 [tmux][1] 2.5 に差分ファイル ```tmux-2.5-fix.diff``` のみを適用後、tmux 2.5 を通常通りにビルドしてインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
+
+また、[github 上の tmux の HEAD][2] における差分ファイルについても最近の差分ファイルのみを適用後、 tmux の HEAD 版を通常通りにビルドしてインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
 
 ## オプションの設定について
 
