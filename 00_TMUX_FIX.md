@@ -79,6 +79,14 @@ set-option -g utf8-cjk off
 
 なお、[github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、既に obsolute となった ```tmux-HEAD-392253f0-fix.diff```, ```tmux-HEAD-6b1ceca8-fix.diff```, ```tmux-HEAD-e7b1e05b-fix.diff``` を削除しましたので、どうか御了承下さい。
 
+### 2017/09/17 現在の追記
+
+2017/09/17 現在の [github 上の tmux の HEAD の commit である ae5a62a5][TMRP]に対応した差分ファイル ```tmux-HEAD-ae5a62a5-fix.diff``` を追加致しました。現在の [github 上の tmux の HEAD][TMRP]には ```tmux-HEAD-ae5a62a5-fix.diff``` を適用して下さい。
+
+今回の差分ファイルでは、ソースファイル ```utf8.c``` のコンパイル時に発生する警告に対応するための修正を行っています。
+
+なお、[github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、 ```tmux-HEAD-3b40f8e4-fix.diff``` を削除しましたので、どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
