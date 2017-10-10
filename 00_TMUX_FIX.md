@@ -2,44 +2,54 @@
 
 ## 概要
 
-[tmux][TMUX] 2.3 において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 East_Asian_Width 特性の値が A (Ambiguous) となる文字 (以下、 East Asian Ambiguous Character) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
+[tmux][TMUX] 2.3 において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
 
-ファイル ```tmux-2.3-fix.diff``` は、 tmux 2.3 において East Asian Ambiguous Character の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
+ファイル ```tmux-2.3-fix.diff``` は、 [tmux 2.3][TMUX] において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
 
 ## 差分ファイルの適用と tmux 2.3 のインストール
 
-差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め、 [waltarix 氏][WALT]によって作成された tmux の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
+[tmux 2.3][TMUX] のソースコードに差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め、 [waltarix 氏][WALT]によって作成された [tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
 
 [https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch][PANE]
 
-最初に、上記の差分ファイル ```tmux-pane-border-ascii.patch``` を取得した後、tmux のソースコードが置かれているディレクトリにおいて、
+最初に、上記の差分ファイル ```tmux-pane-border-ascii.patch``` を取得した後、[tmux 2.3][TMUX] のソースコードが置かれているディレクトリにおいて、
 以下のようにして差分ファイル```tmux-pane-border-ascii.patch``` を適用します。
 
 ```
-# patch -p1 < /path/to/diff/tmux-pane-border-ascii.patch
-(ここに、/path/to/diff は tmux-pane-border-ascii.patch が置かれたディレクトリのパス名)
+ $ patch -p1 < /path/to/diff/tmux-pane-border-ascii.patch
+ (ここに、/path/to/diff は tmux-pane-border-ascii.patch が置かれたディレクトリのパス名)
 ```
 
-その後、tmux 2.3 のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-2.3-fix.diff``` を適用します。
+その後、 [tmux 2.3][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-2.3-fix.diff``` を適用します。
 
 ```
-# patch -p1 < /path/to/diff/tmux-2.3-fix.diff
-(ここに、/path/to/diff は、 tmux-2.3-fix.diff が置かれたディレクトリのパス名)
+ $ patch -p1 < /path/to/diff/tmux-2.3-fix.diff
+ (ここに、/path/to/diff は、 tmux-2.3-fix.diff が置かれたディレクトリのパス名)
 ```
 
-差分ファイルを適用後、 tmux 2.3 を通常通りにビルドしてインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
+差分ファイルを適用後、 [tmux 2.3][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
 
 ## tmux 2.5 及び github 上の tmux の HEAD における差分ファイルの適用とインストール
 
-[tmux][TMUX] 2.5 に適用する差分ファイル ```tmux-2.5-fix.diff``` には、既に [waltarix 氏][WALT]によって作成された ```pane-border-ascii.patch``` が含まれています。
+[tmux 2.5][TMUX] のソースコードに適用する差分ファイル ```tmux-2.5-fix.diff``` には、既に [waltarix 氏][WALT]によって作成された ```pane-border-ascii.patch``` が含まれています。
 
-従って、 [tmux][TMUX] 2.5 に差分ファイル ```tmux-2.5-fix.diff``` のみを適用後、tmux 2.5 を通常通りにビルドしてインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
+従って、 [tmux 2.5][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-2.5-fix.diff``` のみを適用後、tmux 2.5 を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
 
-また、[github 上の tmux の HEAD][TMRP] における差分ファイルについても最近の差分ファイルのみを適用後、 tmux の HEAD 版を通常通りにビルドしてインストールすると、 tmux において、 East Asian Ambiguous Character が全角文字の幅と同じ幅で表示されるようになります。
+```
+ $ patch -p1 < /path/to/diff/tmux-2.5-fix.diff
+ (ここに、/path/to/diff は、 tmux-2.5-fix.diff が置かれたディレクトリのパス名)
+```
+
+また、[github 上の tmux の HEAD][TMRP] のソースコードにおける差分ファイルについても、 [github 上の tmux の HEAD][TMRP] のソースコードが置かれているディレクトリより、以下のようにして、最近の差分ファイルのみを適用後、 [tmux の HEAD 版][TMRP]を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+
+```
+ $ patch -p1 < /path/to/diff/tmux-HEAD-xxxxxxxx-fix.diff
+ (ここに、 tmux-HEAD-xxxxxxxx-fix.diff は、最近の差分ファイルのファイル名であり、 /path/to/diff は、 tmux-HEAD-xxxxxxxx-fix.diff が置かれたディレクトリのパス名)
+```
 
 ## オプションの設定について
 
-East Asian Ambiguous Character の文字幅を 2 ではなく 1 として扱う場合は、tmux の設定ファイル .tmux.conf に以下の設定を追記します。
+ここで、 [East Asian Ambiguous Character][EAWA] の文字幅を 2 ではなく 1 として扱う場合は、[tmux][TMUX] の設定ファイル ```.tmux.conf``` に以下の設定を追記します。
 
 ```
 set-option -g utf8-cjk off
@@ -49,13 +59,13 @@ set-option -g utf8-cjk off
 
 ## 最後に
 
-先ず最初に、tmux の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を作成された [waltarix 氏][WALT]に心より感謝致します。
+先ず最初に、[tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を作成された [waltarix 氏][WALT]に心より感謝致します。
 
-また、差分ファイル ```tmux-2.3-fix.diff``` を作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した East_Asian_Width 特性が A の文字の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
+また、差分ファイル ```tmux-2.3-fix.diff``` を作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][WAEA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
 
 [http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c][WCWD]
 
-最後に、 tmux の作者である [Nicholas Marriott 氏][NICM]を初め、 [tmux][TMUX] に関わる全ての人々に心より感謝致します。
+最後に、 [tmux][TMUX] の作者である [Nicholas Marriott 氏][NICM]を初め、 [tmux][TMUX] に関わる全ての人々に心より感謝致します。
 
 ## 追記
 
@@ -90,6 +100,7 @@ set-option -g utf8-cjk off
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
+[EAWA]:http://www.unicode.org/reports/tr11/#Ambiguous
 [TMRP]:https://github.com/tmux/tmux.git
 [TM25]:https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz
 [WALT]:https://github.com/waltarix
