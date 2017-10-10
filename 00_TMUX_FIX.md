@@ -2,9 +2,9 @@
 
 ## 概要
 
-[tmux][TMUX] 2.3 において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
+[tmux 2.3][TMUX] 以降において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
 
-ファイル ```tmux-2.3-fix.diff``` は、 [tmux 2.3][TMUX] において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
+ファイル ```tmux-2.3-fix.diff```, ```tmux-2.5-fix.diff``` 及び ```tmux-HEAD-*-fix.diff``` は、 [tmux 2.3][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
 
 ## 差分ファイルの適用と tmux 2.3 のインストール
 
