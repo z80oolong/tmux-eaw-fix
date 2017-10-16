@@ -97,6 +97,12 @@ set-option -g utf8-cjk off
 
 なお、[github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、 ```tmux-HEAD-3b40f8e4-fix.diff``` を削除しましたので、どうか御了承下さい。
 
+## 2017/10/17 現在の追記
+
+2017/10/17 現在の tmux の[安定版のバージョンの 2.6][TM26] 及び [github 上の tmux の HEAD の commit である fb02df66][TMRP]に対応した差分ファイル ```tmux-HEAD-fb02df66-fix.diff``` を追加致しました。
+
+なお、[github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、 obsolute となった ```tmux-HEAD-ae5a62a5-fix.diff``` を削除しましたので、どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
@@ -108,3 +114,4 @@ set-option -g utf8-cjk off
 [WCWD]:http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 [DRMK]:http://www.cl.cam.ac.uk/~mgk25/
 [NICM]:https://github.com/nicm
+[TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz

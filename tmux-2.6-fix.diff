@@ -1,5 +1,5 @@
 diff --git a/options-table.c b/options-table.c
-index f5e973e5..6baab894 100644
+index f5e973e..6baab89 100644
 --- a/options-table.c
 +++ b/options-table.c
 @@ -152,6 +152,14 @@ const struct options_table_entry options_table[] = {
@@ -33,7 +33,7 @@ index f5e973e5..6baab894 100644
  	  .type = OPTIONS_TABLE_KEY,
  	  .scope = OPTIONS_TABLE_SESSION,
 diff --git a/tmux.c b/tmux.c
-index 78cb499b..168420e1 100644
+index 78cb499..168420e 100644
 --- a/tmux.c
 +++ b/tmux.c
 @@ -191,17 +191,26 @@ main(int argc, char **argv)
@@ -80,7 +80,7 @@ index 78cb499b..168420e1 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index adc020d5..77bfe5fb 100644
+index adc020d..77bfe5f 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -61,6 +61,13 @@ struct tmuxproc;
@@ -98,7 +98,7 @@ index adc020d5..77bfe5fb 100644
   * Minimum layout cell size, NOT including separator line. The scroll region
   * cannot be one line in height so this must be at least two.
 diff --git a/tty-acs.c b/tty-acs.c
-index 1f7a2b11..f9f39780 100644
+index 1f7a2b1..f9f3978 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
 @@ -64,6 +64,43 @@ static const struct tty_acs_entry tty_acs_table[] = {
@@ -167,7 +167,7 @@ index 1f7a2b11..f9f39780 100644
  		return (NULL);
  	return (entry->string);
 diff --git a/utf8.c b/utf8.c
-index a91da360..87f83303 100644
+index a91da36..87f8330 100644
 --- a/utf8.c
 +++ b/utf8.c
 @@ -25,6 +25,342 @@
