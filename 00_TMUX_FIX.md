@@ -97,7 +97,7 @@ set-option -g utf8-cjk off
 
 なお、[github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、 ```tmux-HEAD-3b40f8e4-fix.diff``` を削除しましたので、どうか御了承下さい。
 
-## 2017/10/17 現在の追記
+### 2017/10/17 現在の追記
 
 2017/10/17 現在の tmux の[安定版のバージョンの 2.6][TM26] 及び [github 上の tmux の HEAD の commit である fb02df66][TMRP]に対応した差分ファイル ```tmux-HEAD-fb02df66-fix.diff``` を追加致しました。
 
