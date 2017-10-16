@@ -29,7 +29,7 @@
 
 差分ファイルを適用後、 [tmux 2.3][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
 
-## tmux 2.5 及び github 上の tmux の HEAD における差分ファイルの適用とインストール
+## tmux 2.5 以降及び github 上の tmux の HEAD における差分ファイルの適用とインストール
 
 [tmux 2.5][TMUX] のソースコードに適用する差分ファイル ```tmux-2.5-fix.diff``` には、既に [waltarix 氏][WALT]によって作成された ```pane-border-ascii.patch``` が含まれています。
 
@@ -57,7 +57,7 @@ set-option -g utf8-cjk off
 
 なお、オプション ```utf8-cjk``` の初期値は、 locale に関する環境変数 ```LC_CTYPE``` の値が ```"ja*", "ko*", "zh*"``` の場合は ```on``` となり、それ以外の場合は ```off``` となります。そして、オプション ```utf8-cjk``` の値が ```on``` の場合は、オプション ```pane-border-ascii``` の値に関わらず、 tmux の画面分割のボーダーラインは ascii 文字となります。
 
-## 最後に
+## 謝辞
 
 先ず最初に、[tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を作成された [waltarix 氏][WALT]に心より感謝致します。
 
