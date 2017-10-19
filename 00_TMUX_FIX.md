@@ -61,7 +61,7 @@ set-option -g utf8-cjk off
 
 先ず最初に、[tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を作成された [waltarix 氏][WALT]に心より感謝致します。
 
-また、差分ファイル ```tmux-2.3-fix.diff``` を作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][WAEA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
+また、差分ファイル ```tmux-2.3-fix.diff``` を作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][EAWA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
 
 [http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c][WCWD]
 
