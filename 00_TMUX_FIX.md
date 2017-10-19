@@ -77,7 +77,7 @@ set-option -g utf8-cjk off
 
 ### 2017/07/06 現在の追記
 
-2017/07/06 現在、 tmux の[安定版のバージョンは 2.5 になっています][TM25]。以降は tmux 2.5 には差分ファイル ```tmux-2.5-fix.diff``` を、 [github 上の tmux][2] には、 ```tmux-HEAD-6b1ceca8-fix.diff``` をそれぞれ適用して下さい。
+2017/07/06 現在、 tmux の[安定版のバージョンは 2.5 になっています][TM25]。以降は tmux 2.5 には差分ファイル ```tmux-2.5-fix.diff``` を、 [github 上の tmux][TMRP] には、 ```tmux-HEAD-6b1ceca8-fix.diff``` をそれぞれ適用して下さい。
 
 ### 2017/08/06 現在の追記
 
