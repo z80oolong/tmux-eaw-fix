@@ -103,6 +103,12 @@ set-option -g utf8-cjk off
 
 なお、[github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、 obsolute となった ```tmux-HEAD-ae5a62a5-fix.diff``` を削除しましたので、どうか御了承下さい。
 
+### 2018/01/25 現在の追記とお断り
+
+2018/01/25 現在の [github 上の tmux の HEAD の commit である 19afd842][TMRP]に対応した差分ファイル ```tmux-HEAD-19afd842-fix.diff``` を追加致しました。ここ最近は各種諸用が重なり、本差分ファイルの更新が滞りましたことを心より御詫び申し上げます。
+
+また、本差分ファイルの更新に当たって御指摘及び御助力等を頂きました [mattn 氏][MATN]に心より感謝致します。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
@@ -115,3 +121,4 @@ set-option -g utf8-cjk off
 [DRMK]:http://www.cl.cam.ac.uk/~mgk25/
 [NICM]:https://github.com/nicm
 [TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
+[MATN]:https://github.com/mattn
