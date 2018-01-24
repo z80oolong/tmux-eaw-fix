@@ -1,3 +1,4 @@
+----
 diff --git a/options-table.c b/options-table.c
 index c9a69271..53cd7e72 100644
 --- a/options-table.c
@@ -536,4 +537,3 @@ index a91da360..87f83303 100644
  #endif
  	if (width < 0 || width > 0xff) {
  		log_debug("Unicode %04lx, wcwidth() %d", (long)wc, width);
-
