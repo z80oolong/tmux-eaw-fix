@@ -107,6 +107,8 @@ set-option -g utf8-cjk off
 
 2018/01/25 現在の [github 上の tmux の HEAD の commit である 19afd842][TMRP]に対応した差分ファイル ```tmux-HEAD-19afd842-fix.diff``` を追加致しました。ここ最近は各種諸用が重なり、本差分ファイルの更新が滞りましたことを心より御詫び申し上げます。
 
+また、 [github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、 obsolute となった ```tmux-HEAD-fb02df66-fix.diff``` を削除しましたので、どうか御了承下さい。
+
 また、本差分ファイルの更新に当たって御指摘及び御助力等を頂きました [mattn 氏][MATN]に心より感謝致します。
 
 <!-- 外部リンク一覧 -->
