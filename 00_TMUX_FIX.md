@@ -111,6 +111,10 @@ set-option -g utf8-cjk off
 
 また、本差分ファイルの更新に当たって御指摘及び御助力等を頂きました [mattn 氏][MATN]に心より感謝致します。
 
+### 2018/02/23 現在の追記
+
+2018/02/23 現在の [github 上の tmux の HEAD の commit である 9464b94f][TMRP] に対応した差分ファイル ```tmux-HEAD-9464b94f-fix.diff``` を追加致しました。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
