@@ -115,6 +115,12 @@ set-option -g utf8-cjk off
 
 2018/02/23 現在の [github 上の tmux の HEAD の commit である 9464b94f][TMRP] に対応した差分ファイル ```tmux-HEAD-9464b94f-fix.diff``` を追加致しました。
 
+### 2018/03/23 現在の追記
+
+2018/03/23 現在の [github 上の tmux の HEAD の commit である 919f55ac][TMRP] に対応した差分ファイル ```tmux-HEAD-919f55ac-fix.diff``` を追加致しました。 [github 上の tmux の HEAD の commit である 919f55ac][TMRP] は、安定版 2.7 の rc 版です。
+
+これに伴い、差分ファイル ```tmux-HEAD-19afd842-fix.diff```, ```tmux-HEAD-9464b94f-fix.diff``` を削除しました。どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
