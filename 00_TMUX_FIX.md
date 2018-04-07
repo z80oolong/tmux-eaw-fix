@@ -121,6 +121,14 @@ set-option -g utf8-cjk off
 
 これに伴い、差分ファイル ```tmux-HEAD-19afd842-fix.diff```, ```tmux-HEAD-9464b94f-fix.diff``` を削除しました。どうか御了承下さい。
 
+### 2018/04/06 現在の追記
+
+2018/04/06 現在の [github 上の tmux の HEAD の commit である b5c0b2ca][TMRP] に対応した差分ファイル ```tmux-HEAD-b5c0b2ca-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-919f55ac-fix.diff``` を削除しました。どうか御了承下さい。
+
+なお、今後の差分ファイルについては、[本稿の Gist][GST1] にも投稿を行う他、 [Github のリポジトリ https://github.com/z80oolong/diffs][GITH] にも同時に投稿を行う予定ですので、どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
@@ -134,3 +142,5 @@ set-option -g utf8-cjk off
 [NICM]:https://github.com/nicm
 [TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
 [MATN]:https://github.com/mattn
+[GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
+[GITH]:https://github.com/z80oolong/diffs
