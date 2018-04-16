@@ -129,6 +129,14 @@ set-option -g utf8-cjk off
 
 なお、今後の差分ファイルについては、[本稿の Gist][GST1] にも投稿を行う他、 [Github のリポジトリ https://github.com/z80oolong/diffs][GITH] にも同時に投稿を行う予定ですので、どうか御了承下さい。
 
+### 2018/04/16 現在の追記
+
+2018/04/06 現在の tmux の[安定版のバージョンの 2.7][TM27] 及び [github 上の tmux の HEAD の commit である ae0b7c7d][TMRP]に対応した差分ファイルである ```tmux-2.7-fix.diff, tmux-HEAD-ae0b7c7d-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-b5c9b2ca-fix.diff``` を削除しました。どうか御了承下さい。
+
+なお、これに伴い、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
@@ -141,6 +149,8 @@ set-option -g utf8-cjk off
 [DRMK]:http://www.cl.cam.ac.uk/~mgk25/
 [NICM]:https://github.com/nicm
 [TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
+[TM26]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
+[TAP1]:https://github.com/z80oolong/homebrew-tmux
