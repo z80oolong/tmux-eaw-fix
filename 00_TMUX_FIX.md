@@ -131,7 +131,7 @@ set-option -g utf8-cjk off
 
 ### 2018/04/16 現在の追記
 
-2018/04/06 現在の tmux の[安定版のバージョンの 2.7][TM27] 及び [github 上の tmux の HEAD の commit である ae0b7c7d][TMRP]に対応した差分ファイルである ```tmux-2.7-fix.diff, tmux-HEAD-ae0b7c7d-fix.diff``` を追加致しました。
+2018/04/16 現在の tmux の[安定版のバージョンの 2.7][TM27] 及び [github 上の tmux の HEAD の commit である ae0b7c7d][TMRP]に対応した差分ファイルである ```tmux-2.7-fix.diff, tmux-HEAD-ae0b7c7d-fix.diff``` を追加致しました。
 
 これに伴い、差分ファイル ```tmux-HEAD-b5c9b2ca-fix.diff``` を削除しました。どうか御了承下さい。
 
@@ -139,7 +139,7 @@ set-option -g utf8-cjk off
 
 ### 2018/05/15 現在の追記
 
-2018/04/06 現在の [github 上の tmux の HEAD の commit である 82c0eed3][TMRP]に対応した差分ファイルである ```tmux-HEAD-82c0eed3-fix.diff``` を追加致しました。
+2018/05/15 現在の [github 上の tmux の HEAD の commit である 82c0eed3][TMRP]に対応した差分ファイルである ```tmux-HEAD-82c0eed3-fix.diff``` を追加致しました。
 
 これに伴い、差分ファイル ```tmux-HEAD-ae0b7c7d-fix.diff``` を削除しました。どうか御了承下さい。
 
