@@ -1,5 +1,5 @@
 diff --git a/options-table.c b/options-table.c
-index 2b6b794..6df2b35 100644
+index 2b6b794b..6df2b358 100644
 --- a/options-table.c
 +++ b/options-table.c
 @@ -158,6 +158,14 @@ const struct options_table_entry options_table[] = {
@@ -33,7 +33,7 @@ index 2b6b794..6df2b35 100644
  	  .type = OPTIONS_TABLE_KEY,
  	  .scope = OPTIONS_TABLE_SESSION,
 diff --git a/tmux.c b/tmux.c
-index 5b73079..f8f36b4 100644
+index 5b73079e..f8f36b42 100644
 --- a/tmux.c
 +++ b/tmux.c
 @@ -189,18 +189,27 @@ main(int argc, char **argv)
@@ -81,7 +81,7 @@ index 5b73079..f8f36b4 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index 5593bfb..421dba8 100644
+index 89dfb348..88c6b29c 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -61,6 +61,13 @@ struct tmuxproc;
@@ -99,7 +99,7 @@ index 5593bfb..421dba8 100644
   * Minimum layout cell size, NOT including separator line. The scroll region
   * cannot be one line in height so this must be at least two.
 diff --git a/tty-acs.c b/tty-acs.c
-index 1f7a2b1..f9f3978 100644
+index 1f7a2b11..f9f39780 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
 @@ -64,6 +64,43 @@ static const struct tty_acs_entry tty_acs_table[] = {
@@ -168,7 +168,7 @@ index 1f7a2b1..f9f3978 100644
  		return (NULL);
  	return (entry->string);
 diff --git a/utf8.c b/utf8.c
-index a91da36..775925d 100644
+index a91da360..775925da 100644
 --- a/utf8.c
 +++ b/utf8.c
 @@ -25,6 +25,319 @@
@@ -491,7 +491,7 @@ index a91da36..775925d 100644
  static int	utf8_width(wchar_t);
  
  /* Set a single character. */
-@@ -109,11 +422,23 @@ utf8_width(wchar_t wc)
+@@ -109,10 +422,22 @@ utf8_width(wchar_t wc)
  {
  	int	width;
  
@@ -510,8 +510,7 @@ index a91da36..775925d 100644
  	width = utf8proc_wcwidth(wc);
  #else
  	width = wcwidth(wc);
- #endif
 +#endif
+ #endif
  	if (width < 0 || width > 0xff) {
  		log_debug("Unicode %04lx, wcwidth() %d", (long)wc, width);
- 
