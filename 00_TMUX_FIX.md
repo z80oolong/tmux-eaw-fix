@@ -4,7 +4,7 @@
 
 [tmux 2.3][TMUX] 以降において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
 
-ファイル ```tmux-2.3-fix.diff```, ```tmux-2.5-fix.diff``` 及び ```tmux-HEAD-*-fix.diff``` は、 [tmux 2.3][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
+ファイル ```tmux-2.3-fix.diff```, ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-*-fix.diff``` は、 [tmux 2.3][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
 
 ## 差分ファイルの適用と tmux 2.3 のインストール
 
@@ -31,13 +31,13 @@
 
 ## tmux 2.5 以降及び github 上の tmux の HEAD における差分ファイルの適用とインストール
 
-[tmux 2.5][TMUX] のソースコードに適用する差分ファイル ```tmux-2.5-fix.diff``` には、既に [waltarix 氏][WALT]によって作成された ```pane-border-ascii.patch``` が含まれています。
+[tmux 2.5][TMUX] 以降の安定版のソースコードに適用する差分ファイル ```tmux-x.y-fix.diff``` には、既に [waltarix 氏][WALT]によって作成された ```pane-border-ascii.patch``` が含まれています。
 
-従って、 [tmux 2.5][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-2.5-fix.diff``` のみを適用後、tmux 2.5 を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+従って、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` のみを適用後、[tmux][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
 
 ```
- $ patch -p1 < /path/to/diff/tmux-2.5-fix.diff
- (ここに、/path/to/diff は、 tmux-2.5-fix.diff が置かれたディレクトリのパス名)
+ $ patch -p1 < /path/to/diff/tmux-x.y-fix.diff
+ (ここに、/path/to/diff は、 tmux-x.y-fix.diff が置かれたディレクトリのパス名)
 ```
 
 また、[github 上の tmux の HEAD][TMRP] のソースコードにおける差分ファイルについても、 [github 上の tmux の HEAD][TMRP] のソースコードが置かれているディレクトリより、以下のようにして、最近の差分ファイルのみを適用後、 [tmux の HEAD 版][TMRP]を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
@@ -46,6 +46,14 @@
  $ patch -p1 < /path/to/diff/tmux-HEAD-xxxxxxxx-fix.diff
  (ここに、 tmux-HEAD-xxxxxxxx-fix.diff は、最近の差分ファイルのファイル名であり、 /path/to/diff は、 tmux-HEAD-xxxxxxxx-fix.diff が置かれたディレクトリのパス名)
 ```
+
+## Linuxbrew を用いた差分ファイルの適用とインストール
+
+[Linuxbrew][BREW] を導入した端末において、[本稿の Gist][GST1] にある差分ファイルを適用した [tmux][TMUX] をインストールする際には、**これらの差分ファイルを適用した [tmux][TMUX] を導入するための [Linuxbrew][BREW] 向け Tap リポジトリ [z80oolong/tmux][TAP1] を使用することを強く御勧め致します。**
+
+Tap リポジトリ [z80oolong/tmux][TAP1] では、[最新の安定版の tmux][TMUX] 及び [github 上の最新の tmux の HEAD][TMRP] のインストールの他、旧安定版の [tmux][TMUX] のインストールも可能です。 
+
+[z80oolong/tmux][TAP1] の詳細な使用法につきましては、 [z80oolong/tmux の README.md][READ] を御覧下さい。
 
 ## オプションの設定について
 
@@ -147,9 +155,20 @@ set-option -g utf8-cjk off
 
 ### 2018/06/12 現在の追記
 
-2018/06/12 現在の [github 上の tmux の HEAD の commit である 9da78d72][TMRP]に対応した差分ファイルである ```tmux-HEAD-9da78d72-fix.diff``` を追加致しました。
+2018/06/12 現在の [github 上の tmux の HEAD の commit である 9da78d72][TMRP] に対応した差分ファイルである ```tmux-HEAD-9da78d72-fix.diff``` を追加致しました。
 
 これに伴い、差分ファイル ```tmux-HEAD-82c0eed3-fix.diff``` を削除しました。どうか御了承下さい。
+
+なお、これに伴い、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
+
+### 2018/07/04 現在の追記
+
+2018/07/04 現在の [github 上の tmux の HEAD の commit である 33f9b316][TMRP] に対応した差分ファイルである ```tmux-HEAD-33f9b316-fix.diff``` を追加致しました。
+
+
+これに伴い、差分ファイル ```tmux-HEAD-9da78d72-fix.diff``` を削除しました。また、旧安定版に対応した差分ファイルである ```tmux-2.5-fix.diff, tmux-2.6-fix.diff``` も同時に削除しました。どうか御了承下さい。
+
+**なお、旧安定版の [tmux][TMUX] の差分ファイルの適用とインストールは、後述する [Linuxbrew][BREW] 向けの Tap リポジトリ [z80oolong/tmux][TAP1] を用いて行うことが可能です。**
 
 なお、これに伴い、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
 
@@ -161,6 +180,9 @@ set-option -g utf8-cjk off
 [TM25]:https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz
 [WALT]:https://github.com/waltarix
 [PANE]:https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch
+[BREW]:https://linuxbrew.sh
+[TAP1]:https://github.com/z80oolong/homebrew-tmux
+[READ]:https://github.com/z80oolong/homebrew-tmux/blob/master/README.md
 [WCWD]:http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 [DRMK]:http://www.cl.cam.ac.uk/~mgk25/
 [NICM]:https://github.com/nicm
@@ -169,4 +191,3 @@ set-option -g utf8-cjk off
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
-[TAP1]:https://github.com/z80oolong/homebrew-tmux

@@ -1,8 +1,8 @@
 diff --git a/options-table.c b/options-table.c
-index f5e973e..6baab89 100644
+index 2b6b794b..6df2b358 100644
 --- a/options-table.c
 +++ b/options-table.c
-@@ -152,6 +152,14 @@ const struct options_table_entry options_table[] = {
+@@ -158,6 +158,14 @@ const struct options_table_entry options_table[] = {
  	  .default_num = ALERT_OTHER
  	},
  
@@ -17,7 +17,7 @@ index f5e973e..6baab89 100644
  	{ .name = "assume-paste-time",
  	  .type = OPTIONS_TABLE_NUMBER,
  	  .scope = OPTIONS_TABLE_SESSION,
-@@ -315,6 +323,14 @@ const struct options_table_entry options_table[] = {
+@@ -321,6 +329,14 @@ const struct options_table_entry options_table[] = {
  	  .default_num = 0
  	},
  
@@ -33,16 +33,17 @@ index f5e973e..6baab89 100644
  	  .type = OPTIONS_TABLE_KEY,
  	  .scope = OPTIONS_TABLE_SESSION,
 diff --git a/tmux.c b/tmux.c
-index 78cb499..168420e 100644
+index 5b73079e..f8f36b42 100644
 --- a/tmux.c
 +++ b/tmux.c
-@@ -191,17 +191,26 @@ main(int argc, char **argv)
- 	char					*path, *label, **var;
+@@ -189,18 +189,27 @@ main(int argc, char **argv)
+ {
+ 	char					*path, *label, *cause, **var;
  	char					 tmp[PATH_MAX];
- 	const char				*s, *shell;
 +#ifndef NO_USE_UTF8CJK
-+	char		*ctype;
++	char					*ctype;
 +#endif
+ 	const char				*s, *shell, *cwd;
  	int					 opt, flags, keys;
  	const struct options_table_entry	*oe;
  
@@ -80,10 +81,10 @@ index 78cb499..168420e 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index adc020d..77bfe5f 100644
+index aad11ffe..ea803dea 100644
 --- a/tmux.h
 +++ b/tmux.h
-@@ -61,6 +61,13 @@ struct tmuxproc;
+@@ -62,6 +62,13 @@ struct tmuxproc;
  #define TMUX_CONF "/etc/tmux.conf"
  #endif
  
@@ -98,7 +99,7 @@ index adc020d..77bfe5f 100644
   * Minimum layout cell size, NOT including separator line. The scroll region
   * cannot be one line in height so this must be at least two.
 diff --git a/tty-acs.c b/tty-acs.c
-index 1f7a2b1..f9f3978 100644
+index 1f7a2b11..f9f39780 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
 @@ -64,6 +64,43 @@ static const struct tty_acs_entry tty_acs_table[] = {
@@ -167,22 +168,14 @@ index 1f7a2b1..f9f3978 100644
  		return (NULL);
  	return (entry->string);
 diff --git a/utf8.c b/utf8.c
-index a91da36..87f8330 100644
+index a91da360..775925da 100644
 --- a/utf8.c
 +++ b/utf8.c
-@@ -25,6 +25,342 @@
+@@ -25,6 +25,319 @@
  
  #include "tmux.h"
  
 +#ifndef NO_USE_UTF8CJK
-+// Prototype of function mk_wcwidth_cjk(), wcs_wcwidth_cjk(), and etc.
-+// implemented by Markus Kuhn Ph.D., 2007.
-+
-+int mk_wcwidth(wchar_t ucs);
-+int mk_wcswidth(const wchar_t *pwcs, size_t n);
-+int mk_wcwidth_cjk(wchar_t ucs);
-+int mk_wcswidth_cjk(const wchar_t *pwcs, size_t n);
-+
 +/*
 + * This is an implementation of wcwidth() and wcswidth() (defined in
 + * IEEE Std 1002.1-2001) for Unicode.
@@ -244,9 +237,8 @@ index a91da36..87f8330 100644
 + * Latest version: http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 + */
 +
-+#if 0
 +// Delete duplicated '#include <wchar.h>' by Z.OOL. <zool@zool.jpn.org>
-+#include <wchar.h>
++//#include <wchar.h>
 +
 +struct interval {
 +  int first;
@@ -257,20 +249,6 @@ index a91da36..87f8330 100644
 +static int bisearch(wchar_t ucs, const struct interval *table, int max) {
 +  int min = 0;
 +  int mid;
-+#else
-+// Fix types of struct internal's member and 'max' argument of function bisearch().
-+// by Z.OOL. <zool@zool.jpn.org>
-+
-+struct interval {
-+  wchar_t first;
-+  wchar_t last;
-+};
-+
-+/* auxiliary function for binary search in interval table */
-+static int bisearch(wchar_t ucs, const struct interval *table, size_t max) {
-+  size_t min = 0;
-+  size_t mid;
-+#endif
 +
 +  if (ucs < table[0].first || ucs > table[max].last)
 +    return 0;
@@ -513,7 +491,7 @@ index a91da36..87f8330 100644
  static int	utf8_width(wchar_t);
  
  /* Set a single character. */
-@@ -109,10 +445,22 @@ utf8_width(wchar_t wc)
+@@ -109,10 +422,22 @@ utf8_width(wchar_t wc)
  {
  	int	width;
  
@@ -536,4 +514,3 @@ index a91da36..87f8330 100644
  #endif
  	if (width < 0 || width > 0xff) {
  		log_debug("Unicode %04lx, wcwidth() %d", (long)wc, width);
-
