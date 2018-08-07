@@ -161,9 +161,9 @@ set-option -g utf8-cjk off
 
 なお、これに伴い、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
 
-### 2018/07/04 現在の追記
+### 2018/08/04 現在の追記
 
-2018/07/04 現在の [github 上の tmux の HEAD の commit である 33f9b316][TMRP] に対応した差分ファイルである ```tmux-HEAD-33f9b316-fix.diff``` を追加致しました。
+2018/08/04 現在の [github 上の tmux の HEAD の commit である 33f9b316][TMRP] に対応した差分ファイルである ```tmux-HEAD-33f9b316-fix.diff``` を追加致しました。
 
 
 これに伴い、差分ファイル ```tmux-HEAD-9da78d72-fix.diff``` を削除しました。また、旧安定版に対応した差分ファイルである ```tmux-2.5-fix.diff, tmux-2.6-fix.diff``` も同時に削除しました。どうか御了承下さい。
