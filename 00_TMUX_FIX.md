@@ -1,39 +1,20 @@
-# tmux 2.3 以降において East Asian Ambiguous Character を全角文字の幅で表示する
+# tmux 2.5 以降において East Asian Ambiguous Character を全角文字の幅で表示する
 
 ## 概要
 
-[tmux 2.3][TMUX] 以降において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
+[tmux 2.5][TMUX] 以降において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
 
-ファイル ```tmux-2.3-fix.diff```, ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-*-fix.diff``` は、 [tmux 2.3][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
+ファイル ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-*-fix.diff``` は、 [tmux 2.5][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
 
-## 差分ファイルの適用と tmux 2.3 のインストール
-
-[tmux 2.3][TMUX] のソースコードに差分ファイル ```tmux-2.3-fix.diff``` を適用するには、予め、 [waltarix 氏][WALT]によって作成された [tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を適用する必要があります。 
+この差分には、　[waltarix 氏][WALT]によって作成された [tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` が含まれています。
 
 [https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch][PANE]
 
-最初に、上記の差分ファイル ```tmux-pane-border-ascii.patch``` を取得した後、[tmux 2.3][TMUX] のソースコードが置かれているディレクトリにおいて、
-以下のようにして差分ファイル```tmux-pane-border-ascii.patch``` を適用します。
-
-```
- $ patch -p1 < /path/to/diff/tmux-pane-border-ascii.patch
- (ここに、/path/to/diff は tmux-pane-border-ascii.patch が置かれたディレクトリのパス名)
-```
-
-その後、 [tmux 2.3][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-2.3-fix.diff``` を適用します。
-
-```
- $ patch -p1 < /path/to/diff/tmux-2.3-fix.diff
- (ここに、/path/to/diff は、 tmux-2.3-fix.diff が置かれたディレクトリのパス名)
-```
-
-差分ファイルを適用後、 [tmux 2.3][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
-
 ## tmux 2.5 以降及び github 上の tmux の HEAD における差分ファイルの適用とインストール
 
-[tmux 2.5][TMUX] 以降の安定版のソースコードに適用する差分ファイル ```tmux-x.y-fix.diff``` には、既に [waltarix 氏][WALT]によって作成された ```pane-border-ascii.patch``` が含まれています。
+[tmux][TMUX] のソースコードに差分ファイルを適用するには、安定版の　[tmux][TMUX] には、差分ファイル ```tmux-x.y-fix.diff``` を、 [github 上の tmux の HEAD][TMRP] のソースコードには、　```tmux-HEAD-*-fix.diff``` をそれぞれ適用して下さい。
 
-従って、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` のみを適用後、[tmux][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+従って、安定版の [tmux][TMUX] のソースコードにおける差分ファイルについては、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` を適用後、[tmux][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
 
 ```
  $ patch -p1 < /path/to/diff/tmux-x.y-fix.diff
@@ -165,12 +146,29 @@ set-option -g utf8-cjk off
 
 2018/08/04 現在の [github 上の tmux の HEAD の commit である 33f9b316][TMRP] に対応した差分ファイルである ```tmux-HEAD-33f9b316-fix.diff``` を追加致しました。
 
-
 これに伴い、差分ファイル ```tmux-HEAD-9da78d72-fix.diff``` を削除しました。また、旧安定版に対応した差分ファイルである ```tmux-2.5-fix.diff, tmux-2.6-fix.diff``` も同時に削除しました。どうか御了承下さい。
 
 **なお、旧安定版の [tmux][TMUX] の差分ファイルの適用とインストールは、後述する [Linuxbrew][BREW] 向けの Tap リポジトリ [z80oolong/tmux][TAP1] を用いて行うことが可能です。**
 
 なお、これに伴い、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
+
+### 2018/09/12 現在の追記
+
+2018/09/12 現在の [github 上の tmux の HEAD の commit である 71d2ab18][TMRP] に対応した差分ファイルである ```tmux-HEAD-71d2ab18-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-33f9b316-fix.diff``` を削除しました。
+
+また、旧安定版 [tmux 2.3][TMUX] に対応した差分ファイルである ```tmux-2.3-fix.diff``` を削除しました。**今後は、旧安定版の [tmux][TMUX] の差分ファイルの適用とインストールは、 [Linuxbrew][BREW] 向けの Tap リポジトリ [z80oolong/tmux][TAP1] を用いることを推奨します。**
+
+なお、旧安定版 [tmux 2.3][TMUX] に対応した差分ファイルである ```tmux-2.3-fix.diff``` は以下の URL からも入手できます。
+
+[https://raw.githubusercontent.com/z80oolong/diffs/master/tmux/tmux-2.3-fix.diff][DIF1]
+
+旧安定版 [tmux 2.3][TMUX] に対応した差分ファイルである ```tmux-2.3-fix.diff``` を旧安定版 [tmux 2.3][TMUX] のソースコードに適用するには、予め [waltarix 氏][WALT]によって作成された [tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである以下の差分ファイルを適用する必要があります。
+
+[https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch][PANE]
+
+これに伴い、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
 
 <!-- 外部リンク一覧 -->
 
@@ -191,3 +189,4 @@ set-option -g utf8-cjk off
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
+[DIF1]:https://raw.githubusercontent.com/z80oolong/diffs/master/tmux/tmux-2.3-fix.diff
