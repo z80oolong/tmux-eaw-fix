@@ -10,7 +10,7 @@
 
 [https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch][PANE]
 
-## tmux 2.5 以降及び github 上の tmux の HEAD における差分ファイルの適用とインストール
+## 差分ファイルの適用とインストール
 
 [tmux][TMUX] のソースコードに差分ファイルを適用するには、安定版の　[tmux][TMUX] には、差分ファイル ```tmux-x.y-fix.diff``` を、 [github 上の tmux の HEAD][TMRP] のソースコードには、　```tmux-HEAD-*-fix.diff``` をそれぞれ適用して下さい。
 
@@ -169,6 +169,14 @@ set-option -g utf8-cjk off
 [https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch][PANE]
 
 これに伴い、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
+
+### 2018/09/12 現在の追記
+
+2018/09/12 現在の [github 上の tmux の HEAD の commit である 6abb62df][TMRP] に対応した差分ファイルである ```tmux-HEAD-6abb62df-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-71d2ab18-fix.diff``` を削除しました。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
 
 <!-- 外部リンク一覧 -->
 

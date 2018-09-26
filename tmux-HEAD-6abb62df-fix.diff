@@ -81,7 +81,7 @@ index 5b73079e..f8f36b42 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index 6c5d4402..236cb49f 100644
+index be74a3a7..69d44bf0 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -63,6 +63,13 @@ struct tmuxproc;
@@ -95,9 +95,9 @@ index 6c5d4402..236cb49f 100644
 +#endif
 +#endif
 +
- /*
-  * Minimum layout cell size, NOT including separator line. The scroll region
-  * cannot be one line in height so this must be at least two.
+ /* Minimum layout cell size, NOT including border lines. */
+ #define PANE_MINIMUM 1
+ 
 diff --git a/tty-acs.c b/tty-acs.c
 index 1f7a2b11..f9f39780 100644
 --- a/tty-acs.c
