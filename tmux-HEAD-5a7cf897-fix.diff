@@ -1,5 +1,5 @@
 diff --git a/options-table.c b/options-table.c
-index 0776f0b7..bcb8db66 100644
+index 4bc7982f..e61a8691 100644
 --- a/options-table.c
 +++ b/options-table.c
 @@ -161,6 +161,14 @@ const struct options_table_entry options_table[] = {
@@ -81,7 +81,7 @@ index 5b73079e..f8f36b42 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index be74a3a7..69d44bf0 100644
+index 22fb80a4..ca6e2000 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -63,6 +63,13 @@ struct tmuxproc;

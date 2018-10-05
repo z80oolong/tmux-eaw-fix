@@ -12,7 +12,7 @@
 
 ## 差分ファイルの適用とインストール
 
-[tmux][TMUX] のソースコードに差分ファイルを適用するには、安定版の　[tmux][TMUX] には、差分ファイル ```tmux-x.y-fix.diff``` を、 [github 上の tmux の HEAD][TMRP] のソースコードには、　```tmux-HEAD-*-fix.diff``` をそれぞれ適用して下さい。
+[tmux][TMUX] のソースコードに差分ファイルを適用するには、安定版の [tmux][TMUX] には、差分ファイル ```tmux-x.y-fix.diff``` を、 [github 上の tmux の HEAD][TMRP] のソースコードには、　```tmux-HEAD-*-fix.diff``` をそれぞれ適用して下さい。
 
 従って、安定版の [tmux][TMUX] のソースコードにおける差分ファイルについては、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` を適用後、[tmux][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
 
@@ -178,6 +178,14 @@ set-option -g utf8-cjk off
 
 また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
 
+### 2018/10/05 現在の追記
+
+2018/10/05 現在の [github 上の tmux の HEAD の commit である 5a7cf897][TMRP] に対応した差分ファイルである ```tmux-HEAD-5a7cf897-fix.diff``` を追加致しました。
+
+また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 2.8-rc][T28R] に対応した差分ファイルである ```tmux-2.8-rc-fix.diff``` も同時に追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-6abb62df-fix.diff``` を削除しました。どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
@@ -194,7 +202,9 @@ set-option -g utf8-cjk off
 [NICM]:https://github.com/nicm
 [TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
 [TM27]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
+[T28R]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.8-rc.tar.gz
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
+[GIT1]:https://github.com/z80oolong/diffs/tree/master/tmux
 [DIF1]:https://raw.githubusercontent.com/z80oolong/diffs/master/tmux/tmux-2.3-fix.diff
