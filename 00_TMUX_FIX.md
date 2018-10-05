@@ -186,6 +186,8 @@ set-option -g utf8-cjk off
 
 これに伴い、差分ファイル ```tmux-HEAD-6abb62df-fix.diff``` を削除しました。どうか御了承下さい。
 
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] を更新しました。こちらの方もどうか御覧下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
