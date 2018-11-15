@@ -198,6 +198,14 @@ set-option -g utf8-cjk off
 
 また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
 
+### 2018/11/15 現在の追記
+
+2018/11/15 現在の [安定版のバージョンの 2.8][TM28] 及び [github 上の tmux の HEAD の commit である 0fd73f23][TMRP] に対応した差分ファイルである ```tmux-2.8-fix.diff, tmux-HEAD-0fd73f23-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-2.8-rc-fix.diff, tmux-HEAD-b1ad075d-fix.diff``` を削除しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
@@ -215,6 +223,7 @@ set-option -g utf8-cjk off
 [TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
 [TM27]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
 [T28R]:https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8-rc.tar.gz
+[TM27]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.8.tar.gz
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
