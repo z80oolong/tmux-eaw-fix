@@ -231,7 +231,7 @@ set-option -g utf8-cjk off
 [TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
 [TM27]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
 [T28R]:https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8-rc.tar.gz
-[TM27]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.8.tar.gz
+[TM28]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.8.tar.gz
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
