@@ -81,7 +81,7 @@ index f4265e0a..b4ae8681 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index 0255e583..592800f4 100644
+index 1bbfaae4..b33f88e5 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -64,6 +64,13 @@ struct winlink;
