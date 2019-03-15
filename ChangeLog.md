@@ -4,6 +4,12 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2019/03/15 現在の ChangeLog
+
+2019/03/15 現在の [github 上の tmux の HEAD の commit である 2c755e3c][TMRP] に対応した差分ファイルである ```tmux-HEAD-2c755e3c-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-d5c83790-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
 ## 2019/02/21 現在の ChangeLog
 
 2019/02/21 現在の [github 上の tmux の HEAD の commit である d5c83790][TMRP] に対応した差分ファイルである ```tmux-HEAD-d5c83790-fix.diff``` を追加致しました。
