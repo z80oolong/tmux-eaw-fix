@@ -10,6 +10,8 @@
 
 これに伴い、差分ファイル ```tmux-HEAD-d5c83790-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2019/02/21 現在の ChangeLog
 
 2019/02/21 現在の [github 上の tmux の HEAD の commit である d5c83790][TMRP] に対応した差分ファイルである ```tmux-HEAD-d5c83790-fix.diff``` を追加致しました。
