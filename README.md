@@ -30,7 +30,7 @@
 
 ## Linuxbrew を用いた差分ファイルの適用とインストール
 
-[Linuxbrew][BREW] を導入した端末において、[本稿の Gist][GST1] にある差分ファイルを適用した [tmux][TMUX] をインストールする際には、**これらの差分ファイルを適用した [tmux][TMUX] を導入するための [Linuxbrew][BREW] 向け Tap リポジトリ [z80oolong/tmux][TAP1] を使用することを強く御勧め致します。**
+[Linuxbrew][BREW] を導入した端末において、[East Asian Ambiguous Character][EAWA] 対応の差分ファイルを適用した [tmux][TMUX] をインストールする際には、**これらの差分ファイルを適用した [tmux][TMUX] を導入するための [Linuxbrew][BREW] 向け Tap リポジトリ [z80oolong/tmux][TAP1] を使用することを強く御勧め致します。**
 
 Tap リポジトリ [z80oolong/tmux][TAP1] では、[最新の安定版の tmux][TMUX] 及び [github 上の最新の tmux の HEAD][TMRP] のインストールの他、旧安定版の [tmux][TMUX] のインストールも可能です。 
 
