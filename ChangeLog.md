@@ -8,6 +8,8 @@
 
 2019/03/27 現在の [github 上の tmux の HEAD の commit である 6861045d][TMRP] に対応した差分ファイルである ```tmux-HEAD-6861045d-fix.diff``` を追加致しました。
 
+また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 2.9-rc][T29R] に対応した差分ファイルである ```tmux-2.9-rc-fix.diff``` も同時に追加致しました。
+
 これに伴い、差分ファイル ```tmux-HEAD-2c755e3c-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
 また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
@@ -210,6 +212,7 @@
 [TM27]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
 [T28R]:https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8-rc.tar.gz
 [TM28]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.8.tar.gz
+[T29R]:https://github.com/tmux/tmux/releases/download/2.9/tmux-2.9-rc.tar.gz
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
