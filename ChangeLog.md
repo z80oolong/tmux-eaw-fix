@@ -4,11 +4,21 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2019/04/16 現在の ChangeLog
+
+2019/04/16 現在の [github 上の tmux の HEAD の commit である e6ee3e95][TMRP] に対応した差分ファイルである ```tmux-HEAD-e6ee3e95-fix.diff``` を追加致しました。
+
+また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 2.9-rc3][TMXR] に対応した差分ファイルである ```tmux-2.9-rc3-fix.diff``` も同時に追加致しました。
+
+これに伴い、差分ファイル ```tmux-2.9-fix.diff, tmux-HEAD-2c755e3c-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2019/03/27 現在の ChangeLog
 
 2019/03/27 現在の [github 上の tmux の HEAD の commit である 6861045d][TMRP] に対応した差分ファイルである ```tmux-HEAD-6861045d-fix.diff``` を追加致しました。
 
-また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 2.9-rc][T29R] に対応した差分ファイルである ```tmux-2.9-rc-fix.diff``` も同時に追加致しました。
+また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 2.9-rc][TMXR] に対応した差分ファイルである ```tmux-2.9-rc-fix.diff``` も同時に追加致しました。
 
 これに伴い、差分ファイル ```tmux-HEAD-2c755e3c-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
@@ -48,7 +58,7 @@
 
 ## 2018/11/15 現在の ChangeLog
 
-2018/11/15 現在の [安定版のバージョンの 2.8][TM28] 及び [github 上の tmux の HEAD の commit である 0fd73f23][TMRP] に対応した差分ファイルである ```tmux-2.8-fix.diff, tmux-HEAD-0fd73f23-fix.diff``` を追加致しました。
+2018/11/15 現在の [安定版のバージョンの 2.8][TMXR] 及び [github 上の tmux の HEAD の commit である 0fd73f23][TMRP] に対応した差分ファイルである ```tmux-2.8-fix.diff, tmux-HEAD-0fd73f23-fix.diff``` を追加致しました。
 
 これに伴い、差分ファイル ```tmux-2.8-rc-fix.diff, tmux-HEAD-b1ad075d-fix.diff``` を削除しました。どうか御了承下さい。
 
@@ -68,7 +78,7 @@
 
 2018/10/05 現在の [github 上の tmux の HEAD の commit である 5a7cf897][TMRP] に対応した差分ファイルである ```tmux-HEAD-5a7cf897-fix.diff``` を追加致しました。
 
-また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 2.8-rc][T28R] に対応した差分ファイルである ```tmux-2.8-rc-fix.diff``` も同時に追加致しました。
+また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 2.8-rc][TMXR] に対応した差分ファイルである ```tmux-2.8-rc-fix.diff``` も同時に追加致しました。
 
 これに伴い、差分ファイル ```tmux-HEAD-6abb62df-fix.diff``` を削除しました。どうか御了承下さい。
 
@@ -128,7 +138,7 @@
 
 ## 2018/04/16 現在の ChangeLog
 
-2018/04/16 現在の tmux の[安定版のバージョンの 2.7][TM27] 及び [github 上の tmux の HEAD の commit である ae0b7c7d][TMRP]に対応した差分ファイルである ```tmux-2.7-fix.diff, tmux-HEAD-ae0b7c7d-fix.diff``` を追加致しました。
+2018/04/16 現在の tmux の[安定版のバージョンの 2.7][TMXR] 及び [github 上の tmux の HEAD の commit である ae0b7c7d][TMRP]に対応した差分ファイルである ```tmux-2.7-fix.diff, tmux-HEAD-ae0b7c7d-fix.diff``` を追加致しました。
 
 これに伴い、差分ファイル ```tmux-HEAD-b5c9b2ca-fix.diff``` を削除しました。どうか御了承下さい。
 
@@ -162,7 +172,7 @@
 
 ## 2017/10/17 現在の ChangeLog
 
-2017/10/17 現在の tmux の[安定版のバージョンの 2.6][TM26] 及び [github 上の tmux の HEAD の commit である fb02df66][TMRP]に対応した差分ファイル ```tmux-HEAD-fb02df66-fix.diff``` を追加致しました。
+2017/10/17 現在の tmux の[安定版のバージョンの 2.6][TMXR] 及び [github 上の tmux の HEAD の commit である fb02df66][TMRP]に対応した差分ファイル ```tmux-HEAD-fb02df66-fix.diff``` を追加致しました。
 
 なお、[github 上の tmux の HEAD][TMRP]に適用する差分ファイルのうち、 obsolute となった ```tmux-HEAD-ae5a62a5-fix.diff``` を削除しましたので、どうか御了承下さい。
 
@@ -208,11 +218,7 @@
 [WCWD]:http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 [DRMK]:http://www.cl.cam.ac.uk/~mgk25/
 [NICM]:https://github.com/nicm
-[TM26]:https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
-[TM27]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
-[T28R]:https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8-rc.tar.gz
-[TM28]:https://github.com/tmux/tmux/releases/download/2.7/tmux-2.8.tar.gz
-[T29R]:https://github.com/tmux/tmux/releases/download/2.9/tmux-2.9-rc.tar.gz
+[TMXR]:https://github.com/tmux/tmux/releases/
 [MATN]:https://github.com/mattn
 [GST1]:https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34
 [GITH]:https://github.com/z80oolong/diffs
