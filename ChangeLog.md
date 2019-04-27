@@ -4,6 +4,16 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2019/04/27 現在の ChangeLog
+
+2019/04/16 現在の [github 上の tmux の HEAD の commit である 85f09f9a][TMRP] に対応した差分ファイルである ```tmux-HEAD-85f09f9a-fix.diff``` を追加致しました。
+
+また、 [tmux][TMUX] の安定版である [tmux 2.9][TMXR] に対応した差分ファイルである ```tmux-2.9-fix.diff``` も同時に追加致しました。
+
+これに伴い、差分ファイル ```tmux-2.9-rc3-fix.diff, tmux-HEAD-e6ee3e95-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2019/04/16 現在の ChangeLog
 
 2019/04/16 現在の [github 上の tmux の HEAD の commit である e6ee3e95][TMRP] に対応した差分ファイルである ```tmux-HEAD-e6ee3e95-fix.diff``` を追加致しました。
