@@ -8,7 +8,7 @@
 
 2019/04/16 現在の [github 上の tmux の HEAD の commit である 85f09f9a][TMRP] に対応した差分ファイルである ```tmux-HEAD-85f09f9a-fix.diff``` を追加致しました。
 
-また、 [tmux][TMUX] の安定版である [tmux 2.9][TMXR] に対応した差分ファイルである ```tmux-2.9-fix.diff``` も同時に追加致しました。
+また、 [tmux][TMUX] の安定版である [tmux 2.9][TMXR] に対応した差分ファイルである ```tmux-2.9-fix.diff``` 及び旧安定版 [tmux 2.4][TMXR] に対応した差分ファイルである ```tmux-2.4-fix.diff``` も同時に追加致しました。
 
 これに伴い、差分ファイル ```tmux-2.9-rc3-fix.diff, tmux-HEAD-e6ee3e95-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
