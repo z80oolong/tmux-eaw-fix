@@ -4,9 +4,19 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2019/06/08 現在の ChangeLog
+
+2019/06/08 現在の [github 上の tmux の HEAD の commit である e13c1e53][TMRP] に対応した差分ファイルである ```tmux-HEAD-e13c1e53-fix.diff``` を追加致しました。
+
+また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 3.0-rc2][TMXR] に対応した差分ファイルである ```tmux-3.0-rc2-fix.diff``` も同時に追加致しました。
+
+これに伴い、差分ファイル ```tmux-3.0-rc-fix.diff, tmux-HEAD-eefbbfde-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2019/05/29 現在の ChangeLog
 
-2019/05/29 現在の [github 上の tmux の HEAD の commit である e6ee3e95][TMRP] に対応した差分ファイルである ```tmux-HEAD-eefbbfde-fix.diff``` を追加致しました。
+2019/05/29 現在の [github 上の tmux の HEAD の commit である eefbbfde][TMRP] に対応した差分ファイルである ```tmux-HEAD-eefbbfde-fix.diff``` を追加致しました。
 
 また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 3.0-rc][TMXR] に対応した差分ファイルである ```tmux-3.0-rc-fix.diff``` も同時に追加致しました。
 
