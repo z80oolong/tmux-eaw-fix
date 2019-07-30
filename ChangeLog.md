@@ -8,7 +8,9 @@
 
 2019/07/30 現在の [github 上の tmux の HEAD の commit である 2dd9a4fb][TMRP] に対応した差分ファイルである ```tmux-HEAD-2dd9a4fb-fix.diff``` を追加致しました。
 
-これに伴い、差分ファイル ```tmux-HEAD-8e33cc61-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+また、 [tmux][TMUX] の安定版のプレリリース版である [tmux 3.0-rc4][TMXR] に対応した差分ファイルである ```tmux-3.0-rc4-fix.diff``` も同時に追加致しました。
+
+これに伴い、差分ファイル ```tmux-3.0-rc3-fix.diff, tmux-HEAD-8e33cc61-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
 また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
 
