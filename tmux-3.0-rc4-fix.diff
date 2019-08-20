@@ -99,10 +99,10 @@ index 5c10420..cfebaed 100644
  #define WINDOW_MINIMUM PANE_MINIMUM
  #define WINDOW_MAXIMUM 10000
 diff --git a/tty-acs.c b/tty-acs.c
-index 1463412..a022c01 100644
+index 1463412..8762504 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
-@@ -68,6 +68,43 @@ static const struct tty_acs_entry tty_acs_table[] = {
+@@ -68,6 +68,47 @@ static const struct tty_acs_entry tty_acs_table[] = {
  	{ '~', "\302\267" }		/* bullet */
  };
  
@@ -115,6 +115,10 @@ index 1463412..a022c01 100644
 +	{ '0', "\342\226\256" },
 +	{ '`', "\342\227\206" },
 +	{ 'a', "\342\226\222" },
++	{ 'b', "\342\220\211" },
++	{ 'c', "\342\220\214" },
++	{ 'd', "\342\220\215" },
++	{ 'e', "\342\220\212" },
 +	{ 'f', "\302\260" },
 +	{ 'g', "\302\261" },
 +	{ 'h', "\342\226\222" },
@@ -146,24 +150,25 @@ index 1463412..a022c01 100644
  static int
  tty_acs_cmp(const void *key, const void *value)
  {
-@@ -118,8 +155,18 @@ tty_acs_get(struct tty *tty, u_char ch)
+@@ -118,8 +159,21 @@ tty_acs_get(struct tty *tty, u_char ch)
  	}
  
  	/* Otherwise look up the UTF-8 translation. */
--	entry = bsearch(&ch, tty_acs_table, nitems(tty_acs_table),
--	    sizeof tty_acs_table[0], tty_acs_cmp);
-+	entry = bsearch(&ch,
 +#ifdef NO_USE_PANE_BORDER_ASCII
-+	    tty_acs_table,
+ 	entry = bsearch(&ch, tty_acs_table, nitems(tty_acs_table),
+ 	    sizeof tty_acs_table[0], tty_acs_cmp);
 +#else
++	struct tty_acs_entry *entries;
++
 +#ifdef NO_USE_UTF8_CJK
-+	    options_get_number(global_s_options, "pane-border-ascii") ? tty_acs_table_putty : tty_acs_table,
++	entries = options_get_number(global_s_options, "pane-border-ascii") ? tty_acs_table_putty : tty_acs_table;
 +#else
-+	    (options_get_number(global_options, "utf8-cjk") || options_get_number(global_s_options, "pane-border-ascii")) ? tty_acs_table_putty : tty_acs_table,
++	entries = (options_get_number(global_options, "utf8-cjk") || options_get_number(global_s_options, "pane-border-ascii")) \
++		    ? tty_acs_table_putty : tty_acs_table;
 +#endif
++
++	entry = bsearch(&ch, (const void *)entries, nitems(tty_acs_table), sizeof tty_acs_table[0], tty_acs_cmp);
 +#endif
-+	    nitems(tty_acs_table), sizeof tty_acs_table[0],
-+	    tty_acs_cmp);
  	if (entry == NULL)
  		return (NULL);
  	return (entry->string);
