@@ -1,5 +1,5 @@
 diff --git a/options-table.c b/options-table.c
-index 4c78953..7fdbc79 100644
+index 4898e55..7fdbc79 100644
 --- a/options-table.c
 +++ b/options-table.c
 @@ -124,6 +124,14 @@ const struct options_table_entry options_table[] = {
@@ -17,20 +17,21 @@ index 4c78953..7fdbc79 100644
  	{ .name = "assume-paste-time",
  	  .type = OPTIONS_TABLE_NUMBER,
  	  .scope = OPTIONS_TABLE_SESSION,
-@@ -293,11 +301,13 @@ const struct options_table_entry options_table[] = {
+@@ -293,6 +301,14 @@ const struct options_table_entry options_table[] = {
  	  .default_num = 0
  	},
  
 +#ifndef NO_USE_PANE_BORDER_ASCII
- 	{ .name = "pane-border-ascii",
- 	  .type = OPTIONS_TABLE_FLAG,
- 	  .scope = OPTIONS_TABLE_SESSION,
- 	  .default_num = 0
- 	},
++	{ .name = "pane-border-ascii",
++	  .type = OPTIONS_TABLE_FLAG,
++	  .scope = OPTIONS_TABLE_SESSION,
++	  .default_num = 0
++	},
 +#endif
- 
++
  	{ .name = "prefix",
  	  .type = OPTIONS_TABLE_KEY,
+ 	  .scope = OPTIONS_TABLE_SESSION,
 diff --git a/tmux.c b/tmux.c
 index 1b3332a..cbdead5 100644
 --- a/tmux.c
@@ -99,41 +100,80 @@ index 995e310..6d1391a 100644
  /*
   * Minimum layout cell size, NOT including separator line. The scroll region
 diff --git a/tty-acs.c b/tty-acs.c
-index 967901d..50038ed 100644
+index 7fd265d..60187de 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
-@@ -64,6 +64,7 @@ const struct tty_acs_entry tty_acs_table[] = {
+@@ -64,6 +64,47 @@ const struct tty_acs_entry tty_acs_table[] = {
  	{ '~', "\302\267" }		/* bullet */
  };
  
 +#ifndef NO_USE_PANE_BORDER_ASCII
- const struct tty_acs_entry tty_acs_table_putty[] = {
- 	{ '+', "\342\206\222" },
- 	{ ',', "\342\206\220" },
-@@ -98,6 +99,7 @@ const struct tty_acs_entry tty_acs_table_putty[] = {
- 	{ '}', "\302\243" },
- 	{ '~', "*" }
- };
++const struct tty_acs_entry tty_acs_table_putty[] = {
++	{ '+', "\342\206\222" },
++	{ ',', "\342\206\220" },
++	{ '-', "\342\206\221" },
++	{ '.', "\342\206\223" },
++	{ '0', "\342\226\256" },
++	{ '`', "\342\227\206" },
++	{ 'a', "\342\226\222" },
++	{ 'b', "\342\220\211" },
++	{ 'c', "\342\220\214" },
++	{ 'd', "\342\220\215" },
++	{ 'e', "\342\220\212" },
++	{ 'f', "\302\260" },
++	{ 'g', "\302\261" },
++	{ 'h', "\342\226\222" },
++	{ 'i', "\342\230\203" },
++	{ 'j', "+" },
++	{ 'k', "+" },
++	{ 'l', "+" },
++	{ 'm', "+" },
++	{ 'n', "+" },
++	{ 'o', "\342\216\272" },
++	{ 'p', "\342\216\273" },
++	{ 'q', "-" },
++	{ 'r', "\342\216\274" },
++	{ 's', "\342\216\275" },
++	{ 't', "+" },
++	{ 'u', "+" },
++	{ 'v', "+" },
++	{ 'w', "+" },
++	{ 'x', "|" },
++	{ 'y', "\342\211\244" },
++	{ 'z', "\342\211\245" },
++	{ '{', "\317\200" },
++	{ '|', "\342\211\240" },
++	{ '}', "\302\243" },
++	{ '~', "*" }
++};
 +#endif
- 
++
  int
  tty_acs_cmp(const void *key, const void *value)
-@@ -124,7 +126,15 @@ tty_acs_get(struct tty *tty, u_char ch)
+ {
+@@ -88,9 +129,22 @@ tty_acs_get(struct tty *tty, u_char ch)
+ 	}
  
  	/* Otherwise look up the UTF-8 translation. */
- 	entry = bsearch(&ch,
 +#ifdef NO_USE_PANE_BORDER_ASCII
-+	    tty_acs_table,
-+#else
-+#ifdef NO_USE_UTF8_CJK
- 	    options_get_number(global_s_options, "pane-border-ascii") ? tty_acs_table_putty : tty_acs_table,
-+#else
-+	    (options_get_number(global_options, "utf8-cjk") || options_get_number(global_s_options, "pane-border-ascii")) ? tty_acs_table_putty : tty_acs_table,
-+#endif
-+#endif
- 	    nitems(tty_acs_table), sizeof tty_acs_table[0],
+ 	entry = bsearch(&ch,
+ 	    tty_acs_table, nitems(tty_acs_table), sizeof tty_acs_table[0],
  	    tty_acs_cmp);
++#else
++	struct tty_acs_entry *entries;
++
++#ifdef NO_USE_UTF8_CJK
++	entries = options_get_number(global_s_options, "pane-border-ascii") ? tty_acs_table_putty : tty_acs_table;
++#else
++	entries = (options_get_number(global_options, "utf8-cjk") || options_get_number(global_s_options, "pane-border-ascii")) \
++		    ? tty_acs_table_putty : tty_acs_table;
++#endif
++
++	entry = bsearch(&ch, (const void *)entries, nitems(tty_acs_table), sizeof tty_acs_table[0], tty_acs_cmp);
++#endif
  	if (entry == NULL)
+ 		return (NULL);
+ 	return (entry->string);
 diff --git a/utf8.c b/utf8.c
 index eb9b47a..a87eb3e 100644
 --- a/utf8.c
@@ -458,7 +498,7 @@ index eb9b47a..a87eb3e 100644
  static int	utf8_width(wchar_t);
  
  /* Set a single character. */
-@@ -109,11 +422,23 @@ utf8_width(wchar_t wc)
+@@ -109,10 +422,22 @@ utf8_width(wchar_t wc)
  {
  	int	width;
  
@@ -477,7 +517,7 @@ index eb9b47a..a87eb3e 100644
  	width = utf8proc_wcwidth(wc);
  #else
  	width = wcwidth(wc);
- #endif
 +#endif
+ #endif
  	if (width < 0 || width > 0xff) {
  		log_debug("Unicode %04x, wcwidth() %d", wc, width);
