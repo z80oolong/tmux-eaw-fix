@@ -99,7 +99,7 @@ index 41a09351..3d048f8a 100644
  #define WINDOW_MINIMUM PANE_MINIMUM
  #define WINDOW_MAXIMUM 10000
 diff --git a/tty-acs.c b/tty-acs.c
-index 14634120..1440d43e 100644
+index 14634120..7664323f 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
 @@ -22,9 +22,12 @@
@@ -295,7 +295,7 @@ index 14634120..1440d43e 100644
 +	return (options_get_number(global_s_options, "pane-border-ascii") ? tty_acs_table_putty[ch] : tty_acs_table[ch]);
 +#else
 +	return ((options_get_number(global_options, "utf8-cjk") || options_get_number(global_s_options, "pane-border-ascii")) \
-+		    ? tty_acs_table_putty : tty_acs_table);
++		  ? tty_acs_table_putty[ch] : tty_acs_table[ch]);
 +#endif
 +#endif
 +#endif
