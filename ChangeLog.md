@@ -6,6 +6,14 @@
 
 ## 2019/09/12 現在の ChangeLog
 
+2019/09/12 現在の [github 上の tmux の HEAD の commit である 658ecb07][TMRP] に対応した差分ファイルである ```tmux-HEAD-658ecb07-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-2e90841f-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
+## 2019/09/12 現在の ChangeLog
+
 2019/09/12 現在の [github 上の tmux の HEAD の commit である 2e90841f][TMRP] に対応した差分ファイルである ```tmux-HEAD-2e90841f-fix.diff``` を追加致しました。
 
 なお、今回の差分ファイルにおいて、 [koie-hidetaka 氏][KOIE]により投稿された、ファイル ```tty-acs.c``` 内の配列 ```tty_acs_table[]``` の改良を施す事を目的とした[オリジナルの tmux の pull request][PR01] を先行して取り込んでいます。
