@@ -6,7 +6,8 @@ stated in the file but permission has been received to distribute them with
 tmux. All other files have a license and copyright notice at their start,
 typically:
 
-Copyright (c) waltarix <https://github.com/waltarix>
+Copyright (c) Tmux Developers <https://github.com/tmux>
+Copyright (c) koie <https://github.com/koie>
 Copyright (c) Markus Kuhn <http://www.cl.cam.ac.uk/~mgk25/>
 Copyright (c) Z.OOL. <zool@zool.jpn.org>
 

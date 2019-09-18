@@ -6,9 +6,7 @@
 
 ファイル ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-xxxxxxxxx-fix.diff (ここに、 xxxxxxxx は tmux の HEAD 版の最新の commit ID 番号。以下同様)``` は、 [tmux 2.5][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
 
-この差分には、　[waltarix 氏][WALT]によって作成された [tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` が含まれています。
-
-[https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch][PANE]
+なお、この差分には、 [koie 氏][KOIE]によって作成された [tmux][TMUX] の[画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]が含まれています。
 
 ## 差分ファイルの適用とインストール
 
@@ -36,40 +34,76 @@ Tap リポジトリ [z80oolong/tmux][TAP1] では、[最新の安定版の tmux]
 
 [z80oolong/tmux][TAP1] の詳細な使用法につきましては、 [z80oolong/tmux の README.md][READ] を御覧下さい。
 
-## オプションの設定について
+## 各種設定について
 
-ここで、 [East Asian Ambiguous Character][EAWA] の文字幅を 2 ではなく 1 として扱う場合は、[tmux][TMUX] の設定ファイル ```.tmux.conf``` に以下の設定を追記します。
+本節では、本差分ファイルを適用後に拡張される [tmux][TMUX] のオプション及び [tmux][TMUX] が参照する環境変数について述べます。
+
+### ```utf8-cjk```
+
+[East Asian Ambiguous Character][EAWA] の文字幅を 2 とすることを有効化するかどうかを設定するオプションです。
+
+このオプションの設定値を ```on``` とすると、 [East Asian Ambiguous Character][EAWA] の文字幅が 2 となり、 ```off``` とすると、文字幅が 1 となります。例えば、[East Asian Ambiguous Character][EAWA] を全角文字として表示する場合は、 [tmux][TMUX] の設定ファイル ```.tmux.conf``` に以下の設定を追記します。
 
 ```
-set-option -g utf8-cjk off
+set-option -g utf8-cjk on
 ```
 
-なお、オプション ```utf8-cjk``` の初期値は、 locale に関する環境変数 ```LC_CTYPE``` の値が ```"ja*", "ko*", "zh*"``` の場合は ```on``` となり、それ以外の場合は ```off``` となります。そして、オプション ```utf8-cjk``` の値が ```on``` の場合は、オプション ```pane-border-ascii``` の値に関わらず、 tmux の画面分割のボーダーラインは ascii 文字となります。
+なお、オプション ```utf8-cjk``` の初期値は、 locale に関する環境変数 ```LC_CTYPE``` の値が ```"ja*", "ko*", "zh*"``` の場合は ```on``` となり、それ以外の場合は ```off``` となります。
+
+### ```pane-border-ascii```
+
+[tmux][TMUX] において画面分割を行う場合に罫線文字に ascii 文字を使用するためのオプションです。
+
+通常は [tmux][TMUX] での画面分割において使用する罫線文字は、環境に応じて UTF-8 の罫線文字か、端末が対応している ACS か、若しくは ascii 文字が使用されます。
+
+このオプションを ```on``` に指定すると、 [tmux][TMUX] での画面分割において使用する罫線文字に ascii 文字を使用します。
+
+### ```pane-border-acs```
+
+[tmux][TMUX] において画面分割を行う場合に罫線の描画に ACS を使用するためのオプションです。
+
+このオプションを ```on``` に指定すると、 [tmux][TMUX] での画面分割において罫線の描画に ACS を使用します。
+
+なお、このオプションと ```pane-border-ascii``` の両方を ```on``` に指定した場合は、 ```pane-border-acs``` が有効となることに留意する必要があります。
+
+### 環境変数 ```TMUX_ACS```
+
+環境変数 ```TMUX_ACS``` に以下の値を設定すると、[tmux][TMUX] での画面分割において以下のように罫線の描画を行います。
+
+- ```utf8, utf-8``` … 罫線の文字に UTF-8 の罫線文字を使用します。
+- ```acs``` … 罫線の描画に ACS を使用します。
+- ```ascii``` … 罫線の文字に ascii 文字を使用します。
+
+なお、環境変数 ```TMUX_ACS``` による設定は、オプション ```pane-border-ascii, pane-border-acs``` の設定に優先する事に留意する必要があります。
 
 ## 謝辞
 
-先ず最初に、[tmux][TMUX] の画面分割において、ボーダーラインを罫線文字に代えて ascii 文字を使用するための差分ファイルである ```pane-border-ascii.patch``` を作成された [waltarix 氏][WALT]に心より感謝致します。
+先ず最初に、本差分ファイルを作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][EAWA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
 
-また、差分ファイル ```tmux-2.3-fix.diff``` を作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][EAWA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
+- [http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c][WCWD]
 
-[http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c][WCWD]
+また、本差分ファイルについて、 [tmux][TMUX] の画面分割の為のボーダーラインの罫線文字について判別と適切な描画を行う為の修正を作成して頂いた [koie 氏][KOIE]に心より感謝致します。 [koie 氏][KOIE]は、他にも本差分ファイルに関して有益な指摘も幾つか頂きました。
 
-最後に、 [tmux][TMUX] の作者である [Nicholas Marriott 氏][NICM]を初め、 [tmux][TMUX] に関わる全ての人々に心より感謝致します。
+最後に、 [tmux][TMUX] の作者である [Nicholas Marriott 氏][NICM]を初めとする [tmux の開発コミュニティ][TMUX]及び [tmux][TMUX] に関わる全ての人々に心より感謝致します。
 
 ## 使用条件
 
-本差分ファイルは、端末多重化ソフトウェアである [tmux][TMUX] に適用する差分ファイルであり、 [waltarix 氏][WALT]と [Markus Kuhn 氏][DRMK]の両氏及び [Z.OOL. (mailto:zool@zool.jpn.org)][ZOOL] が著作権を有します。
+本差分ファイルは、端末多重化ソフトウェアである [tmux][TMUX] に適用する差分ファイルであり、以下の各氏が著作権を有します。
 
-従って、本スクリプトは [tmux][TMUX] のライセンスと同様である [ISC License][ISCL] に基づいて配布されるものとします。詳細については、本リポジトリに同梱する ```LICENSE``` を参照して下さい。
+- [tmux の開発コミュニティ][TMUX]の各氏
+- [koie 氏][KOIE]
+- [Markus Kuhn 氏][DRMK]
+- [Z.OOL. (mailto:zool@zool.jpn.org)][ZOOL]
+
+従って、本差分ファイルは [tmux][TMUX] のライセンスと同様である [ISC License][ISCL] に基づいて配布されるものとします。詳細については、本リポジトリに同梱する ```LICENSE``` を参照して下さい。
 
 <!-- 外部リンク一覧 -->
 
 [TMUX]:http://tmux.github.io/
 [EAWA]:http://www.unicode.org/reports/tr11/#Ambiguous
 [TMRP]:https://github.com/tmux/tmux.git
-[TM25]:https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz
-[WALT]:https://github.com/waltarix
-[PANE]:https://gist.githubusercontent.com/waltarix/1399751/raw/6c8f54ec8e55823fb99b644a8a5603847cb60882/tmux-pane-border-ascii.patch
+[KOIE]:https://github.com/koie
+[PANE]:https://github.com/koie/tmux/commit/ac6c53ffd6c2987a3a4a5807df7fc6cca5d6ce88
 [BREW]:https://linuxbrew.sh
 [TAP1]:https://github.com/z80oolong/homebrew-tmux
 [READ]:https://github.com/z80oolong/homebrew-tmux/blob/master/README.md

@@ -98,18 +98,16 @@ index f9de920c..64e173bb 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tty-acs.c b/tty-acs.c
-index 14634120..68334d5f 100644
+index 14634120..1099c79a 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
-@@ -19,9 +19,85 @@
- #include <sys/types.h>
- 
- #include <stdlib.h>
-+#include <string.h>
+@@ -22,6 +22,83 @@
  
  #include "tmux.h"
  
 +#ifndef NO_USE_UTF8CJK
++#include <string.h>
++
 +static char tty_acs_table[UCHAR_MAX][4] = {
 +	['+'] = "\342\206\222",	/* arrow pointing right */
 +	[','] = "\342\206\220",	/* arrow pointing left */
@@ -187,7 +185,7 @@ index 14634120..68334d5f 100644
  static int	tty_acs_cmp(const void *, const void *);
  
  /* Table mapping ACS entries to UTF-8. */
-@@ -77,11 +153,91 @@ tty_acs_cmp(const void *key, const void *value)
+@@ -77,11 +154,91 @@ tty_acs_cmp(const void *key, const void *value)
  	ch = *(u_char *) key;
  	return (ch - entry->key);
  }
@@ -232,11 +230,6 @@ index 14634120..68334d5f 100644
 +	 * line drawing on UTF-8 terminals.
 +	 */
 +
-+	if (options_get_number(global_s_options, "pane-border-acs"))
-+		return (ACST_ACS);
-+	if (options_get_number(global_s_options, "pane-border-ascii"))
-+		return (ACST_ASCII);
-+
 +	struct environ_entry	*envent;
 +	envent = environ_find(tty->client->environ, "TMUX_ACS");
 +	if (envent != NULL) {
@@ -248,6 +241,11 @@ index 14634120..68334d5f 100644
 +		else
 +			return (ACST_ASCII);
 +	}
++
++	if (options_get_number(global_s_options, "pane-border-acs"))
++		return (ACST_ACS);
++	if (options_get_number(global_s_options, "pane-border-ascii"))
++		return (ACST_ASCII);
 +
 +	if ((tty->flags & TTY_UTF8) &&
 +	    (!tty_term_has(tty->term, TTYC_U8) ||
@@ -279,7 +277,7 @@ index 14634120..68334d5f 100644
  	if (tty == NULL)
  		return (0);
  
-@@ -102,12 +258,31 @@ tty_acs_needed(struct tty *tty)
+@@ -102,12 +259,31 @@ tty_acs_needed(struct tty *tty)
  	if (tty->flags & TTY_UTF8)
  		return (0);
  	return (1);
@@ -311,7 +309,7 @@ index 14634120..68334d5f 100644
  	struct tty_acs_entry	*entry;
  
  	/* Use the ACS set instead of UTF-8 if needed. */
-@@ -123,4 +298,5 @@ tty_acs_get(struct tty *tty, u_char ch)
+@@ -123,4 +299,5 @@ tty_acs_get(struct tty *tty, u_char ch)
  	if (entry == NULL)
  		return (NULL);
  	return (entry->string);
