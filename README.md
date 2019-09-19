@@ -6,7 +6,7 @@
 
 ファイル ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-xxxxxxxxx-fix.diff (ここに、 xxxxxxxx は tmux の HEAD 版の最新の commit ID 番号。以下同様)``` は、 [tmux 2.5][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
 
-なお、この差分には、 [koie 氏][KOIE]によって作成された [tmux][TMUX] の[画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]が含まれています。
+なお、この差分には、 [koie-hidetaka 氏][KOIE]によって作成された [tmux][TMUX] の[画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]が含まれています。
 
 ## 差分ファイルの適用とインストール
 
@@ -93,20 +93,20 @@ set-option -g utf8-cjk on
 
 - [http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c][WCWD]
 
-また、本差分ファイルについて、 [tmux][TMUX] の画面分割の為のボーダーラインの罫線文字について判別と適切な描画を行う為の修正を作成して頂いた [koie 氏][KOIE]に心より感謝致します。 [koie 氏][KOIE]は、他にも本差分ファイルに関して有益な指摘も幾つか頂きました。
+また、本差分ファイルについて、 [tmux][TMUX] の画面分割の為のボーダーラインの罫線文字について判別と適切な描画を行う為の修正を作成して頂いた [koie-hidetaka 氏][KOIE]に心より感謝致します。 [koie-hidetaka 氏][KOIE]におきましては、他にも本差分ファイルに関して有益な指摘も幾つか頂きました。
 
 最後に、 [tmux][TMUX] の作者である [Nicholas Marriott 氏][NICM]を初めとする [tmux の開発コミュニティ][TMUX]及び [tmux][TMUX] に関わる全ての人々に心より感謝致します。
 
 ## 使用条件
 
-本差分ファイルは、端末多重化ソフトウェアである [tmux][TMUX] に適用する差分ファイルであり、以下の各氏が著作権を有します。
+本差分ファイルは、端末多重化ソフトウェアである [tmux][TMUX] に適用する差分ファイルであり、以下に述べる各氏が著作権を有し、[tmux][TMUX] のライセンスと同様である [ISC License][ISCL] に基づいて配布されるものとします。
 
 - [tmux の開発コミュニティ][TMUX]の各氏
-- [koie 氏][KOIE]
+- [koie-hidetaka 氏][KOIE]
 - [Markus Kuhn 氏][DRMK]
 - [Z.OOL. (mailto:zool@zool.jpn.org)][ZOOL]
 
-従って、本差分ファイルは [tmux][TMUX] のライセンスと同様である [ISC License][ISCL] に基づいて配布されるものとします。詳細については、本リポジトリに同梱する ```LICENSE``` を参照して下さい。
+本差分ファイルの使用条件の詳細については、本リポジトリに同梱する ```LICENSE``` を参照して下さい。
 
 <!-- 外部リンク一覧 -->
 

@@ -4,6 +4,18 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2019/09/19 現在の ChangeLog
+
+2019/09/19 現在の [github 上の tmux の HEAD の commit である 5ae2d421][TMRP] に対応した差分ファイルである ```tmux-HEAD-5ae2d421-fix.diff``` を追加致しました。
+
+なお、今回の差分ファイルにおいて、 [koie-hidetaka 氏][KOIE]によって作成された [tmux の画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]を取り込んでいます。また、この修正に伴って ```README.md``` の修正も併せて行っています。
+
+そして、 [tmux][TMUX] の安定版のプレリリース版である [tmux 3.0-rc5][TMXR] に対応した差分ファイルである ```tmux-3.0-rc5-fix.diff``` も同時に追加致しました。
+
+これに伴い、差分ファイル ```tmux-3.0-rc4-fix.diff, tmux-HEAD-a5e36a4b-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2019/09/13 現在の ChangeLog
 
 2019/09/13 現在の [github 上の tmux の HEAD の commit である a5e36a4b][TMRP] に対応した差分ファイルである ```tmux-HEAD-a5e36a4b-fix.diff``` を追加致しました。
@@ -367,3 +379,4 @@
 [KOIE]:https://github.com/koie-hidetaka
 [ISSUE1]:https://github.com/z80oolong/tmux-eaw-fix/issues/1
 [PR01]:https://github.com/tmux/tmux/pull/1907
+[PANE]:https://github.com/koie/tmux/commit/ac6c53ffd6c2987a3a4a5807df7fc6cca5d6ce88
