@@ -12,18 +12,29 @@
 
 [tmux][TMUX] のソースコードに差分ファイルを適用するには、安定版の [tmux][TMUX] には、差分ファイル ```tmux-x.y-fix.diff``` を、 [github 上の tmux の HEAD][TMRP] のソースコードには、　```tmux-HEAD-xxxxxxxx-fix.diff``` をそれぞれ適用して下さい。
 
-従って、安定版の [tmux][TMUX] のソースコードにおける差分ファイルについては、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` を適用後、[tmux][TMUX] を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+従って、安定版の [tmux][TMUX] のソースコードにおける差分ファイルについては、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` を適用後、[tmux][TMUX] をコマンド ```./configure, make``` を用いてビルド及びインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
 
 ```
  $ patch -p1 < /path/to/diff/tmux-x.y-fix.diff
  (ここに、/path/to/diff は、 tmux-x.y-fix.diff が置かれたディレクトリのパス名)
+ $ ./configure --prefix=/path/to/install ...
+ (ここに、 /path/to/install は tmux のインストール先。なお、 ./configure の引数は適宜追加すること。)
+ $ make
+ $ make install
 ```
 
-また、[github 上の tmux の HEAD][TMRP] のソースコードにおける差分ファイルについても、 [github 上の tmux の HEAD][TMRP] のソースコードが置かれているディレクトリより、以下のようにして、最近の差分ファイルを適用後、 [tmux の HEAD 版][TMRP]を通常通りにビルドしてインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+また、[github 上の tmux の HEAD][TMRP] のソースコードにおける差分ファイルについても、 [github 上の tmux の HEAD][TMRP] のソースコードが置かれているディレクトリより、以下のようにして、最近の差分ファイルを適用後、 [tmux の HEAD 版][TMRP]をコマンド ```./configure, make``` を用いてビルド及びインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+
+なお、 [tmux の HEAD 版][TMRP]でのビルドの場合、**コマンド ```./configure``` の実行に先立ち、シェルスクリプト ```./autogen.sh``` を実行して ```./configure``` を生成する必要があることに留意する必要があります。**
 
 ```
  $ patch -p1 < /path/to/diff/tmux-HEAD-xxxxxxxx-fix.diff
  (ここに、 /path/to/diff は、 tmux-HEAD-xxxxxxxx-fix.diff が置かれたディレクトリのパス名)
+ $ sh ./autogen.sh
+ $ ./configure --prefix=/path/to/install ...
+ (ここに、 /path/to/install は tmux のインストール先。なお、 ./configure の引数は適宜追加すること。)
+ $ make
+ $ make install
 ```
 
 ## Linuxbrew を用いた差分ファイルの適用とインストール
