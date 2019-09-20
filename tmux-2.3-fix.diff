@@ -75,7 +75,7 @@ index 1b3332a..d3e663c 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index 995e310..3285038 100644
+index 995e310..1cacb57 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -50,7 +50,9 @@ struct tmuxpeer;
@@ -88,6 +88,16 @@ index 995e310..3285038 100644
  
  /*
   * Minimum layout cell size, NOT including separator line. The scroll region
+@@ -395,6 +397,9 @@ enum tty_code_code {
+ 	TTYC_SS,	/* set cursor style, Ss */
+ 	TTYC_TC,	/* 24-bit "true" colour, Tc */
+ 	TTYC_TSL,	/* to_status_line, tsl */
++#ifndef NO_USE_UTF8CJK
++	TTYC_U8,
++#endif
+ 	TTYC_VPA,	/* row_address, cv */
+ 	TTYC_XENL,	/* eat_newline_glitch, xn */
+ 	TTYC_XT,	/* xterm(1)-compatible title, XT */
 diff --git a/tty-acs.c b/tty-acs.c
 index 7fd265d..7fe1a0e 100644
 --- a/tty-acs.c
