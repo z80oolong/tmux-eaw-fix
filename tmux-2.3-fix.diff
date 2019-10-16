@@ -1,8 +1,8 @@
 diff --git a/options-table.c b/options-table.c
-index 4898e55..561ce87 100644
+index 4898e55..7f658aa 100644
 --- a/options-table.c
 +++ b/options-table.c
-@@ -904,6 +904,27 @@ const struct options_table_entry options_table[] = {
+@@ -904,6 +904,29 @@ const struct options_table_entry options_table[] = {
  	  .default_num = 0
  	},
  
@@ -13,7 +13,9 @@ index 4898e55..561ce87 100644
 +	  .scope = OPTIONS_TABLE_SERVER,
 +	  .default_num = 1
 +	},
++#endif
 +
++#ifndef NO_USE_PANE_BORDER_ACS_ASCII
 +	{ .name = "pane-border-acs",
 +	  .type = OPTIONS_TABLE_FLAG,
 +	  .scope = OPTIONS_TABLE_SESSION,
@@ -75,7 +77,7 @@ index 1b3332a..d3e663c 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tmux.h b/tmux.h
-index 995e310..1cacb57 100644
+index 995e310..c36112b 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -50,7 +50,9 @@ struct tmuxpeer;
@@ -92,21 +94,21 @@ index 995e310..1cacb57 100644
  	TTYC_SS,	/* set cursor style, Ss */
  	TTYC_TC,	/* 24-bit "true" colour, Tc */
  	TTYC_TSL,	/* to_status_line, tsl */
-+#ifndef NO_USE_UTF8CJK
++#ifndef NO_USE_PANE_BORDER_ACS_ASCII
 +	TTYC_U8,
 +#endif
  	TTYC_VPA,	/* row_address, cv */
  	TTYC_XENL,	/* eat_newline_glitch, xn */
  	TTYC_XT,	/* xterm(1)-compatible title, XT */
 diff --git a/tty-acs.c b/tty-acs.c
-index 7fd265d..7fe1a0e 100644
+index 7fd265d..2b92e0b 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
 @@ -22,6 +22,83 @@
  
  #include "tmux.h"
  
-+#ifndef NO_USE_UTF8CJK
++#ifndef NO_USE_PANE_BORDER_ACS_ASCII
 +#include <string.h>
 +
 +static char tty_acs_table[UCHAR_MAX][4] = {
@@ -190,9 +192,9 @@ index 7fd265d..7fe1a0e 100644
  	ch = *(u_char *) key;
  	return (ch - entry->key);
  }
-+#endif  /* NO_USE_UTF8CJK */
++#endif  /* NO_USE_PANE_BORDER_ACS_ASCII */
 +
-+#ifndef NO_USE_UTF8CJK
++#ifndef NO_USE_PANE_BORDER_ACS_ASCII
 +static int
 +get_utf8_width(const char *s)
 +{
@@ -266,13 +268,13 @@ index 7fd265d..7fe1a0e 100644
 +
 +	return (ACST_ASCII);
 +}
-+#endif /* NO_USE_UTF8CJK */
++#endif /* NO_USE_PANE_BORDER_ACS_ASCII */
  
  /* Retrieve ACS to output as a string. */
  const char *
  tty_acs_get(struct tty *tty, u_char ch)
  {
-+#ifndef NO_USE_UTF8CJK
++#ifndef NO_USE_PANE_BORDER_ACS_ASCII
 +	switch (tty_acs_type(tty)) {
 +	case ACST_UTF8:
 +		if (tty_acs_table[ch][0] != '\0')
@@ -297,17 +299,17 @@ index 7fd265d..7fe1a0e 100644
  	if (entry == NULL)
  		return (NULL);
  	return (entry->string);
-+#endif /* NO_USE_UTF8CJK */
++#endif /* NO_USE_PANE_BORDER_ACS_ASCII */
  }
 diff --git a/tty-term.c b/tty-term.c
-index a3a2636..ae7052b 100644
+index a3a2636..4cb387b 100644
 --- a/tty-term.c
 +++ b/tty-term.c
 @@ -503,6 +503,15 @@ tty_term_find(char *name, int fd, char **cause)
  	if (!tty_term_flag(term, TTYC_XENL))
  		term->flags |= TERM_EARLYWRAP;
  
-+#ifndef NO_USE_UTF8CJK
++#ifndef NO_USE_PANE_BORDER_ACS_ASCII
 +	/* Generate ACS table. */
 +	memset(term->acs, 0, sizeof term->acs);
 +	if (tty_term_has(term, TTYC_ACSC)) {
