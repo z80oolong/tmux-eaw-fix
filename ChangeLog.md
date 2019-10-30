@@ -4,6 +4,20 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2019/10/29 現在の ChangeLog
+
+2019/10/29 現在の [github 上の tmux の HEAD の commit である a1006db9][TMRP] に対応した差分ファイルである ```tmux-HEAD-a1006db9-fix.diff``` を追加致しました。
+
+これに伴い、差分ファイル ```tmux-HEAD-fb7ce5b5-fix.diff``` をディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
+## 2019/10/16 現在の ChangeLog
+
+```tmux-2.3-fix.diff``` から ```tmux-2.9a-fix.diff``` までの旧安定版の差分ファイルについて、 [koie-hidetaka 氏][KOIE]によって作成された [tmux の画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]に関するコードを ```#ifdef NO_USE_PANE_BORDER_ACS_ASCII ... #endif``` 及び ```#ifndef NO_USE_PANE_BORDER_ACS_ASCII ... #endif``` で囲む修正を行いました。これにより、 [koie-hidetaka 氏][KOIE] による修正と、 East Asian Ambiguous Character を全角文字の幅で表示する修正を個別に有効化することが可能となりました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2019/10/15 現在の ChangeLog
 
 2019/10/15 現在の [github 上の tmux の HEAD の commit である fb7ce5b5][TMRP] に対応した差分ファイルである ```tmux-HEAD-fb7ce5b5-fix.diff``` を追加致しました。
