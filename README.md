@@ -45,6 +45,15 @@ Tap リポジトリ [z80oolong/tmux][TAP1] では、[最新の安定版の tmux]
 
 [z80oolong/tmux][TAP1] の詳細な使用法につきましては、 [z80oolong/tmux の README.md][READ] を御覧下さい。
 
+## AppImage パッケージを用いたインストール
+
+[tmux][TMUX] のソースコードへの [East Asian Ambiguous Character][EAWA] 対応の差分ファイルの適用及びソースコードのビルドによるインストールが困難な環境及び状況の方に向けて、**[East Asian Ambiguous Character][EAWA] 対応の差分ファイルを適用したソースコードからのビルド済みの [tmux][TMUX] の AppImage パッケージを用意しました。ソースコードからのビルド作業がお手数な方は、 [tmux][TMUX] の AppImage パッケージの使用を強く御勧めします。**
+
+[tmux][TMUX] の AppImage パッケージは、以下の URL にて配布されています。詳細な使用法についても、以下の URL を御覧下さい。
+
+- EAW 対応 tmux を起動する AppImage ファイルの配布ページ
+    - [https://github.com/z80oolong/tmux-eaw-appimage/releases][APPR]
+
 ## 各種設定について
 
 本節では、本差分ファイルを適用後に拡張される [tmux][TMUX] のオプション及び [tmux][TMUX] が参照する環境変数について述べます。
@@ -118,6 +127,7 @@ set-option -g utf8-cjk on
 [BREW]:https://linuxbrew.sh
 [TAP1]:https://github.com/z80oolong/homebrew-tmux
 [READ]:https://github.com/z80oolong/homebrew-tmux/blob/master/README.md
+[APPR]:https://github.com/z80oolong/tmux-eaw-appimage/releases
 [WCWD]:http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 [DRMK]:http://www.cl.cam.ac.uk/~mgk25/
 [NICM]:https://github.com/nicm
