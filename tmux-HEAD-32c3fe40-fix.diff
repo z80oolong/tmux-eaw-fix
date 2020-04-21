@@ -80,7 +80,7 @@ index 40872eca..296e6d7c 100644
  	 * If socket is specified on the command-line with -S or -L, it is
  	 * used. Otherwise, $TMUX is checked and if that fails "default" is
 diff --git a/tty-acs.c b/tty-acs.c
-index 3e811103..dbf5446b 100644
+index 3e811103..856d25e4 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
 @@ -22,6 +22,83 @@
@@ -167,7 +167,7 @@ index 3e811103..dbf5446b 100644
  static int	tty_acs_cmp(const void *, const void *);
  
  /* Table mapping ACS entries to UTF-8. */
-@@ -77,11 +154,92 @@ tty_acs_cmp(const void *key, const void *value)
+@@ -77,11 +154,93 @@ tty_acs_cmp(const void *key, const void *value)
  	ch = *(u_char *) key;
  	return (ch - entry->key);
  }
@@ -229,9 +229,9 @@ index 3e811103..dbf5446b 100644
 +	if (options_get_number(global_s_options, "pane-border-ascii"))
 +		return (ACST_ASCII);
 +
-+	//if ((tty->flags & TTY_UTF8) &&
-+	//    (!tty_term_has(tty->term, TTYC_U8) ||
-+	if ((!tty_term_has(tty->term, TTYC_U8) ||
++	/*
++	 * if ((tty->flags & TTY_UTF8) &&
++	    (!tty_term_has(tty->term, TTYC_U8) ||
 +	     tty_term_number(tty->term, TTYC_U8) != 0)) {
 +		static int hline_width = 0;
 +		const char *hline = "\342\224\200";
@@ -242,6 +242,7 @@ index 3e811103..dbf5446b 100644
 +		if (hline_width == 1)
 +			return (ACST_UTF8);
 +	}
++	*/
 +
 +	if (tty_term_has(tty->term, TTYC_ACSC))
 +		return (ACST_ACS);
@@ -260,7 +261,7 @@ index 3e811103..dbf5446b 100644
  	if (tty == NULL)
  		return (0);
  
-@@ -102,12 +260,31 @@ tty_acs_needed(struct tty *tty)
+@@ -102,12 +261,31 @@ tty_acs_needed(struct tty *tty)
  	if (tty->client->flags & CLIENT_UTF8)
  		return (0);
  	return (1);
@@ -292,7 +293,7 @@ index 3e811103..dbf5446b 100644
  	struct tty_acs_entry	*entry;
  
  	/* Use the ACS set instead of UTF-8 if needed. */
-@@ -123,4 +300,5 @@ tty_acs_get(struct tty *tty, u_char ch)
+@@ -123,4 +301,5 @@ tty_acs_get(struct tty *tty, u_char ch)
  	if (entry == NULL)
  		return (NULL);
  	return (entry->string);
