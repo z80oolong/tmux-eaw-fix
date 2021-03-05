@@ -1,5 +1,5 @@
 diff --git a/options-table.c b/options-table.c
-index a6f07cf9..7e07eb6d 100644
+index a6f07cf..7e07eb6 100644
 --- a/options-table.c
 +++ b/options-table.c
 @@ -1084,6 +1084,38 @@ const struct options_table_entry options_table[] = {
@@ -42,7 +42,7 @@ index a6f07cf9..7e07eb6d 100644
  	OPTIONS_TABLE_HOOK("after-bind-key", ""),
  	OPTIONS_TABLE_HOOK("after-capture-pane", ""),
 diff --git a/tmux.c b/tmux.c
-index 3a49c803..70733fc9 100644
+index 3a49c80..70733fc 100644
 --- a/tmux.c
 +++ b/tmux.c
 @@ -327,20 +327,29 @@ main(int argc, char **argv)
@@ -110,7 +110,7 @@ index 3a49c803..70733fc9 100644
  	exit(client_main(osdep_event_init(), argc, argv, flags, feat));
  }
 diff --git a/tmux.h b/tmux.h
-index 401bf82f..c114e0da 100644
+index 6961094..9c10ac9 100644
 --- a/tmux.h
 +++ b/tmux.h
 @@ -76,6 +76,17 @@ struct winlink;
@@ -132,7 +132,7 @@ index 401bf82f..c114e0da 100644
  #define PANE_MINIMUM 1
  
 diff --git a/tty-acs.c b/tty-acs.c
-index 63eccb93..7729eca5 100644
+index 63eccb9..7729eca 100644
 --- a/tty-acs.c
 +++ b/tty-acs.c
 @@ -23,6 +23,130 @@
@@ -421,7 +421,7 @@ index 63eccb93..7729eca5 100644
 +#endif
  }
 diff --git a/tty-term.c b/tty-term.c
-index 1d9b36da..20f48506 100644
+index 1d9b36d..20f4850 100644
 --- a/tty-term.c
 +++ b/tty-term.c
 @@ -592,6 +592,15 @@ tty_term_create(struct tty *tty, char *name, char **caps, u_int ncaps,
@@ -449,7 +449,7 @@ index 1d9b36da..20f48506 100644
  	/* Log the capabilities. */
  	for (i = 0; i < tty_term_ncodes(); i++)
 diff --git a/utf8.c b/utf8.c
-index f43945e6..6fdda8cd 100644
+index f43945e..6fdda8c 100644
 --- a/utf8.c
 +++ b/utf8.c
 @@ -26,6 +26,407 @@
