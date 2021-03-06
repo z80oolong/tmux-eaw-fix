@@ -6,7 +6,9 @@
 
 ## 2021/03/02 現在の ChangeLog
 
-2021/03/02 現在の [github 上の tmux の HEAD の commit である 48131c6d][TMRP] に対応した差分ファイルである ```tmux-HEAD-48131c6d-fix.diff``` を追加致しました。
+2021/03/02現在の [github 上の tmux の HEAD の commit である 48131c6d][TMRP] に対応した差分ファイルである ```tmux-HEAD-48131c6d-fix.diff``` を追加致しました。
+
+また、安定版のプレリリース版である [tmux 3.2-rc2][TMXR] に対応した差分ファイルである ```tmux-3.2-rc4-fix.diff``` も同時に追加しました。
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
