@@ -108,6 +108,14 @@ set-option -g utf8-emoji on
 
 なお、環境変数 ```TMUX_ACS``` による設定は、オプション ```pane-border-ascii, pane-border-acs``` の設定に優先する事に留意する必要があります。
 
+### 環境変数 ```TMUX_CONF```
+
+[tmux 2.6-3.0a][TMUX] までにおいては、環境変数 ```TMUX_CONF``` の値には、 System-wide で使用する [tmux][TMUX] の設定ファイル ```tmux.conf``` の絶対パスを指定します。
+
+また、 [tmux 3.1][TMUX] 以降においては、環境変数 ```TMUX_CONF``` の値には、 [tmux][TMUX] において使用する設定ファイル ```tmux.conf``` の絶対パスを、設定ファイルを読み込む順にセミコロンで区切って指定します。なお、 ```tmux.conf``` のパスには、 ```~/``` 及び、先頭に ```$``` を付した環境変数を使用できます。
+
+環境変数 ```TMUX_CONF``` が指定されない場合は、 [tmux][TMUX] のコンパイル時に指定されるマクロ ```TMUX_CONF``` の値が使用されます。
+
 ## 謝辞
 
 先ず最初に、本差分ファイルを作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][EAWA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
