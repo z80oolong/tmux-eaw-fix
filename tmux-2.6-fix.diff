@@ -1,5 +1,5 @@
 diff --git a/cfg.c b/cfg.c
-index 00ee33b1..f47b0909 100644
+index 00ee33b1..4ca1697b 100644
 --- a/cfg.c
 +++ b/cfg.c
 @@ -72,6 +72,10 @@ start_cfg(void)
@@ -8,7 +8,7 @@ index 00ee33b1..f47b0909 100644
  
 +#ifndef NO_USE_ENV_TMUX_CONF
 +	struct environ_entry	*tmux_conf_entry;
-+	char			*tmux_conf
++	char			*tmux_conf;
 +#endif
  	/*
  	 * Configuration files are loaded without a client, so NULL is passed
