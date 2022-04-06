@@ -4,6 +4,16 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2022/04/02 現在の ChangeLog
+
+2022/04/02 現在の [github 上の tmux の HEAD の commit である b0ff4467][TMRP] に対応した差分ファイルである ```tmux-HEAD-b0ff4467-fix.diff``` を追加致しました。
+
+また、全ての [tmux][TMUX] のバージョンの差分ファイルにおいて、 System-wide な環境における [tmux][TMUX] の設定ファイル ```tmux.conf``` の絶対パス及び、 ```tmux.conf``` の絶対パスの検索順の設定を行うための環境変数 ```TMUX_CONF``` を指定出来るように変更を加えました。環境変数 ```TMUX_CONF``` は、主に AppImage パッケージファイルにおいて使用されます。
+
+これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2022/03/30 現在の ChangeLog
 
 2022/03/30 現在の [github 上の tmux の HEAD の commit である ac16f2c6][TMRP] に対応した差分ファイルである ```tmux-HEAD-ac16f2c6-fix.diff``` を追加致しました。

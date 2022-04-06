@@ -116,6 +116,8 @@ set-option -g utf8-emoji on
 
 環境変数 ```TMUX_CONF``` が指定されない場合は、 [tmux][TMUX] のコンパイル時に指定されるマクロ ```TMUX_CONF``` の値が使用されます。
 
+なお、この環境変数 ```TMUX_CONF``` は、 AppImage パッケージファイルにて主に使用されます。
+
 ## 謝辞
 
 先ず最初に、本差分ファイルを作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][EAWA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
