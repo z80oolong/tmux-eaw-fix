@@ -4,6 +4,18 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2023/07/30 現在の ChangeLog
+
+2023/07/30 現在の [github 上の tmux の HEAD の commit である fda39377][TMRP] に対応した差分ファイルである ```tmux-HEAD-fda39377-fix.diff``` を追加致しました。
+
+これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+なお、本 HEAD 版の差分ファイルより、 [github 上の tmux][TMRP] の sixel ブランチを HEAD 版の差分ファイルに適用することにより、 tmux より SIXEL Graphics の表示に対応しました。 sixel ブランチの適用にあたっては、sixel ブランチの適用部分の細部について若干の修正を行った上で、 0 色のパレットしか持たない SIXEL 画像や、空の SIXEL 画像を扱った際に tmux が異常終了する不具合を修正しております。
+
+現在のところ、本 HEAD 版の差分ファイルでは、 ormode の SIXEL 画像の表示には、ほぼ対応しておりません。どうか御了承下さい。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2023/07/09 現在の ChangeLog
 
 2023/07/09 現在の [github 上の tmux の HEAD の commit である 1a11c972][TMRP] に対応した差分ファイルである ```tmux-HEAD-1a11c972-fix.diff``` を追加致しました。
