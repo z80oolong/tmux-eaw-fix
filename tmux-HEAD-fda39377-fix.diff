@@ -37,10 +37,10 @@ index 0d43485f..ca9b9473 100644
  AC_LINK_IFELSE([AC_LANG_PROGRAM(
 diff --git a/image-sixel.c b/image-sixel.c
 new file mode 100644
-index 00000000..4b02e858
+index 00000000..f51a997c
 --- /dev/null
 +++ b/image-sixel.c
-@@ -0,0 +1,566 @@
+@@ -0,0 +1,581 @@
 +/* $OpenBSD$ */
 +
 +/*
@@ -442,7 +442,14 @@ index 00000000..4b02e858
 +	}
 +
 +	if (colours) {
-+		new->colours = xmalloc(si->ncolours * sizeof *new->colours);
++		if (si->ncolours == 0) {
++			new->colours = xmalloc((size_t)SIXEL_COLOUR_REGISTERS * sizeof *new->colours);
++			log_debug("%s: WARNING; si->ncolours == 0, force %d ncolours.", __func__, SIXEL_COLOUR_REGISTERS);
++		} else {
++			new->colours = xmalloc(si->ncolours * sizeof *new->colours);
++			log_debug("%s: WARNING; si->ncolours == %d.", __func__, si->ncolours);
++		}
++
 +		for (i = 0; i < si->ncolours; i++)
 +			new->colours[i] = si->colours[i];
 +		new->ncolours = si->ncolours;
@@ -494,11 +501,19 @@ index 00000000..4b02e858
 +	if (map != NULL) {
 +		colours = map->colours;
 +		ncolours = map->ncolours;
++		log_debug("%s: map->{colours,ncolours}; colours == %p, ncolours == %d", __func__, colours, ncolours);
 +	} else {
 +		colours = si->colours;
 +		ncolours = si->ncolours;
++		log_debug("%s: si->{colours,ncolours}; colours == %p, ncolours == %d", __func__, colours, ncolours);
 +	}
-+	contains = xcalloc(1, ncolours);
++
++	if (ncolours == 0) {
++		contains = xcalloc(1, (size_t)SIXEL_COLOUR_REGISTERS);
++		log_debug("%s: WARNING; ncolours == 0, force contains = xcalloc(1, (size_t)%d)", __func__, SIXEL_COLOUR_REGISTERS);
++	} else {
++		contains = xcalloc(1, ncolours);
++	}
 +
 +	len = 8192;
 +	buf = xmalloc(len);
@@ -1244,18 +1259,20 @@ index 874a3522..ccc794fc 100644
  	else {
  		TAILQ_FOREACH(wp, &w->panes, entry) {
 diff --git a/server-fn.c b/server-fn.c
-index 2a79f3e3..81acced7 100644
+index 2a79f3e3..d7d8b766 100644
 --- a/server-fn.c
 +++ b/server-fn.c
-@@ -34,6 +34,12 @@ void
+@@ -33,7 +33,14 @@ static void		 server_destroy_session_group(struct session *);
+ void
  server_redraw_client(struct client *c)
  {
- 	c->flags |= CLIENT_ALLREDRAWFLAGS;
 +#ifdef ENABLE_SIXEL
 +	/* tty features might have changed since the first draw during attach.
 +	 * For example, this happens when DA responses are received.
 +	 */
 +	c->flags |= CLIENT_REDRAWWINDOW;
++#else
+ 	c->flags |= CLIENT_ALLREDRAWFLAGS;
 +#endif
  }
  
