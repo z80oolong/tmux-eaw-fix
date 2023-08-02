@@ -4,6 +4,16 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2023/08/03 現在の ChangeLog
+
+2023/08/03 現在の [github 上の tmux の HEAD の commit である fda39377][TMRP] に対応した差分ファイルである ```tmux-HEAD-fda39377-fix.diff``` について、以下の不具合を修正及び拡張機能に対応しております。
+
+- 0 色のパレット及び空の SIXEL Graphics 画像を扱った際に、 ```xcalloc, xmalloc```` による 0 バイトのメモリ領域の確保により、 tmux 全体が異常終了する不具合を修正。
+- SIXEL Graphics の ormode 機能に対応。この際、 ormode 機能の使用時に、各ピクセルにおけるパレット番号の格納値が一部異常な値となる不具合を修正。
+- その他、 [github 上の tmux][TMRP] の sixel ブランチのコードをマージする際に軽微な修正を行った。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2023/07/30 現在の ChangeLog
 
 2023/07/30 現在の [github 上の tmux の HEAD の commit である fda39377][TMRP] に対応した差分ファイルである ```tmux-HEAD-fda39377-fix.diff``` を追加致しました。
