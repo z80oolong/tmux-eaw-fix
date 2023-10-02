@@ -4,6 +4,22 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2023/10/02 現在の ChangeLog
+
+前回更新より間が空いてしまい、誠に恐れ入ります。
+
+2023/10/02 現在の [github 上の tmux の HEAD の commit である b7777807][TMRP] に対応した差分ファイルである ```tmux-HEAD-b7777807-fix.diff``` を追加致しました。
+
+なお、 2023/08/23 の [tmux][TMUX] の master ブランチより、 sixel ブランチが master ブランチに取り込まれ、 [tmux][TMUX] が標準で SIXEL に対応することとなりました。本差分では、更に 0 色のパレットしか持たない SIXEL 画像や、空の SIXEL 画像を扱った際に tmux が異常終了する不具合を修正及び ORMODE に対応するための修正を施しております。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+
+## 2023/08/15 現在の ChangeLog
+
+2023/08/15 現在の [github 上の tmux の HEAD の commit である 11e69f60][TMRP] に対応した差分ファイルである ```tmux-HEAD-11e69f60-fix.diff``` を追加致しました。
+
+また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2023/08/03 現在の ChangeLog
 
 2023/08/03 現在の [github 上の tmux の HEAD の commit である fda39377][TMRP] に対応した差分ファイルである ```tmux-HEAD-fda39377-fix.diff``` について、以下の不具合を修正及び拡張機能に対応しております。
