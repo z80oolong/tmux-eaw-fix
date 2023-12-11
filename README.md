@@ -1,18 +1,32 @@
-# tmux 2.5 以降において East Asian Ambiguous Character を全角文字の幅で表示する
+# tmux-eaw-fix -- tmux 2.6 以降において各種問題を修正する野良差分ファイル
 
 ## 概要
 
-[tmux 2.5][TMUX] 以降において、 Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生しています。
+[tmux][TMUX] とは、 terminal session を効果的に操作できる端末多重化ソフトウェアです。 [tmux][TMUX] の使用により、複数の仮想 window や pane を同時に表示し、それらの間を切り替えたり terminal session を分割することが可能となります。そして、これにより単一の terminal window 内で複数の task を同時に実行することが可能となります。
 
-ファイル ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-xxxxxxxxx-fix.diff (ここに、 xxxxxxxx は tmux の HEAD 版の最新の commit ID 番号。以下同様)``` は、 [tmux 2.5][TMUX] 以降において [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するように修正するための差分ファイルです。
+しかし [tmux 2.6][TMUX] 以降において、現在のところ以下のような問題が発生しています。
 
-なお、この差分には、 [koie-hidetaka 氏][KOIE]によって作成された [tmux][TMUX] の[画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]が含まれています。
+- Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生する。
+- Unicode 上の絵文字の文字幅も適切に扱われない問題が発生する。
+- [tmux][TMUX] の pane 分割において、画面分割におけるボーダーラインの罫線文字の文字幅が適切に扱われず、画面表示が乱れる問題が発生する。
+- [tmux][TMUX] の新たな HEAD 版より追加された SIXEL による画像表示において、パレット数が 0 となるような画像と表示させようとすると、 [tmux][TMUX] の process が異常終了したり、 ORMODE に対応した SIXEL 画像が正常に表示されない問題が発生する。
+
+本リポジトリに置かれているファイル ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-xxxxxxxxx-fix.diff (ここに、 xxxxxxxx は tmux の HEAD 版の最新の commit ID 番号。以下同様)``` は、 [tmux 2.5][TMUX] 以降において、上記で示した問題を解決するために以下で述べる修正を加えた差分ファイルです。
+
+- [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するための各種設定を追加する修正。
+- Unicode 上の絵文字の幅を漢字や全角カナ文字等と同じ幅 2 で表示するための各種設定を追加する修正。
+- [koie-hidetaka 氏][KOIE]によって作成された [tmux][TMUX] の[画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]。
+- SIXEL による画像表示において、パレット数が 0 色である画像を表示させると [tmux][TMUX] のプロセス全体が異常終了する問題を修正。
+- SIXEL による画像表示において、 ORMODE による SXIEL の画像表示に対応させる修正。
+- その他、各種雑多な問題を修正。
+
+なお、本差分ファイルは、 "tmux 2.5 以降において East Asian Ambiguous Character を全角文字の幅で表示する" より、本差分ファイルによって修正される箇所が広範に渡る事に伴い、 "各種問題を修正する野良差分ファイル" と本差分ファイルの呼称を改めるものです。
 
 ## 差分ファイルの適用とインストール
 
 [tmux][TMUX] のソースコードに差分ファイルを適用するには、安定版の [tmux][TMUX] には、差分ファイル ```tmux-x.y-fix.diff``` を、 [github 上の tmux の HEAD][TMRP] のソースコードには、　```tmux-HEAD-xxxxxxxx-fix.diff``` をそれぞれ適用して下さい。
 
-従って、安定版の [tmux][TMUX] のソースコードにおける差分ファイルについては、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` を適用後、[tmux][TMUX] をコマンド ```./configure, make``` を用いてビルド及びインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+従って、安定版の [tmux][TMUX] のソースコードにおける差分ファイルについては、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` を適用後、[tmux][TMUX] をコマンド ```./configure, make``` を用いてビルド及びインストールすると、上述の修正がなされた [tmux][TMUX] が導入されます。
 
 ```
  $ patch -p1 < /path/to/diff/tmux-x.y-fix.diff
@@ -23,7 +37,7 @@
  $ make install
 ```
 
-また、[github 上の tmux の HEAD][TMRP] のソースコードにおける差分ファイルについても、 [github 上の tmux の HEAD][TMRP] のソースコードが置かれているディレクトリより、以下のようにして、最近の差分ファイルを適用後、 [tmux の HEAD 版][TMRP]をコマンド ```./configure, make``` を用いてビルド及びインストールすると、 [tmux][TMUX] において、 [East Asian Ambiguous Character][EAWA] が全角文字の幅と同じ幅で表示されるようになります。
+また、[github 上の tmux の HEAD][TMRP] のソースコードにおける差分ファイルについても、 [github 上の tmux の HEAD][TMRP] のソースコードが置かれているディレクトリより、以下のようにして、最近の差分ファイルを適用後、 [tmux の HEAD 版][TMRP]をコマンド ```./configure, make``` を用いてビルド及びインストールすると、上述の修正がなされた [tmux][TMUX] が導入されます。
 
 なお、 [tmux の HEAD 版][TMRP]でのビルドの場合、**コマンド ```./configure``` の実行に先立ち、シェルスクリプト ```./autogen.sh``` を実行して ```./configure``` を生成する必要があることに留意する必要があります。**
 
@@ -37,9 +51,9 @@
  $ make install
 ```
 
-## Linuxbrew を用いた差分ファイルの適用とインストール
+## Homebrew for Linux を用いた差分ファイルの適用とインストール
 
-[Linuxbrew][BREW] を導入した端末において、[East Asian Ambiguous Character][EAWA] 対応の差分ファイルを適用した [tmux][TMUX] をインストールする際には、**これらの差分ファイルを適用した [tmux][TMUX] を導入するための [Linuxbrew][BREW] 向け Tap リポジトリ [z80oolong/tmux][TAP1] を使用することを強く御勧め致します。**
+[Homebrew for Linux][BREW] を導入した端末において、本差分ファイルを適用した [tmux][TMUX] をインストールする際には、**これらの差分ファイルを適用した [tmux][TMUX] を導入するための [Homebrew for Linux][BREW] 向け Tap リポジトリ [z80oolong/tmux][TAP1] を使用することを強く御勧め致します。**
 
 Tap リポジトリ [z80oolong/tmux][TAP1] では、[最新の安定版の tmux][TMUX] 及び [github 上の最新の tmux の HEAD][TMRP] のインストールの他、旧安定版の [tmux][TMUX] のインストールも可能です。 
 
@@ -47,11 +61,11 @@ Tap リポジトリ [z80oolong/tmux][TAP1] では、[最新の安定版の tmux]
 
 ## AppImage パッケージを用いたインストール
 
-[tmux][TMUX] のソースコードへの [East Asian Ambiguous Character][EAWA] 対応の差分ファイルの適用及びソースコードのビルドによるインストールが困難な環境及び状況の方に向けて、**[East Asian Ambiguous Character][EAWA] 対応の差分ファイルを適用したソースコードからのビルド済みの [tmux][TMUX] の AppImage パッケージを用意しました。ソースコードからのビルド作業がお手数な方は、 [tmux][TMUX] の AppImage パッケージの使用を強く御勧めします。**
+[tmux][TMUX] のソースコードへの本差分ファイルの適用及びソースコードのビルドによるインストールが困難な環境及び状況の方に向けて、**本差分ファイルを適用したソースコードからのビルド済みの [tmux][TMUX] の AppImage パッケージを用意しました。ソースコードからのビルド作業がお手数な方は、 [tmux][TMUX] の AppImage パッケージの使用を強く御勧めします。**
 
 [tmux][TMUX] の AppImage パッケージは、以下の URL にて配布されています。詳細な使用法についても、以下の URL を御覧下さい。
 
-- EAW 対応 tmux を起動する AppImage ファイルの配布ページ
+- 野良差分ファイル適用 tmux を起動する AppImage ファイルの配布ページ
     - [https://github.com/z80oolong/tmux-eaw-appimage/releases][APPR]
 
 ## 各種設定について
