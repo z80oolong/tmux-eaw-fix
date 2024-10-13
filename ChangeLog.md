@@ -6,7 +6,7 @@
 
 ## 2024/10/13 現在の ChangeLog
 
-2024/10/13 現在の [github 上の tmux の HEAD の commit である f8b56fdc][TMRP] に対応した差分ファイルである ```tmux-HEAD-f8b56fdc-fix.diff``` を追加致しました。
+2024/10/13 現在の [github 上の tmux の HEAD の commit である cb00e869][TMRP] に対応した差分ファイルである ```tmux-HEAD-cb00e869-fix.diff``` を追加致しました。
 
 また、新しい安定版の修正版である [tmux 3.5a][TMXR] に対応した差分ファイルである ```tmux-3.5a-fix.diff``` も同時に追加しました。
 
