@@ -4,6 +4,20 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2024/12/17 現在の ChangeLog
+
+前回追加した野良差分ファイルである ```tmux-HEAD-ae8f2208-fix.diff``` について、 ```tmux-HEAD-ae8f2208-fix.diff``` を適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] を更新しました。こちらの方もどうか御覧下さい。
+
+## 2024/12/08 現在の ChangeLog
+
+2024/12/08 現在の [github 上の tmux の HEAD の commit である ae8f2208][TMRP] に対応した差分ファイルである ```tmux-HEAD-ae8f2208-fix.diff``` を追加致しました。
+
+これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また今回の変更より、安定版の tmux の野良差分ファイルのうち、非常に古い安定版である ```tmux 2.6〜3.2a``` に対応する差分ファイルである ```tmux-{2.6~3.2a}-fix.diff``` についても、ディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2024/11/07 現在の ChangeLog
 
 2024/11/07 現在の [github 上の tmux の HEAD の commit である 1fe30bb2][TMRP] に対応した差分ファイルである ```tmux-HEAD-1fe30bb2-fix.diff``` を追加致しました。
@@ -12,7 +26,7 @@
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
-また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
 ## 2024/10/13 現在の ChangeLog
 
@@ -22,7 +36,7 @@
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
-また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
 ## 2024/09/29 現在の ChangeLog
 
@@ -32,7 +46,7 @@
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
-また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
 ## 2024/08/25 現在の ChangeLog
 
@@ -56,7 +70,7 @@
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
-また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
 ## 2024/05/01 現在の ChangeLog
 
@@ -64,7 +78,7 @@
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
-また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
 ## 2024/03/26 現在の ChangeLog
 
@@ -74,7 +88,7 @@
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
-また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
 ## 2024/03/05 現在の ChangeLog
 
@@ -84,7 +98,7 @@
 
 これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
-また、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、 East Asian Ambiguous Character を全角文字の幅で表示する [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
 ## 2024/02/11 現在の ChangeLog
 
@@ -100,7 +114,7 @@
 
 2023/12/11 現在の [github 上の tmux の HEAD の commit である bdf8e614][TMRP] に対応した差分ファイルである ```tmux-HEAD-bdf8e614-fix.diff``` を追加致しました。
 
-なお、 2023/12/11 の [tmux][TMUX] の master ブランチより、本差分ファイルによって修正される箇所が広範に渡る事に伴い、 "**各種問題を修正する野良差分ファイル**" と本差分ファイルの呼称を改めました。
+なお、 2023/12/11 の [tmux][TMUX] の master ブランチの commit より、本差分ファイルによって修正される箇所が広範に渡る事に伴い、 "**各種問題を修正する野良差分ファイル**" と本差分ファイルの呼称を改めました。
 
 また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] と、野良差分ファイルを適用した [tmux][TMUX] をソースコードからビルドすること無く、ビルド済のバイナリファイルとして容易に導入することが出来る AppImage パッケージである [tmux-eaw-appimage][TAPP] も併せて更新しました。こちらの方もどうか御覧下さい。
 
