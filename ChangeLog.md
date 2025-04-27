@@ -4,6 +4,14 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2025/04/27 現在の ChangeLog
+
+2025/04/27 現在の [github 上の tmux の HEAD の commit である 36fba4cc][TMRP] に対応した差分ファイルである ```tmux-HEAD-36fba4cc-fix.diff``` を追加致しました。
+
+これに伴い、tmux の HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
+
+また、野良差分ファイルを適用した [tmux][TMUX] を導入するための Formula 群である [z80oolong/tmux][TAP1] も併せて更新しました。こちらの方もどうか御覧下さい。
+
 ## 2025/03/14 現在の ChangeLog
 
 2025/03/14 現在の [github 上の tmux の HEAD の commit である d4b8635f][TMRP] に対応した差分ファイルである ```tmux-HEAD-d4b8635f-fix.diff``` を追加致しました。
