@@ -1,171 +1,148 @@
-# tmux-eaw-fix -- tmux 2.6 以降において各種問題を修正する野良差分ファイル
+# tmux-eaw-fix -- tmux 2.6 以降の各種問題を修正する差分ファイル
 
 ## 概要
 
-[tmux][TMUX] とは、 terminal session を効果的に操作できる端末多重化ソフトウェアです。 [tmux][TMUX] の使用により、複数の仮想 window や pane を同時に表示し、それらの間を切り替えたり terminal session を分割することが可能となります。そして、これにより単一の terminal window 内で複数の task を同時に実行することが可能となります。
+[tmux][TMUX] は、端末セッションを効率的に管理できる端末多重化ソフトウェアです。複数の仮想ウィンドウやペインを同時に表示し、切り替えやセッションの分割を可能にします。これにより、単一の端末ウィンドウ内で複数のタスクを並行して実行できます。
 
-しかし [tmux 2.6][TMUX] 以降において、現在のところ以下のような問題が発生しています。
+しかし、[tmux 2.6][TMUX] 以降では以下の問題が確認されています：
 
-- Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題が発生する。
-- Unicode 上の絵文字の文字幅も適切に扱われない問題が発生する。
-- [tmux][TMUX] の pane 分割において、画面分割におけるボーダーラインの罫線文字の文字幅が適切に扱われず、画面表示が乱れる問題が発生する。
-- [tmux][TMUX] の新たな HEAD 版より追加された SIXEL による画像表示において、パレット数が 0 となるような画像と表示させようとすると、 [tmux][TMUX] の process が異常終了したり、 ORMODE に対応した SIXEL 画像が正常に表示されない問題が発生する。
+- **Unicode の [East Asian Width 特性が A (Ambiguous)][EAWA] である "◎" や "★" などの記号文字や罫線文字（以下、[East Asian Ambiguous Character][EAWA]）が、日本語環境で文字幅を適切に扱えず、表示が乱れる。**
+- Unicode の絵文字の文字幅が正しく処理されない。
+- ペイン分割時のボーダーラインの罫線文字の文字幅が適切に扱われず、画面表示が乱れる。
+- **HEAD 版で追加された SIXEL 画像表示において、パレット数が 0 の画像を表示しようとするとプロセスが異常終了する、または ORMODE に対応した SIXEL 画像が正常に表示されない。**
 
-本リポジトリに置かれているファイル ```tmux-x.y-fix.diff (ここに、 x.y は tmux の安定版のバージョン番号。以下同様)``` 及び ```tmux-HEAD-xxxxxxxxx-fix.diff (ここに、 xxxxxxxx は tmux の HEAD 版の最新の commit ID 番号。以下同様)``` は、 [tmux 2.5][TMUX] 以降において、上記で示した問題を解決するために以下で述べる修正を加えた差分ファイルです。
+本リポジトリの差分ファイル ```tmux-x.y-fix.diff```（```x.y``` は安定版のバージョン番号）および ```tmux-HEAD-xxxxxxxx-fix.diff```（```xxxxxxxx``` は HEAD 版の最新コミット ID）は、[tmux 2.5][TMUX] 以降のこれらの問題を解決するための修正を施したものです。修正内容は以下の通りです：
 
-- [East Asian Ambiguous Character][EAWA] の幅を漢字や全角カナ文字等と同じ幅 2 で表示するための各種設定を追加する修正。
-- Unicode 上の絵文字の幅を漢字や全角カナ文字等と同じ幅 2 で表示するための各種設定を追加する修正。
-- [koie-hidetaka 氏][KOIE]によって作成された [tmux][TMUX] の[画面分割におけるボーダーラインの罫線文字を判別し、適切に描画するためのソースコードの修正][PANE]。
-- SIXEL による画像表示において、パレット数が 0 色である画像を表示させると [tmux][TMUX] のプロセス全体が異常終了する問題を修正。
-- SIXEL による画像表示において、 ORMODE による SXIEL の画像表示に対応させる修正。
-- その他、各種雑多な問題を修正。
+- **[East Asian Ambiguous Character][EAWA] の文字幅を漢字や全角カナと同じ幅 2 で表示する設定を追加。**
+- Unicode 絵文字の文字幅を幅 2 で表示する設定を追加。
+- [koie-hidetaka 氏][KOIE] による、ペイン分割時のボーダーライン罫線文字を適切に描画する[修正][PANE]。
+- **SIXEL 画像表示でパレット数が 0 の場合にプロセスが異常終了する問題を修正。**
+- **SIXEL 画像表示で ORMODE に対応する修正。**
+- その他、細かな問題の修正。
 
-なお、本差分ファイルは、 "tmux 2.5 以降において East Asian Ambiguous Character を全角文字の幅で表示する" より、本差分ファイルによって修正される箇所が広範に渡る事に伴い、 "各種問題を修正する野良差分ファイル" と本差分ファイルの呼称を改めるものです。
+**本差分ファイルは、[East Asian Ambiguous Character][EAWA] を全角文字幅で表示する修正を中心に、広範な問題を解決する "野良差分ファイル" と位置付けられます。**
 
 ## 差分ファイルの適用とインストール
 
-[tmux][TMUX] のソースコードに差分ファイルを適用するには、安定版の [tmux][TMUX] には、差分ファイル ```tmux-x.y-fix.diff``` を、 [github 上の tmux の HEAD][TMRP] のソースコードには、　```tmux-HEAD-xxxxxxxx-fix.diff``` をそれぞれ適用して下さい。
+### 安定版 tmux
 
-従って、安定版の [tmux][TMUX] のソースコードにおける差分ファイルについては、 [tmux][TMUX] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```tmux-x.y-fix.diff``` を適用後、[tmux][TMUX] をコマンド ```./configure, make``` を用いてビルド及びインストールすると、上述の修正がなされた [tmux][TMUX] が導入されます。
-
-```
- $ patch -p1 < /path/to/diff/tmux-x.y-fix.diff
- (ここに、/path/to/diff は、 tmux-x.y-fix.diff が置かれたディレクトリのパス名)
- $ ./configure --prefix=/path/to/install ...
- (ここに、 /path/to/install は tmux のインストール先。なお、 ./configure の引数は適宜追加すること。)
- $ make
- $ make install
-```
-
-また、[github 上の tmux の HEAD][TMRP] のソースコードにおける差分ファイルについても、 [github 上の tmux の HEAD][TMRP] のソースコードが置かれているディレクトリより、以下のようにして、最近の差分ファイルを適用後、 [tmux の HEAD 版][TMRP]をコマンド ```./configure, make``` を用いてビルド及びインストールすると、上述の修正がなされた [tmux][TMUX] が導入されます。
-
-なお、 [tmux の HEAD 版][TMRP]でのビルドの場合、**コマンド ```./configure``` の実行に先立ち、シェルスクリプト ```./autogen.sh``` を実行して ```./configure``` を生成する必要があることに留意する必要があります。**
+安定版 [tmux][TMUX] のソースコードに差分ファイル ```tmux-x.y-fix.diff``` を適用するには、以下の手順を実行してください：
 
 ```
- $ patch -p1 < /path/to/diff/tmux-HEAD-xxxxxxxx-fix.diff
- (ここに、 /path/to/diff は、 tmux-HEAD-xxxxxxxx-fix.diff が置かれたディレクトリのパス名)
- $ sh ./autogen.sh
- $ ./configure --prefix=/path/to/install ...
- (ここに、 /path/to/install は tmux のインストール先。なお、 ./configure の引数は適宜追加すること。)
- $ make
- $ make install
+  $ patch -p1 < /path/to/diff/tmux-x.y-fix.diff
+  $ ./configure --prefix=/path/to/install ...
+  $ make
+  $ make install
 ```
 
-## Homebrew for Linux を用いた差分ファイルの適用とインストール
+**ここに、```/path/to/diff``` は差分ファイルのディレクトリ、```/path/to/install``` はインストール先のパスを示します。```./configure``` の引数は適宜追加してください。**
 
-[Homebrew for Linux][BREW] を導入した端末において、本差分ファイルを適用した [tmux][TMUX] をインストールする際には、**これらの差分ファイルを適用した [tmux][TMUX] を導入するための [Homebrew for Linux][BREW] 向け Tap リポジトリ [z80oolong/tmux][TAP1] を使用することを強く御勧め致します。**
+### HEAD 版 tmux
 
-Tap リポジトリ [z80oolong/tmux][TAP1] では、[最新の安定版の tmux][TMUX] 及び [github 上の最新の tmux の HEAD][TMRP] のインストールの他、旧安定版の [tmux][TMUX] のインストールも可能です。 
+[GitHub の tmux HEAD][TMRP] のソースコードに ```tmux-HEAD-xxxxxxxx-fix.diff``` を適用する場合、以下の手順を実行してください。**HEAD 版では ```./configure``` を生成するために、事前に ```./autogen.sh``` を実行する必要があります。**
 
-[z80oolong/tmux][TAP1] の詳細な使用法につきましては、 [z80oolong/tmux の README.md][READ] を御覧下さい。
+```
+  $ patch -p1 < /path/to/diff/tmux-HEAD-xxxxxxxx-fix.diff
+  $ sh ./autogen.sh
+  $ ./configure --prefix=/path/to/install ...
+  $ make
+  $ make install
+```
 
-## AppImage パッケージを用いたインストール
+## Homebrew for Linux を使用したインストール
 
-[tmux][TMUX] のソースコードへの本差分ファイルの適用及びソースコードのビルドによるインストールが困難な環境及び状況の方に向けて、**本差分ファイルを適用したソースコードからのビルド済みの [tmux][TMUX] の AppImage パッケージを用意しました。ソースコードからのビルド作業がお手数な方は、 [tmux][TMUX] の AppImage パッケージの使用を強く御勧めします。**
+[Homebrew for Linux][BREW] を使用する場合、**本差分ファイルを適用した [tmux][TMUX] を [z80oolong/tmux][TAP1] Tap リポジトリからインストールすることを強く推奨します。** このリポジトリでは、最新安定版、HEAD 版、旧安定版のインストールが可能です。詳細は [z80oolong/tmux の README][READ] を参照してください。
 
-[tmux][TMUX] の AppImage パッケージは、以下の URL にて配布されています。詳細な使用法についても、以下の URL を御覧下さい。
+## AppImage パッケージを使用したインストール
 
-- 野良差分ファイル適用 tmux を起動する AppImage ファイルの配布ページ
-    - [https://github.com/z80oolong/tmux-eaw-appimage/releases][APPR]
+**ソースコードのビルドが困難な環境向けに、差分ファイルを適用した [tmux][TMUX] の AppImage パッケージを用意しました。ビルドの手間を省きたい場合は、以下の URL から配布されている AppImage パッケージの使用を強く推奨します：**
 
-## 各種設定について
+- [tmux-eaw-appimage 配布ページ][APPR]
 
-本節では、本差分ファイルを適用後に拡張される [tmux][TMUX] のオプション及び [tmux][TMUX] が参照する環境変数について述べます。
+## 設定オプション
+
+本差分ファイルを適用すると、以下の [tmux][TMUX] オプションおよび環境変数が追加されます。
 
 ### ```utf8-cjk```
 
-[East Asian Ambiguous Character][EAWA] の文字幅を 2 とすることを有効化するかどうかを設定するオプションです。
+**[East Asian Ambiguous Character][EAWA] の文字幅を 2（全角）にする設定。```on``` で幅 2、```off``` で幅 1 となります。**
 
-このオプションの設定値を ```on``` とすると、 [East Asian Ambiguous Character][EAWA] の文字幅が 2 となり、 ```off``` とすると、文字幅が 1 となります。例えば、[East Asian Ambiguous Character][EAWA] を全角文字として表示する場合は、 [tmux][TMUX] の設定ファイル ```.tmux.conf``` に以下の設定を追記します。
+以下は設定例です。
 
 ```
-set-option -g utf8-cjk on
+  set-option -g utf8-cjk on
 ```
 
-なお、オプション ```utf8-cjk``` の初期値は、 locale に関する環境変数 ```LC_CTYPE``` の値が ```"ja*", "ko*", "zh*"``` の場合は ```on``` となり、それ以外の場合は ```off``` となります。
+**初期値は、環境変数 ```LC_CTYPE``` が ```ja*```, ```ko*```, ```zh*``` の場合 ```on```、それ以外は ```off``` となります。**
 
 ### ```utf8-emoji```
 
-UTF-8 で定義される絵文字の文字幅を 2 とすることを有効化するかどうかを設定するオプションです。
+UTF-8 絵文字の文字幅を 2（全角）にする設定。```on``` で幅 2、```off``` で幅 1。
 
-このオプションの設定値を ```on``` とすると、 UTF-8 で定義される絵文字の文字幅が 2 となり、 ```off``` とすると、文字幅が 1 となります。例えば、 UTF-8 で定義される絵文字のを全角文字として表示する場合は、 [tmux][TMUX] の設定ファイル ```.tmux.conf``` に以下の設定を追記します。
+以下は設定例です。
 
 ```
-set-option -g utf8-emoji on
+  set-option -g utf8-emoji on
 ```
 
-なお、オプション ```utf8-emoji``` の初期値は、 locale に関する環境変数 ```LC_CTYPE``` の値が ```"ja*", "ko*", "zh*"``` の場合は ```on``` となり、それ以外の場合は ```off``` となります。
+**初期値は ```utf8-cjk``` と同様です。**
 
 ### ```pane-border-ascii```
 
-[tmux][TMUX] において画面分割を行う場合に罫線文字に ascii 文字を使用するためのオプションです。
-
-通常は [tmux][TMUX] での画面分割において使用する罫線文字は、環境に応じて UTF-8 の罫線文字か、端末が対応している ACS か、若しくは ascii 文字が使用されます。
-
-このオプションを ```on``` に指定すると、 [tmux][TMUX] での画面分割において使用する罫線文字に ascii 文字を使用します。
+ペイン分割時の罫線文字に ASCII 文字を使用する設定です。```on``` で ASCII 文字を使用します。
 
 ### ```pane-border-acs```
 
-[tmux][TMUX] において画面分割を行う場合に罫線の描画に ACS を使用するためのオプションです。
+ペイン分割時の罫線描画に ACS を使用する設定です。```on``` で ACS を使用します。
 
-このオプションを ```on``` に指定すると、 [tmux][TMUX] での画面分割において罫線の描画に ACS を使用します。
-
-なお、このオプションと ```pane-border-ascii``` の両方を ```on``` に指定した場合は、 ```pane-border-acs``` が有効となることに留意する必要があります。
+**```pane-border-ascii``` と両方 ```on``` の場合、```pane-border-acs``` が優先します。**
 
 ### 環境変数 ```TMUX_ACS```
 
-環境変数 ```TMUX_ACS``` に以下の値を設定すると、[tmux][TMUX] での画面分割において以下のように罫線の描画を行います。
+ペイン分割時の罫線描画を設定します：
 
-- ```utf8, utf-8``` … 罫線の文字に UTF-8 の罫線文字を使用します。
-- ```acs``` … 罫線の描画に ACS を使用します。
-- ```ascii``` … 罫線の文字に ascii 文字を使用します。
+- ```utf8```, ```utf-8```: UTF-8 罫線文字を使用します。
+- ```acs```: ACS を使用します。
+- ```ascii```: ASCII 文字を使用します。
 
-なお、環境変数 ```TMUX_ACS``` による設定は、オプション ```pane-border-ascii, pane-border-acs``` の設定に優先する事に留意する必要があります。
+**```TMUX_ACS``` は ```pane-border-ascii``` および ```pane-border-acs``` に優先します。**
 
 ### 環境変数 ```TMUX_CONF```
 
-[tmux 2.6-3.0a][TMUX] までにおいては、環境変数 ```TMUX_CONF``` の値には、 System-wide で使用する [tmux][TMUX] の設定ファイル ```tmux.conf``` の絶対パスを指定します。
+- [tmux 2.6-3.0a][TMUX]: システム全体の ```tmux.conf``` の絶対パスを指定します。
+- [tmux 3.1][TMUX] 以降: 複数の ```tmux.conf``` のパスをセミコロンで区切って指定します（```~/``` や環境変数 ```$``` も使用可）。
+- 未指定の場合、コンパイル時のマクロ ```TMUX_CONF``` の値を使用します。
 
-また、 [tmux 3.1][TMUX] 以降においては、環境変数 ```TMUX_CONF``` の値には、 [tmux][TMUX] において使用する設定ファイル ```tmux.conf``` の絶対パスを、設定ファイルを読み込む順にセミコロンで区切って指定します。なお、 ```tmux.conf``` のパスには、 ```~/``` 及び、先頭に ```$``` を付した環境変数を使用できます。
-
-環境変数 ```TMUX_CONF``` が指定されない場合は、 [tmux][TMUX] のコンパイル時に指定されるマクロ ```TMUX_CONF``` の値が使用されます。
-
-なお、この環境変数 ```TMUX_CONF``` は、 AppImage パッケージファイルにて主に使用されます。
+**```TMUX_CONF``` は主に AppImage パッケージで使用されます。**
 
 ## 謝辞
 
-先ず最初に、本差分ファイルを作成するに当たっては、下記の URL にある、 Markus Kuhn 氏が作成した [East_Asian_Width 特性が A の文字][EAWA]の扱いを考慮した wcwidth(3) 関数の実装を使用しました。 [Markus Kuhn][DRMK] 氏には心より感謝いたします。
-
-- [http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c][WCWD]
-
-また、本差分ファイルについて、 [tmux][TMUX] の画面分割の為のボーダーラインの罫線文字について判別と適切な描画を行う為の修正を作成して頂いた [koie-hidetaka 氏][KOIE]に心より感謝致します。 [koie-hidetaka 氏][KOIE]におきましては、他にも本差分ファイルに関して有益な指摘も幾つか頂きました。
-
-最後に、 [tmux][TMUX] の作者である [Nicholas Marriott 氏][NICM]を初めとする [tmux の開発コミュニティ][TMUX]及び [tmux][TMUX] に関わる全ての人々に心より感謝致します。
+本差分ファイルの作成にあたり、[Markus Kuhn 氏][DRMK] の [wcwidth(3) 実装][WCWD] を使用しました。また、ペイン分割の罫線文字の修正を提供してくれた [koie-hidetaka 氏][KOIE]、[tmux][TMUX] の開発者 [Nicholas Marriott 氏][NICM] をはじめとする [tmux コミュニティ][TMUX] に深く感謝します。
 
 ## 使用条件
 
-本差分ファイルは、端末多重化ソフトウェアである [tmux][TMUX] に適用する差分ファイルであり、以下に述べる各氏が著作権を有し、[tmux][TMUX] のライセンスと同様である [ISC License][ISCL] に基づいて配布されるものとします。
+本差分ファイルは [tmux][TMUX] 用の差分ファイルであり、[ISC License][ISCL] の下で配布されます。著作権は以下の者に帰属します：
 
-- [tmux の開発コミュニティ][TMUX]の各氏
+- [tmux 開発コミュニティ][TMUX]
 - [koie-hidetaka 氏][KOIE]
 - [Markus Kuhn 氏][DRMK]
-- [Z.OOL. (mailto:zool@zool.jpn.org)][ZOOL]
+- [Z.OOL.][ZOOL]
 
-本差分ファイルの使用条件の詳細については、本リポジトリに同梱する ```LICENSE``` を参照して下さい。
+詳細はリポジトリ内の ```LICENSE``` を参照してください。
 
 <!-- 外部リンク一覧 -->
 
-[TMUX]:http://tmux.github.io/
-[EAWA]:http://www.unicode.org/reports/tr11/#Ambiguous
-[TMRP]:https://github.com/tmux/tmux.git
-[KOIE]:https://github.com/koie
-[PANE]:https://github.com/koie/tmux/commit/ac6c53ffd6c2987a3a4a5807df7fc6cca5d6ce88
-[BREW]:https://linuxbrew.sh
-[TAP1]:https://github.com/z80oolong/homebrew-tmux
-[READ]:https://github.com/z80oolong/homebrew-tmux/blob/master/README.md
-[APPR]:https://github.com/z80oolong/tmux-eaw-appimage/releases
-[WCWD]:http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
-[DRMK]:http://www.cl.cam.ac.uk/~mgk25/
-[NICM]:https://github.com/nicm
-[ZOOL]:http://zool.jpn.org/
-[ISCL]:https://www.isc.org/downloads/software-support-policy/isc-license/
+[TMUX]: http://tmux.github.io/
+[EAWA]: http://www.unicode.org/reports/tr11/#Ambiguous
+[TMRP]: https://github.com/tmux/tmux.git
+[KOIE]: https://github.com/koie
+[PANE]: https://github.com/koie/tmux/commit/ac6c53ffd6c2987a3a4a5807df7fc6cca5d6ce88
+[BREW]: https://linuxbrew.sh
+[TAP1]: https://github.com/z80oolong/homebrew-tmux
+[READ]: https://github.com/z80oolong/homebrew-tmux/blob/master/README.md
+[APPR]: https://github.com/z80oolong/tmux-eaw-appimage/releases
+[WCWD]: http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
+[DRMK]: http://www.cl.cam.ac.uk/~mgk25/
+[NICM]: https://github.com/nicm
+[ZOOL]: http://zool.jpn.org/
+[ISCL]: https://www.isc.org/downloads/software-support-policy/isc-license/
