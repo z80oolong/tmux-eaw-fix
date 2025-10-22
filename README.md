@@ -20,7 +20,7 @@
 - SIXEL 画像表示において、ORMODE に対応した SIXEL 画像を表示するための修正。
 - その他、各種雑多な問題を修正。
 
-なお、本リポジトリは、従来の「tmux 2.5 以降において East Asian Ambiguous Character を全角文字の幅で表示する」という名称から、修正範囲が広範にわたることに伴い、「[tmux 2.6 以降において各種問題を修正する野良差分ファイル][GST1]」と呼称を改めたものです。
+なお、本リポジトリは、従来の "**tmux 2.5 以降において East Asian Ambiguous Character を全角文字の幅で表示する**" という名称から、修正範囲が広範にわたることに伴い、 "**tmux 2.6 以降において各種問題を修正する野良差分ファイル][GST1]**" と呼称を改めたものです。
 
 ## 差分ファイルの適用とインストール
 
@@ -29,23 +29,21 @@
 安定版の [tmux][TMUX] のソースコードに野良差分ファイルを適用する場合、[tmux][TMUX] のソースコードが置かれているディレクトリで以下のように ```tmux-x.y-fix.diff``` を適用し、```./configure``` および ```make``` コマンドを用いてビルドおよびインストールすることで、上述の修正が施された [tmux][TMUX] が導入されます。
 
 ```
-  # patch -p1 < /path/to/diff/tmux-x.y-fix.diff
-  # （ここで、/path/to/diff は tmux-x.y-fix.diff が置かれたディレクトリのパス名）
-  # ./configure --prefix=/path/to/install ...
-  # （ここで、/path/to/install は tmux のインストール先。./configure の引数は適宜追加してください。）
-  # make
+  $ patch -p1 < /path/to/diff/tmux-x.y-fix.diff    #（ここで、/path/to/diff は tmux-x.y-fix.diff が置かれたディレクトリのパス名）
+  $ ./configure --prefix=/path/to/install ...      # （ここで、/path/to/install は tmux のインストール先。./configure の引数は適宜追加してください。）
+  $ make
+  # sudo -s
   # make install
 ```
 
 [GitHub 上の HEAD 版の tmux][TMRP] のソースコードに野良差分ファイルを適用する場合も、ソースコードが置かれているディレクトリで以下のように最新の差分ファイルを適用し、```./configure``` および ```make``` コマンドを用いてビルドおよびインストールすることで、上述の修正が施された [tmux][TMUX] が導入されます。**ただし、[GitHub 上の HEAD 版の tmux][TMRP] のビルドでは、```./configure``` 実行前にシェルスクリプト ```./autogen.sh``` を実行して ```./configure``` を生成する必要があります。**
 
 ```
-  # patch -p1 < /path/to/diff/tmux-HEAD-xxxxxxxx-fix.diff
-  # （ここで、/path/to/diff は tmux-HEAD-xxxxxxxx-fix.diff が置かれたディレクトリのパス名）
-  # sh ./autogen.sh
-  # ./configure --prefix=/path/to/install ...
-  # （ここで、/path/to/install は tmux のインストール先。./configure の引数は適宜追加してください。）
-  # make
+  $ patch -p1 < /path/to/diff/tmux-HEAD-xxxxxxxx-fix.diff    #（ここで、/path/to/diff は tmux-HEAD-xxxxxxxx-fix.diff が置かれたディレクトリのパス名）
+  $ sh ./autogen.sh
+  $ ./configure --prefix=/path/to/install ...                #（ここで、/path/to/install は tmux のインストール先。./configure の引数は適宜追加してください。）
+  $ make
+  # sudo -s
   # make install
 ```
 
