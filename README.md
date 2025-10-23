@@ -49,11 +49,11 @@
 
 ## Homebrew for Linux を用いた差分ファイルの適用とインストール
 
-[Homebrew for Linux][BREW] を導入した端末で野良差分ファイルを適用した [tmux][TMUX] をインストールする場合、**野良差分ファイルを適用した [tmux][TMUX] を導入するための [Homebrew for Linux][BREW] 向け Tap リポジトリ ```z80oolong/tmux```[TAP1] の使用を強く推奨します。**
+[Homebrew for Linux][BREW] を導入した端末で野良差分ファイルを適用した [tmux][TMUX] をインストールする場合、**野良差分ファイルを適用した [tmux][TMUX] を導入するための [Homebrew for Linux][BREW] 向け Tap リポジトリ [```z80oolong/tmux```][TAP1] の使用を強く推奨します。**
 
-Tap リポジトリ ```z80oolong/tmux```[TAP1] では、最新の安定版の [tmux][TMUX] および [GitHub 上の最新の HEAD 版の tmux][TMRP] のインストールに加え、旧安定版の [tmux][TMUX] のインストールも可能です。
+Tap リポジトリ [```z80oolong/tmux```][TAP1] では、最新の安定版の [tmux][TMUX] および [GitHub 上の最新の HEAD 版の tmux][TMRP] のインストールに加え、旧安定版の [tmux][TMUX] のインストールも可能です。
 
-```z80oolong/tmux```[TAP1] の詳細な使用方法については、[z80oolong/tmux の README.md][READ] をご覧ください。
+[```z80oolong/tmux```][TAP1] の詳細な使用方法については、[z80oolong/tmux の README.md][READ] をご覧ください。
 
 ## AppImage パッケージを用いたインストール
 
@@ -72,8 +72,8 @@ Tap リポジトリ ```z80oolong/tmux```[TAP1] では、最新の安定版の [t
 
 [East Asian Ambiguous Character][EAWA] の文字幅を設定するオプションです。
 
-- ```on``` を指定した場合: [East Asian Ambiguous Character][EAWA] を全角文字幅で表示します。
-- ```off``` を指定した場合: [East Asian Ambiguous Character][EAWA] を半角文字幅で表示します。
+- **```on``` を指定した場合:** [East Asian Ambiguous Character][EAWA] を全角文字幅で表示します。
+- **```off``` を指定した場合:** [East Asian Ambiguous Character][EAWA] を半角文字幅で表示します。
 
 例えば、[East Asian Ambiguous Character][EAWA] を全角文字幅で表示する場合、[tmux][TMUX] の設定ファイル ```~/.tmux.conf``` に以下の設定を追記します。
 
@@ -90,8 +90,8 @@ Tap リポジトリ ```z80oolong/tmux```[TAP1] では、最新の安定版の [t
 
 UTF-8 で定義される絵文字の文字幅を設定するオプションです。
 
-- ```on``` を指定した場合: UTF-8 の絵文字を全角文字幅で表示します。
-- ```off``` を指定した場合: UTF-8 の絵文字を半角文字幅で表示します。
+- **```on``` を指定した場合:** UTF-8 の絵文字を全角文字幅で表示します。
+- **```off``` を指定した場合:** UTF-8 の絵文字を半角文字幅で表示します。
 
 例えば、絵文字を全角文字幅で表示する場合、[tmux][TMUX] の設定ファイル ```~/.tmux.conf``` に以下の設定を追記します。
 
@@ -108,15 +108,15 @@ UTF-8 で定義される絵文字の文字幅を設定するオプションで�
 
 [tmux][TMUX] のペイン分割で使用する罫線文字に ASCII 文字を使用するかどうかを設定するオプションです。
 
-- ```on``` を指定した場合: ペイン分割の罫線文字に ASCII 文字を使用します。
-- ```off``` を指定した場合: 環境に応じて UTF-8 の罫線文字、端末が対応する ACS、または ASCII 文字を使用します。
+- **```on``` を指定した場合:** ペイン分割の罫線文字に ASCII 文字を使用します。
+- **```off``` を指定した場合:** 環境に応じて UTF-8 の罫線文字、端末が対応する ACS、または ASCII 文字を使用します。
 
 ### ```pane-border-acs```
 
 [tmux][TMUX] のペイン分割で罫線の描画に ACS を使用するかどうかを設定するオプションです。
 
-- ```on``` を指定した場合: ペイン分割の罫線描画に ACS を使用します。
-- ```off``` を指定した場合: 環境に応じて UTF-8 の罫線文字、端末が対応する ACS、または ASCII 文字を使用します。
+- **```on``` を指定した場合:** ペイン分割の罫線描画に ACS を使用します。
+- **```off``` を指定した場合:** 環境に応じて UTF-8 の罫線文字、端末が対応する ACS、または ASCII 文字を使用します。
 
 なお、```pane-border-ascii``` と ```pane-border-acs``` の両方を ```on``` に設定した場合、```pane-border-acs``` が優先されます。
 
@@ -124,9 +124,9 @@ UTF-8 で定義される絵文字の文字幅を設定するオプションで�
 
 環境変数 ```TMUX_ACS``` に設定する値に応じて、[tmux][TMUX] のペイン分割における罫線の描画を以下のように制御します：
 
-- ```utf8```, ```utf-8```: UTF-8 の罫線文字を使用します。
-- ```acs```: ACS を使用します。
-- ```ascii```: ASCII 文字を使用します。
+- **```utf8```, ```utf-8```:** UTF-8 の罫線文字を使用します。
+- **```acs```:** ACS を使用します。
+- **```ascii```:** ASCII 文字を使用します。
 
 なお、```TMUX_ACS``` の設定は、```pane-border-ascii``` および ```pane-border-acs``` の設定に優先します。
 
