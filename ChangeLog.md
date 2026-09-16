@@ -7,6 +7,7 @@
 ## 2026/09/16 現在の ChangeLog
 
 2026/09/16 現在の [github 上の tmux の HEAD の commit である e880cf63][TMRP] に対応した差分ファイルである ```tmux-HEAD-e880cf63-fix.diff``` を追加致しました。
+また、新しいプレリリース版である [tmux 3.8-rc][TMXR] に対応した差分ファイルである ```tmux-3.8-rc-fix.diff``` も同時に追加しました。
 
 これに伴い、tmux の安定版及び HEAD の commit に対応した差分ファイルのうち古い差分ファイルをディレクトリ ```obsolete/``` に移動しました。どうか御了承下さい。
 
