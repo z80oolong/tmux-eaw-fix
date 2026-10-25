@@ -1,5 +1,20 @@
 # tmux-eaw-fix -- tmux 2.6 以降において各種問題を修正する野良差分ファイル
 
+## 重要な告知 (2026-10-25, 野良差分ファイル配布先の移行のお知らせ)
+
+Homebrew で ```patch do ... file "..." ... end``` の構文がサポートされたことに伴い、**tmux の野良差分ファイルの公式配布先を、本リポジトリから以下の場所へ移行しました。**
+
+- **新しい配布先**: [z80oolong/homebrew-tmux の ```Patches/tmux/``` ディレクトリ][EXT1]
+
+今後の差分ファイルの更新・追加は、上記の新しい場所で行います。
+
+- 最新の差分ファイルは [こちらの z80oolong/homebrew-tmux/Patches/tmux][EXT1]から取得してください。
+- ChangeLog も [新しい場所の ChangeLog.md][EXT2]
+(https://github.com/z80oolong/homebrew-tmux/blob/master/Patches/tmux/ChangeLog.md) に移行しています。
+- Homebrew for Linux をご利用の方は、従来どおり ```brew tap z80oolong/tmux``` → ```brew install z80oolong/tmux/tmux-current``` などで問題なくご利用いただけます（内部で新しい場所のパッチを参照します）。
+
+本リポジトリ (```tmux-eaw-fix```) は、当面の間アーカイブとして残しますが、**新規の差分ファイルの追加は行いません**。ご不便をおかけしますが、ご理解とご協力をお願いいたします。
+
 ## 概要
 
 [tmux][TMUX] は、端末多重化ソフトウェアであり、複数の仮想ウィンドウやペインを同時に操作・表示し、端末セッションの分割や切り替えを可能にします。これにより、単一の端末ウィンドウ内で複数のタスクを効率的に実行できます。
@@ -173,3 +188,5 @@ UTF-8 で定義される絵文字の文字幅を設定するオプションで�
 [NICM]: https://github.com/nicm  
 [ZOOL]: http://zool.jpn.org/  
 [ISCL]: https://www.isc.org/downloads/software-support-policy/isc-license/
+[EXT1]: https://github.com/z80oolong/homebrew-tmux/tree/master/Patches/tmux
+[EXT2]: https://github.com/z80oolong/homebrew-tmux/blob/master/Patches/tmux/ChangeLog.md

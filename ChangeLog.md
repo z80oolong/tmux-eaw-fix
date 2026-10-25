@@ -4,6 +4,10 @@
 
 なお、過去に Gist 上において "追記" として示した変更履歴についても、 "追記" の表記を "ChangeLog" と改め、最新の ChangeLog を先頭に並べ替えた上で再掲してあります。
 
+## 2026/10/25 現在の ChangeLog
+
+```README.md``` でもお知らせした通り、今後野良差分ファイルの配布先を [z80oolong/tmux][TAP1] の [Patches/tmux][EXT1] へ移行致します。誠に恐れ入りますがどうかご了承ください。
+
 ## 2026/10/11 現在の ChangeLog
 
 2026/10/11 現在の [github 上の tmux の HEAD の commit である 95c1c3d7c][TMRP] に対応した差分ファイルである ```tmux-HEAD-95c1c3d7c-fix.diff``` を追加致しました。
@@ -1419,3 +1423,4 @@ sixel ブランチの適用にあたっては、sixel ブランチの適用部�
 [ISSUE1]:https://github.com/z80oolong/tmux-eaw-fix/issues/1
 [PR01]:https://github.com/tmux/tmux/pull/1907
 [PANE]:https://github.com/koie/tmux/commit/ac6c53ffd6c2987a3a4a5807df7fc6cca5d6ce88
+[EXT1]:https://github.com/z80oolong/homebrew-tmux/tree/master/Patches/tmux
