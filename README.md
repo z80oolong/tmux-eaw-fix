@@ -9,8 +9,7 @@ Homebrew で ```patch do ... file "..." ... end``` の構文がサポートさ�
 今後の差分ファイルの更新・追加は、上記の新しい場所で行います。
 
 - 最新の差分ファイルは [こちらの z80oolong/homebrew-tmux/Patches/tmux][EXT1]から取得してください。
-- ChangeLog も [新しい場所の ChangeLog.md][EXT2]
-(https://github.com/z80oolong/homebrew-tmux/blob/master/Patches/tmux/ChangeLog.md) に移行しています。
+- ChangeLog も [新しい場所の ChangeLog.md][EXT2] に移行しています。
 - Homebrew for Linux をご利用の方は、従来どおり ```brew tap z80oolong/tmux``` → ```brew install z80oolong/tmux/tmux-current``` などで問題なくご利用いただけます（内部で新しい場所のパッチを参照します）。
 
 本リポジトリ (```tmux-eaw-fix```) は、当面の間アーカイブとして残しますが、**新規の差分ファイルの追加は行いません**。ご不便をおかけしますが、ご理解とご協力をお願いいたします。
